@@ -3,6 +3,6 @@
 Team Members
   1. Jack Diao, eid: qd572, username: qinyudiao
   2.
-  3.
+  3. Shawn Victor, eid: sfv225, username: shawnvictor
   4. Kenan Hurd, eid: kah4285, username: KenaHu
   5.
