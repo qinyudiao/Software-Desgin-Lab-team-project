@@ -15,7 +15,7 @@ class Landing extends React.Component{
 
   render(){
     return(
-      <div className="Landing">
+      <div className="landing">
         <ReactPlayer className="video" url={video} playing preload loop></ReactPlayer>
         <NavBar />
       </div>
