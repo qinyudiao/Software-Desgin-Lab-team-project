@@ -2,6 +2,7 @@ import React from 'react';
 import NavBar from './NavBar.js';
 import ReactTable from "react-table-6"
 import "react-table-6/react-table.css"
+import { Link } from 'react-router-dom';
 
 
 class Astronauts extends React.Component{
@@ -25,7 +26,8 @@ class Astronauts extends React.Component{
       const columns = [
         {
           Header: "Full Name",
-          accessor: "Astronaut"
+          accessor: "Astronaut",
+          Cell: e =><a href={'/astronaut/'+e.value}> {e.value} </a>
         },
         {
           Header: "DOB",
