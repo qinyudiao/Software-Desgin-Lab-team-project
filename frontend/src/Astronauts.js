@@ -13,7 +13,7 @@ class Astronauts extends React.Component{
     }
 
     componentDidMount(){
-      const url = "https://jsonplaceholder.typicode.com/posts";
+      const url = "https://raw.githubusercontent.com/ShawnVictor/demo/master/db.json";
       fetch(url, {
         method: "GET"
       }).then(response => response.json()).then(posts => {
@@ -25,19 +25,31 @@ class Astronauts extends React.Component{
       const columns = [
         {
           Header: "Full Name",
-          accessor: "userId"
+          accessor: "Astronaut"
         },
         {
-          Header: "Company",
-          accessor: "id"
+          Header: "DOB",
+          accessor: "Date of birth",
         },
         {
-          Header: "Country",
-          accessor: "title"
+          Header: "Gender",
+          accessor: "Gender",
+        },
+        {
+          Header: "Group",
+          accessor: "Group"
+        },
+        {
+          Header: "# Flights",
+          accessor: "# Flights"
         },
         {
           Header: "Status",
-          accessor: "body"
+          accessor: "Status",
+        },
+        {
+          Header: "Missions Flown",
+          accessor: "Missions flown",
         }
       ]
         return(
@@ -46,6 +58,8 @@ class Astronauts extends React.Component{
               <h1>Astronauts</h1>
               <ReactTable
                 columns={columns}
+                data={this.state.posts}
+                filterable
               >
 
 
