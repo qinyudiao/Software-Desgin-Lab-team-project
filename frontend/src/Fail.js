@@ -1,5 +1,6 @@
 import React from 'react';
-import NavBar from './NavBar.js';
+import Header from './Header.js';
+import ReactPlayer from 'react-player'; 
 
 class Fail extends React.Component{
     constructor(props){
@@ -12,8 +13,9 @@ class Fail extends React.Component{
     render(){
         return(
             <div>
-                <NavBar />
+                <Header />
                 <h1>Fail</h1> 
+                <ReactPlayer url="https://www.youtube.com/watch?v=Z99pGVDZhaY&t=166s"/>
             </div>
         )
     }

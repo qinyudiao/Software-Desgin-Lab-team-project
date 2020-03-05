@@ -1,9 +1,13 @@
 import React from 'react';
+<<<<<<< HEAD
 import NavBar from './NavBar.js';
 import ReactTable from "react-table-6"
 import "react-table-6/react-table.css"
 import { Link } from 'react-router-dom';
 
+=======
+import Header from './Header';
+>>>>>>> 750decab24d0fa1accfb7af7f12a7cd8fff60bdd
 
 class Astronauts extends React.Component{
     constructor(props){
@@ -31,6 +35,7 @@ class Astronauts extends React.Component{
         }
       ]
         return(
+<<<<<<< HEAD
           <div>
               <NavBar />
               <h1>Astronauts</h1>
@@ -45,6 +50,12 @@ class Astronauts extends React.Component{
           </div>
 
 
+=======
+            <div>
+                <Header />
+                <h1>Astronauts</h1>
+            </div>
+>>>>>>> 750decab24d0fa1accfb7af7f12a7cd8fff60bdd
         )
     }
 }

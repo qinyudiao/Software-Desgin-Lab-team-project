@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from './NavBar';
+import Header from './Header';
 
 class Map extends React.Component{
     constructor(props){
@@ -12,7 +12,7 @@ class Map extends React.Component{
     render(){
         return(
             <div>
-                <NavBar />
+                <Header />
                 <h1>Map</h1>
             </div>
         )
