@@ -33,15 +33,12 @@ class App extends React.Component{
                     <Route path="/astronaut" component={Astronauts} />
                     <Route path="/fail" component={Fail} />
                     <Route path="/map" component={Map} />
-<<<<<<< HEAD
                     <Route path="/USAstronauts" component={USAstronauts} />
                     <Route path="/RussianAstronauts" component={RussianAstronauts} />
                     <Route path="/InternationalAstronauts" component={InternationalAstronauts} />
-=======
                     <Route path="/country" component={Country} />
                     <Route path="/education" component={Education} />
                     <Route path="/about" component={About} />
->>>>>>> 750decab24d0fa1accfb7af7f12a7cd8fff60bdd
                 </Switch>
             </div>
         )
