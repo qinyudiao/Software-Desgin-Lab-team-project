@@ -1,20 +1,15 @@
 var express = require('express');
 var app = express();
 var cors = require('cors');
-const got = require('got');
+var country = require('./routes/country.js');
 
+app.use('/country', country); 
 app.use(cors());
 
 app.listen(4000, function(){
     console.log('Example app listening on port 4000!');
 });
 
-app.get('/', async (req, res) => {
-    try{
-        const response = await got('https://launchlibrary.net/1.4/location/1', 
-            console.log(response.body))
-        }
-    catch(error){
-        console.log(error);
-    }
+app.get('/', (req, res) => {
+    res.send("Hello World!");
 });
