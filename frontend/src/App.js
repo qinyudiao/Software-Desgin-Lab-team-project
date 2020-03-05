@@ -4,6 +4,9 @@ import {Route, Switch} from 'react-router-dom';
 import Landing from './Landing';
 import About from './About';
 import Astronauts from './Astronauts.js';
+import USAstronauts from './USAstronauts.js';
+import RussianAstronauts from './RussianAstronauts.js';
+import InternationalAstronauts from './InternationalAstronauts.js';
 import Launches from './Launches.js';
 import Companies from './Companies.js';
 import Fail from './Fail.js';
@@ -28,6 +31,9 @@ class App extends React.Component{
                     <Route path="/astronaut" component={Astronauts} />
                     <Route path="/fail" component={Fail} />
                     <Route path="/map" component={Map} />
+                    <Route path="/USAstronauts" component={USAstronauts} />
+                    <Route path="/RussianAstronauts" component={RussianAstronauts} />
+                    <Route path="/InternationalAstronauts" component={InternationalAstronauts} />
                 </Switch>
             </div>
         )

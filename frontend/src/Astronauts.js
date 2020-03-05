@@ -14,7 +14,7 @@ class Astronauts extends React.Component{
     }
 
     componentDidMount(){
-      const url = "https://raw.githubusercontent.com/ShawnVictor/demo/master/db.json";
+      const url = "https://raw.githubusercontent.com/ShawnVictor/demo/master/db2.json";
       fetch(url, {
         method: "GET"
       }).then(response => response.json()).then(posts => {
@@ -25,33 +25,9 @@ class Astronauts extends React.Component{
     render(){
       const columns = [
         {
-          Header: "Full Name",
-          accessor: "Astronaut",
-          Cell: e =><a href={'/astronaut/'+e.value}> {e.value} </a>
-        },
-        {
-          Header: "DOB",
-          accessor: "Date of birth",
-        },
-        {
-          Header: "Gender",
-          accessor: "Gender",
-        },
-        {
-          Header: "Group",
-          accessor: "Group"
-        },
-        {
-          Header: "# Flights",
-          accessor: "# Flights"
-        },
-        {
-          Header: "Status",
-          accessor: "Status",
-        },
-        {
-          Header: "Missions Flown",
-          accessor: "Missions flown",
+          Header: "Country/Company",
+          accessor: "Type",
+          Cell: e =><a href={'/'+ e.value}> {e.value} </a>
         }
       ]
         return(
