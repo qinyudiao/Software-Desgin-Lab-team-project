@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from './NavBar';
+import Header from './Header';
 
 class Companies extends React.Component{
     constructor(props){
@@ -12,7 +12,7 @@ class Companies extends React.Component{
     render(){
         return(
             <div>
-                <NavBar />
+                <Header />
                 <h1>Companies</h1>
             </div>
         )

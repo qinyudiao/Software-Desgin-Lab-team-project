@@ -1,8 +1,8 @@
 import React from 'react';
 import './Landing.css';
-import NavBar from './NavBar.js';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+import Header from './Header.js';
 
 
 class Landing extends React.Component{
@@ -16,7 +16,7 @@ class Landing extends React.Component{
   render(){
     return(
       <div className="landing">
-        <NavBar className="landingContent" />
+        <Header />
         <Carousel autoPlay showThumbs={false}>
           <div>
             <img src='https://i.insider.com/5d0d02fde3ecba05703614b3?width=1600&format=jpeg&auto=webp' />

@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from './NavBar.js';
+import Header from './Header.js';
 import ReactPlayer from 'react-player'; 
 
 class Education extends React.Component{
@@ -13,7 +13,7 @@ class Education extends React.Component{
     render(){
         return(
             <div>
-                <NavBar />
+                <Header />
                 <p>
                     <a href="https://www.nasa.gov/audience/forstudents/5-8/features/nasa-knows/vehicles/index.html">Information from NASA about rockets.</a><br/>
                     <a href="https://www.kennedyspacecenter.com/launches-and-events">See information about upcoming launches.</a><br/>

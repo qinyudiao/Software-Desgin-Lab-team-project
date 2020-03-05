@@ -3,14 +3,11 @@
   grid-template-columns: auto;
   min-width: 100vw;
   min-height: 100vh;
-  justify-items: center;
 }
 
-.video{
-  min-width: 90vw;
-  min-height: 90vh;
-
+.logo{
+  height: 25%;
+  width: 25%;
 }
 
-.landingContent{
-}
+

@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from './NavBar.js';
+import Header from './Header.js';
 
 class Fail extends React.Component{
     constructor(props){
@@ -12,7 +12,7 @@ class Fail extends React.Component{
     render(){
         return(
             <div>
-                <NavBar />
+                <Header />
                 <h1>Fail</h1> 
             </div>
         )

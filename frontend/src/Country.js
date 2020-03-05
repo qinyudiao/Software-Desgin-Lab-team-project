@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from './NavBar.js';
+import Header from './Header.js';
 
 class Country extends React.Component{
     constructor(props){
@@ -12,7 +12,7 @@ class Country extends React.Component{
     render(){
         return(
             <div>
-                <NavBar />
+                <Header />
                 <h1>Country</h1>
             </div>
         )

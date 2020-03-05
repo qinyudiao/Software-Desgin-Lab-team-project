@@ -1,6 +1,6 @@
 import React from 'react';
 import './About.css';
-import NavBar from './NavBar';
+import Header from './Header';
 
 class About extends React.Component{
     constructor(props){
@@ -13,7 +13,7 @@ class About extends React.Component{
     render(){
         return(
             <div>
-                <NavBar />
+                <Header />
                 <h1>About</h1>
             </div>
         )
