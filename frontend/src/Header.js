@@ -15,7 +15,7 @@ class Header extends React.Component{
         return(
             <div className="container">
                 <img className="logo" src={logo} />
-                <h1>Every Rocket Launch</h1>
+                <h2>Every Rocket Launch</h2>
                 <Navbar />
             </div>
         )

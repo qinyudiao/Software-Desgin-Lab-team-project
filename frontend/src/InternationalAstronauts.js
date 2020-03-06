@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './components/Navbar.js';
+import Header from './Header.js';
 import ReactTable from "react-table-6"
 import "react-table-6/react-table.css"
 import { Link } from 'react-router-dom';
@@ -60,7 +60,7 @@ class InternationalAstronauts extends React.Component{
       ]
         return(
           <div>
-              <Navbar />
+              <Header />
               <h1>International Astronauts</h1>
               <ReactTable
                 columns={columns}
