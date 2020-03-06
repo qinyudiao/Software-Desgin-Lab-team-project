@@ -13,8 +13,8 @@ import Fail from './Fail.js';
 import Map from './Map.js';
 import Country from './Country.js';
 import Education from './Education.js';
+import IndividualLaunch from './IndividualLaunch.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './components/Navbar.js';
 
 class App extends React.Component{
     constructor(props){
@@ -31,6 +31,7 @@ class App extends React.Component{
                     <Route path="/" component={Landing} exact />
                     <Route path="/about" component={About} />
                     <Route path="/company" component={Companies} />
+                    <Route exact path="/launch/:launchId" component={IndividualLaunch} />
                     <Route path="/launch" component={Launches} />
                     <Route path="/astronaut" component={Astronauts} />
                     <Route path="/fail" component={Fail} />

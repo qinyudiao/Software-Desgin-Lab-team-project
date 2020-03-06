@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from './Header.js';
 import ReactTable from "react-table-6"
+import {Link} from 'react-router-dom'
 import "react-table-6/react-table.css"
-import { Link } from 'react-router-dom';
 
 
 class Launches extends React.Component{
@@ -27,7 +27,10 @@ class Launches extends React.Component{
         {
           Header: "Company",
           accessor: "A",
-          Cell: e =><a href={'/' + e.value}> {e.value} </a>
+          // Cell: e =><a href={'/' + e.value}> {e.value} hi </a>
+          // Cell: e => <Link to={`/launch/${e.value}`}>{e.value}</Link>
+          Cell: e => <Link to={`launch/${e.value}`}>{e.value}</Link>
+
         },
         {
           Header: "SFR",
