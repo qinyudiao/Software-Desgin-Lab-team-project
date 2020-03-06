@@ -13,6 +13,8 @@ import Fail from './Fail.js';
 import Map from './Map.js';
 import Country from './Country.js';
 import Education from './Education.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from './components/Navbar.js';
 
 class App extends React.Component{
     constructor(props){

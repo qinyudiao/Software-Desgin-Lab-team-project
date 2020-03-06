@@ -28,7 +28,11 @@ class Map extends Component {
                     yesIWantToUseGoogleMapApiInternals
                     onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
                 >
-
+                    <AnyReactComponent
+                        lat={25.997402}
+                        lng={-97.157329}
+                        text="SpaceX"
+                    />
                 </GoogleMapReact>
             </div>
         )

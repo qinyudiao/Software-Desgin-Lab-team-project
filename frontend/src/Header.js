@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './assets/rocket_launch.gif';
-import NavBar from './NavBar.js';
+import Navbar from './components/Navbar.js';
 import './Header.css';
 
 class Header extends React.Component{
@@ -16,7 +16,7 @@ class Header extends React.Component{
             <div className="container">
                 <img className="logo" src={logo} />
                 <h1>Every Rocket Launch</h1>
-                <NavBar />
+                <Navbar />
             </div>
         )
     }
