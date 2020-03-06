@@ -1,4 +1,5 @@
 import React from 'react';
+import NavBar from './components/Navbar.js';
 
 class IndividualLaunch extends React.Component{
     constructor(props){
@@ -11,6 +12,7 @@ class IndividualLaunch extends React.Component{
     render(){
         return(
             <div>
+                <NavBar />
                 <p>hi</p>
             </div>
         )

@@ -14,28 +14,28 @@ function Navbar(){
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
-                    <Link className="nav-link" to="about">About</Link>
+                    <Link className="nav-link" to="/about">About</Link>
                 </li>
                 <li className="nav-item active">
-                    <Link className="nav-link" to="launch">Launches</Link>
+                    <Link className="nav-link" to="/launch">Launches</Link>
                 </li>
                 <li className="nav-item active">
-                    <Link className="nav-link" to="company">Companies</Link>
+                    <Link className="nav-link" to="/company">Companies</Link>
                 </li>
                 <li className="nav-item active">
-                    <Link className="nav-link" to="country">Countries</Link>
+                    <Link className="nav-link" to="/country">Countries</Link>
                 </li>
                 <li className="nav-item active">
-                    <Link className="nav-link" to="astronaut">Astronauts</Link>
+                    <Link className="nav-link" to="/astronaut">Astronauts</Link>
                 </li>
                 <li className="nav-item active">
-                    <Link className="nav-link" to="fail">Failed_Launches</Link>
+                    <Link className="nav-link" to="/fail">Failed_Launches</Link>
                 </li>
                 <li className="nav-item active">
-                    <Link className="nav-link" to="education">Education</Link>
+                    <Link className="nav-link" to="/education">Education</Link>
                 </li>
                 <li className="nav-item active">
-                    <Link className="nav-link" to="map">Map</Link>
+                    <Link className="nav-link" to="/map">Map</Link>
                 </li>
                 <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
