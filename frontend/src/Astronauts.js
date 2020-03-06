@@ -1,8 +1,9 @@
 import React from 'react';
-import Header from './Header.js';
+import NavBar from './NavBar.js';
 import ReactTable from "react-table-6"
 import "react-table-6/react-table.css"
 import { Link } from 'react-router-dom';
+import Header from './Header';
 
 class Astronauts extends React.Component{
     constructor(props){
@@ -13,7 +14,7 @@ class Astronauts extends React.Component{
     }
 
     componentDidMount(){
-      const url = "https://raw.githubusercontent.com/ShawnVictor/demo/master/db2.json";
+      const url = "https://raw.githubusercontent.com/ShawnVictor/demo/master/launches.json";
       fetch(url, {
         method: "GET"
       }).then(response => response.json()).then(posts => {
@@ -31,7 +32,7 @@ class Astronauts extends React.Component{
       ]
         return(
           <div>
-              <Header />
+              <NavBar />
               <h1>Astronauts</h1>
               <ReactTable
                 columns={columns}
