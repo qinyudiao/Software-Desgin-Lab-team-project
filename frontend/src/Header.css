@@ -1,5 +1,5 @@
-.container{
+.container-full{
     display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: 75% 25%;
+    margin: 0 auto;
+    width: 100%;
 }
