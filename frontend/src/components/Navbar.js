@@ -1,11 +1,12 @@
 import React from 'react';
 import './Navbar.css';
+import { Link } from 'react-router-dom';
 
 function Navbar(){
     
     return(
         <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
-        <a className="navbar-brand" href="/">Home</a>
+        <Link className="navbar-brand" to="/">Home</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
         </button>
@@ -13,28 +14,28 @@ function Navbar(){
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
-                    <a className="nav-link" href="about">About<span className="sr-only">(current)</span></a>
+                    <Link className="nav-link" to="about">About</Link>
                 </li>
                 <li className="nav-item active">
-                    <a className="nav-link" href="launch">Launches<span className="sr-only">(current)</span></a>
+                    <Link className="nav-link" to="launch">Launches</Link>
                 </li>
                 <li className="nav-item active">
-                    <a className="nav-link" href="company">Companies<span className="sr-only">(current)</span></a>
+                    <Link className="nav-link" to="company">Companies</Link>
                 </li>
                 <li className="nav-item active">
-                    <a className="nav-link" href="country">Countries<span className="sr-only">(current)</span></a>
+                    <Link className="nav-link" to="country">Countries</Link>
                 </li>
                 <li className="nav-item active">
-                    <a className="nav-link" href="astronaut">Astronauts<span className="sr-only">(current)</span></a>
+                    <Link className="nav-link" to="astronaut">Astronauts</Link>
                 </li>
                 <li className="nav-item active">
-                    <a className="nav-link" href="fail">Failed_Launches<span className="border border-dark"></span></a>
+                    <Link className="nav-link" to="fail">Failed_Launches</Link>
                 </li>
                 <li className="nav-item active">
-                    <a className="nav-link" href="education">Education<span className="sr-only">(current)</span></a>
+                    <Link className="nav-link" to="education">Education</Link>
                 </li>
                 <li className="nav-item active">
-                    <a className="nav-link" href="map">Map<span className="sr-only">(current)</span></a>
+                    <Link className="nav-link" to="map">Map</Link>
                 </li>
                 <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
