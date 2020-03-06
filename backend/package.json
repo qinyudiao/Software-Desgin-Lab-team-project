@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "google-maps-react": "^2.0.2",
     "got": "^10.6.0"
   }
 }
