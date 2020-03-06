@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from './components/Navbar.js';
+import Header from './Header.js';
 
 class IndividualLaunch extends React.Component{
     constructor(props){
@@ -12,7 +12,7 @@ class IndividualLaunch extends React.Component{
     render(){
         return(
             <div>
-                <NavBar />
+                <Header />
                 <p>hi</p>
             </div>
         )

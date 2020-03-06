@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './assets/rocket_launch.gif';
-import Navbar from './components/Navbar.js';
+import Navigation from './components/Navigation.js';
 import './Header.css';
 
 class Header extends React.Component{
@@ -13,13 +13,13 @@ class Header extends React.Component{
 
     render(){
         return(
-            <div className="container">
-                <img className="logo" src={logo} />
-                <h2>Every Rocket Launch</h2>
-                <Navbar />
+            <div className="container-full">
+                <Navigation />
             </div>
         )
     }
 }
 
 export default Header;
+
+ //<img className="logo" src={logo} />
