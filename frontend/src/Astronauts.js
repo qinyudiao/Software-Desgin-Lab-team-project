@@ -1,9 +1,8 @@
 import React from 'react';
-import NavBar from './NavBar.js';
+import Header from './Header.js';
 import ReactTable from "react-table-6"
 import "react-table-6/react-table.css"
 import { Link } from 'react-router-dom';
-import Header from './Header';
 
 class Astronauts extends React.Component{
     constructor(props){
@@ -32,7 +31,7 @@ class Astronauts extends React.Component{
       ]
         return(
           <div>
-              <NavBar />
+              <Header />
               <h1>Astronauts</h1>
               <ReactTable
                 columns={columns}

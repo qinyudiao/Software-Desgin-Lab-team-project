@@ -14,9 +14,10 @@
     "react-player": "^1.15.2",
     "react-responsive-carousel": "^3.1.51",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0",
+    "react-scripts": "^3.4.0",
     "react-table": "^7.0.0-rc.16",
     "react-table-6": "^6.11.0",
+    "start": "^5.1.0",
     "typescript": "^3.8.3"
   },
   "scripts": {
