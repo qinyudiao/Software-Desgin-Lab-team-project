@@ -4,12 +4,12 @@ sudo: required
 services:
     - docker
 #Build our test Docker container
-before_install:
-  - docker build -t everyrocketlaunch-test -f Dockerfile.test .
+# before_install:
+#   - docker build -t everyrocketlaunch-test -f ./frontend/Dockerfile.test .
 
-#Run our test Docker container
-script:
-  - docker run everyrocketlaunch-test
+# #Run our test Docker container
+# script:
+#   - docker run everyrocketlaunch-test
 
 #Build our deployment container
 before_deploy:
@@ -19,6 +19,6 @@ before_deploy:
 deploy:
   skip_cleanup: true
   provider: script
-  script: bash ./scripts/deploy.sh
+  script: bash ./frontend/scripts/deploy.sh
   on:
     branch: master
