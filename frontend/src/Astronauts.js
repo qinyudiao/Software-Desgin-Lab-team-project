@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactTable from "react-table-6"
 import "react-table-6/react-table.css"
-import { Link } from 'react-router-dom';
 import Header from './Header.js';
 
 class Astronauts extends React.Component{
