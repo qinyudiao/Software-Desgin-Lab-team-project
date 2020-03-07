@@ -17,10 +17,13 @@ class About extends React.Component{
 
     // Need to figure out how to update from https://api.github.com/repos/qinyudiao/Software-Desgin-Lab-team-project/contributors
     componentDidMount(){
-      const url = "https://raw.githubusercontent.com/LBest42/demo/master/db.json";
+      // const url = "https://raw.githubusercontent.com/LBest42/demo/master/db.json";
+      const url = 'https://api.github.com/repos/qinyudiao/Software-Desgin-Lab-team-project/contributors'
       fetch(url, {
         method: "GET"
-      }).then(response => response.json()).then(contributors => {
+      }).then(response => response.json())
+      .then(contributors => {
+        console.log(contributors);
         this.setState({contributors: contributors})
       })
     }
@@ -32,10 +35,7 @@ class About extends React.Component{
                 {
                   Header: "Team Member",
                   accessor: "login",
-                  // Cell: e =><a href={'/' + e.value}> {e.value} hi </a>
-                  // Cell: e => <Link to={`/launch/${e.value}`}>{e.value}</Link>
-                  Cell: e => <Link to={`/launch/${e.value}`}>{e.value}</Link>
-
+                  Cell: e => <p>{e.value}</p>
                 },
                 {
                   Header: "Commits",
