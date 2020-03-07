@@ -9,8 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "google-maps-react": "^2.0.2",
-    "got": "^10.6.0"
+    "got": "^10.6.0",
+    "node-fetch": "^2.6.0",
+    "request": "^2.88.2"
   }
 }
