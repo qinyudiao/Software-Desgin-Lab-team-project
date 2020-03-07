@@ -28,7 +28,6 @@ class Launches extends React.Component{
         {
           Header: "Launch",
           accessor: "name",
-        },
         {
           Header: "Time",
           accessor: "net",
