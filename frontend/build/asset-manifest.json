@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0b8bf993.chunk.css",
+    "main.js": "/static/js/main.01be3746.chunk.js",
+    "main.js.map": "/static/js/main.01be3746.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.18445cb3.js",
+    "runtime-main.js.map": "/static/js/runtime-main.18445cb3.js.map",
+    "static/css/2.829186a6.chunk.css": "/static/css/2.829186a6.chunk.css",
+    "static/js/2.b0a14ce2.chunk.js": "/static/js/2.b0a14ce2.chunk.js",
+    "static/js/2.b0a14ce2.chunk.js.map": "/static/js/2.b0a14ce2.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.cd67f13ec6150cf10316f483afbf170e.js": "/precache-manifest.cd67f13ec6150cf10316f483afbf170e.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.829186a6.chunk.css.map": "/static/css/2.829186a6.chunk.css.map",
+    "static/css/main.0b8bf993.chunk.css.map": "/static/css/main.0b8bf993.chunk.css.map",
+    "static/js/2.b0a14ce2.chunk.js.LICENSE.txt": "/static/js/2.b0a14ce2.chunk.js.LICENSE.txt",
+    "static/media/rocket_launch.gif": "/static/media/rocket_launch.9695b461.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.18445cb3.js",
+    "static/css/2.829186a6.chunk.css",
+    "static/js/2.b0a14ce2.chunk.js",
+    "static/css/main.0b8bf993.chunk.css",
+    "static/js/main.01be3746.chunk.js"
+  ]
+}
