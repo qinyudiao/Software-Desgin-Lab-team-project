@@ -13,18 +13,19 @@ class Companies extends React.Component{
     }
 
     componentDidMount(){
-      const url = "https://raw.githubusercontent.com/ShawnVictor/demo/master/launches.json";
+      const url = "https://launchlibrary.net/1.4/agency?=1000";
       fetch(url, {
         method: "GET"
       }).then(response => response.json()).then(posts => {
-        this.setState({posts: posts})
+        console.log(posts);
+        this.setState({posts: posts.agencies})
       })
     }
 
     render(){
       const columns = [
         {
-          Header: "Company",
+          Header: "agencies",
           accessor: "A",
           // Cell: e =><a href={'/' + e.value}> {e.value} hi </a>
           // Cell: e => <Link to={`/launch/${e.value}`}>{e.value}</Link>
