@@ -47,8 +47,6 @@ class About extends React.Component{
         }
         console.log(this.state.issues[i]);
       }
-
-      console.log(this.state.issuesCount);
     }
 
     componentDidMount(){
@@ -71,15 +69,15 @@ class About extends React.Component{
         console.log(issues);
         this.setState({issues: issues});
         this.computeIssues();
-        this.setState({ contributors: [this.state.contributors , this.state.issuesCount]}) //another array
+        // this.setState({ contributors: [this.state.contributors , this.state.issuesCount]}) //another array
         console.log(this.state.contributors);
+        console.log(this.state.issuesCount);
 
       })
     }
 
 
     render(){
-
             const columns = [
                 {
                   Header: "Team Member",
@@ -98,6 +96,8 @@ class About extends React.Component{
         return(
             <React.Fragment>
                 <Header />
+                <div>
+                </div>
                 <h1>About</h1>
                 <p> EveryRocketLaunch is a comprehensive database of rocket launches designed to give you as much relevant
                 information as possible about each and every rocket launch. </p>
