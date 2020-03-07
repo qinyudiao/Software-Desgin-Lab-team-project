@@ -10,20 +10,50 @@ class About extends React.Component{
         super(props);
         this.state = {
             contributors: [],
+            issues: [],
+            issuesCount: {'musa': 0, 'jack' : 0, 'kenan': 0, 'lucas': 0, 'shawn': 0}
         }
+
+        this.computeIssues = this.computeIssues.bind(this);
     }
 
 
 
+    computeIssues(){
+      for(let i = 0; i < this.state.issues.length; i++){
+        console.log("hello");
+        if(this.state.issues[i] != null){
+          console.log(this.state.issues[i].assignee.login);
+        }
+        // if(this.state.issues[i].assignee.login == 'qinyudiao'){
+        //   this.state.issuesCount['musa']++;
+        //   console.log('hello');
+        // }
+      }
+    }
+
     componentDidMount(){
-      const url = 'https://api.github.com/repos/qinyudiao/Software-Desgin-Lab-team-project/contributors'
-      fetch(url, {
+      const urlContributors = 'https://api.github.com/repos/qinyudiao/Software-Desgin-Lab-team-project/contributors';
+      const urlIssues = 'https://api.github.com/repos/qinyudiao/Software-Desgin-Lab-team-project/issues';
+      fetch(urlContributors, {
         method: "GET"
       }).then(response => response.json())
       .then(contributors => {
         console.log(contributors);
         this.setState({contributors: contributors})
       })
+
+      fetch(urlIssues, {
+        method: "GET"
+      }).then(response => response.json())
+      .then(issues => {
+        console.log(issues);
+        this.setState({issues: issues});
+        // this.computeIssues();
+        // while(this.state.issuesCount != null){}
+      })
+
+
     }
 
 
