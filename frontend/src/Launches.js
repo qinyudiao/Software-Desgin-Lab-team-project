@@ -28,6 +28,7 @@ class Launches extends React.Component{
         {
           Header: "Launch",
           accessor: "name",
+        },
         {
           Header: "Time",
           accessor: "net",
@@ -35,6 +36,10 @@ class Launches extends React.Component{
         {
           Header: "Fail Reason",
           accessor: "failreason",
+        },
+        {
+          Header: "Video",
+          accessor: "vidURLs",
         }
       ]
         return(
