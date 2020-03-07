@@ -33,6 +33,10 @@ class Companies extends React.Component{
 
         },
         {
+          Header: "Purpose",
+          accessor: "L",
+        },
+        {
           Header: "Country",
           accessor: "J",
         },
@@ -44,7 +48,7 @@ class Companies extends React.Component{
         return(
             <div>
               <Header />
-              <h1>Astronauts</h1>
+              <h1>Companies</h1>
               <ReactTable
                 columns={columns}
                 data={this.state.posts}

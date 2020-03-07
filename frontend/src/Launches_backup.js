@@ -27,34 +27,24 @@ class Launches extends React.Component{
         {
           Header: "Company",
           accessor: "A",
-          // Cell: e =><a href={'/' + e.value}> {e.value} hi </a>
-          // Cell: e => <Link to={`/launch/${e.value}`}>{e.value}</Link>
           Cell: e => <Link to={`/launch/${e.value}`}>{e.value}</Link>
 
         },
         {
-          Header: "SFR",
-          accessor: "B",
-        },
-        {
-          Header: "Payload(kg)",
-          accessor: "C",
-        },
-        {
-          Header: "Launch Cost($M)",
-          accessor: "D"
+          Header: "Purpose",
+          accessor: "L",
         },
         {
           Header: "Launch Class",
           accessor: "G",
         },
         {
-          Header: "Orbital Altitude",
-          accessor: "H",
+          Header: "Launch Cost($M)",
+          accessor: "D"
         },
         {
-          Header: "Country",
-          accessor: "J",
+          Header: "Orbital Altitude",
+          accessor: "H",
         }
       ]
         return(

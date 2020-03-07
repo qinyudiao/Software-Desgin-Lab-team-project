@@ -36,6 +36,10 @@ class Launches extends React.Component{
         {
           Header: "Fail Reason",
           accessor: "failreason",
+        },
+        {
+          Header: "Video",
+          accessor: "vidURLs",
         }
       ]
         return(
