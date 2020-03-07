@@ -12,11 +12,11 @@ class Astronauts extends React.Component{
     }
 
     componentDidMount(){
-      const url = "https://raw.githubusercontent.com/ShawnVictor/demo/master/launches.json";
+      const url = "https://raw.githubusercontent.com/ShawnVictor/demo/master/db2.json";
       fetch(url, {
-        method: "GET"
-      }).then(response => response.json()).then(posts => {
-        this.setState({posts: posts})
+          method: "GET"
+        }).then(response => response.json()).then(posts => {
+          this.setState({posts: posts})
       })
     }
 
@@ -37,8 +37,7 @@ class Astronauts extends React.Component{
                 data={this.state.posts}
                 filterable
               >
-
-
+              
               </ReactTable>
           </div>
         )

@@ -14,47 +14,28 @@ class Launches extends React.Component{
     }
 
     componentDidMount(){
-      const url = "https://raw.githubusercontent.com/ShawnVictor/demo/master/launches.json";
-      fetch(url, {
-        method: "GET"
-      }).then(response => response.json()).then(posts => {
-        this.setState({posts: posts})
-      })
+      const url = "https://launchlibrary.net/1.4/launch?limit=1755";
+        fetch(url, {
+            method: "GET"
+        }).then(response => response.json()).then(posts => {
+            this.setState({posts: posts.launches})
+            console.log(posts);
+        })
     }
 
     render(){
       const columns = [
         {
-          Header: "Company",
-          accessor: "A",
-          // Cell: e =><a href={'/' + e.value}> {e.value} hi </a>
-          // Cell: e => <Link to={`/launch/${e.value}`}>{e.value}</Link>
-          Cell: e => <Link to={`/launch/${e.value}`}>{e.value}</Link>
-
+          Header: "Launch",
+          accessor: "name",
         },
         {
-          Header: "SFR",
-          accessor: "B",
+          Header: "Time",
+          accessor: "net",
         },
         {
-          Header: "Payload(kg)",
-          accessor: "C",
-        },
-        {
-          Header: "Launch Cost($M)",
-          accessor: "D"
-        },
-        {
-          Header: "Launch Class",
-          accessor: "G",
-        },
-        {
-          Header: "Orbital Altitude",
-          accessor: "H",
-        },
-        {
-          Header: "Country",
-          accessor: "J",
+          Header: "Fail Reason",
+          accessor: "failreason",
         }
       ]
         return(
@@ -66,8 +47,6 @@ class Launches extends React.Component{
                 data={this.state.posts}
                 filterable
               >
-
-
               </ReactTable>
           </div>
 
