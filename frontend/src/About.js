@@ -9,15 +9,13 @@ class About extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            contributors: []
+            contributors: [],
         }
     }
 
 
 
-    // Need to figure out how to update from https://api.github.com/repos/qinyudiao/Software-Desgin-Lab-team-project/contributors
     componentDidMount(){
-      // const url = "https://raw.githubusercontent.com/LBest42/demo/master/db.json";
       const url = 'https://api.github.com/repos/qinyudiao/Software-Desgin-Lab-team-project/contributors'
       fetch(url, {
         method: "GET"
