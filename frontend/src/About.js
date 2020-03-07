@@ -17,24 +17,42 @@ class About extends React.Component{
         this.computeIssues = this.computeIssues.bind(this);
     }
 
-
-
+    // Iterate through issues and increment count for each person 
+    // Counts open issues
     computeIssues(){
       for(let i = 0; i < this.state.issues.length; i++){
-        console.log("hello");
-        if(this.state.issues[i] != null){
-          console.log(this.state.issues[i].assignee.login);
+        console.log(this.state.issues[i]);
+        if(this.state.issues[i].assignees.length){
+          for(let j = 0; j < this.state.issues[i].assignees.length; j++){
+            console.log("goes here");
+            if(this.state.issues[i].assignees[j].login){
+              if(this.state.issues[i].assignees[j].login == 'qinyudiao'){
+                console.log("jack");
+                this.state.issuesCount['jack']++;
+              }
+              else if(this.state.issues[i].assignees[j].login == 'musarafik'){
+                this.state.issuesCount['musa']++;
+              }
+              else if(this.state.issues[i].assignees[j].login == 'ShawnVictor'){
+                this.state.issuesCount['shawn']++;
+              }
+              else if(this.state.issues[i].assignees[j].login == 'KenaHu'){
+                this.state.issuesCount['kenan']++;
+              }
+              else if(this.state.issues[i].assignees[j].login == 'LBest42'){
+                this.state.issuesCount['lucas']++;
+              }
+            }
+          }
         }
-        // if(this.state.issues[i].assignee.login == 'qinyudiao'){
-        //   this.state.issuesCount['musa']++;
-        //   console.log('hello');
-        // }
+        console.log(this.state.issues[i]);
       }
     }
 
     componentDidMount(){
+      // Get commits from Github
       const urlContributors = 'https://api.github.com/repos/qinyudiao/Software-Desgin-Lab-team-project/contributors';
-      const urlIssues = 'https://api.github.com/repos/qinyudiao/Software-Desgin-Lab-team-project/issues';
+      const urlIssues = 'https://api.github.com/repos/qinyudiao/Software-Desgin-Lab-team-project/issues?state=all';
       fetch(urlContributors, {
         method: "GET"
       }).then(response => response.json())
@@ -43,22 +61,23 @@ class About extends React.Component{
         this.setState({contributors: contributors})
       })
 
+      // Get issues from Github
       fetch(urlIssues, {
         method: "GET"
       }).then(response => response.json())
       .then(issues => {
         console.log(issues);
         this.setState({issues: issues});
-        // this.computeIssues();
-        // while(this.state.issuesCount != null){}
+        this.computeIssues();
+        // this.setState({ contributors: [this.state.contributors , this.state.issuesCount]}) //another array
+        console.log(this.state.contributors);
+        console.log(this.state.issuesCount);
+
       })
-
-
     }
 
 
     render(){
-
             const columns = [
                 {
                   Header: "Team Member",
@@ -68,11 +87,17 @@ class About extends React.Component{
                 {
                   Header: "Commits",
                   accessor: "contributions",
+                },
+                {
+                  Header: "Issues",
+                  accessor: "issues"
                 }
                 ]
         return(
             <React.Fragment>
                 <Header />
+                <div>
+                </div>
                 <h1>About</h1>
                 <p> EveryRocketLaunch is a comprehensive database of rocket launches designed to give you as much relevant
                 information as possible about each and every rocket launch. </p>
