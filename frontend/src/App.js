@@ -14,6 +14,7 @@ import Map from './Map.js';
 import Country from './Country.js';
 import Education from './Education.js';
 import IndividualLaunch from './IndividualLaunch.js';
+import IndividualAstronaut from './IndividualAstronaut.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component{
@@ -36,8 +37,11 @@ class App extends React.Component{
                     <Route path="/astronaut" component={Astronauts} />
                     <Route path="/fail" component={Fail} />
                     <Route path="/map" component={Map} />
+                    <Route path="/USAstronauts/:astronautId" component={IndividualAstronaut} />
                     <Route path="/USAstronauts" component={USAstronauts} />
+                    <Route path="/RussianAstronauts/:astronautId" component={IndividualAstronaut} />
                     <Route path="/RussianAstronauts" component={RussianAstronauts} />
+                    <Route path="/InternationalAstronauts/:astronautId" component={IndividualAstronaut} />
                     <Route path="/InternationalAstronauts" component={InternationalAstronauts} />
                     <Route path="/country" component={Country} />
                     <Route path="/education" component={Education} />

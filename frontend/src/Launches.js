@@ -27,8 +27,6 @@ class Launches extends React.Component{
         {
           Header: "Company",
           accessor: "A",
-          // Cell: e =><a href={'/' + e.value}> {e.value} hi </a>
-          // Cell: e => <Link to={`/launch/${e.value}`}>{e.value}</Link>
           Cell: e => <Link to={`/launch/${e.value}`}>{e.value}</Link>
 
         },

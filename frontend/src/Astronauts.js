@@ -1,7 +1,8 @@
 import React from 'react';
-import ReactTable from "react-table-6"
-import "react-table-6/react-table.css"
+import ReactTable from "react-table-6";
+import "react-table-6/react-table.css";
 import Header from './Header.js';
+import {Link} from 'react-router-dom';
 
 class Astronauts extends React.Component{
     constructor(props){
@@ -12,7 +13,7 @@ class Astronauts extends React.Component{
     }
 
     componentDidMount(){
-      const url = "https://raw.githubusercontent.com/ShawnVictor/demo/master/launches.json";
+      const url = "https://raw.githubusercontent.com/ShawnVictor/demo/master/db2.json";
       fetch(url, {
         method: "GET"
       }).then(response => response.json()).then(posts => {
@@ -25,7 +26,8 @@ class Astronauts extends React.Component{
         {
           Header: "Country/Company",
           accessor: "Type",
-          Cell: e =><a href={'/'+ e.value}> {e.value} </a>
+          // Cell: e =><a href={'/'+ e.value}> {e.value} </a>
+          Cell: e => <Link to={`/${e.value}`}>{e.value}</Link>
         }
       ]
         return(

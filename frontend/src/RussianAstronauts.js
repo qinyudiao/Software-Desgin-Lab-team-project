@@ -1,7 +1,8 @@
 import React from 'react';
 import Header from './Header.js';
-import ReactTable from "react-table-6"
-import "react-table-6/react-table.css"
+import ReactTable from "react-table-6";
+import "react-table-6/react-table.css";
+import {Link} from 'react-router-dom';
 
 
 class RussianAstronauts extends React.Component{
@@ -26,7 +27,7 @@ class RussianAstronauts extends React.Component{
         {
           Header: "Full Name",
           accessor: "A",
-          Cell: e =><a href={'/' + e.value}> {e.value} </a>
+          Cell: e => <Link to={`/RussianAstronauts/${e.value}`}>{e.value}</Link>
         },
         {
           Header: "# Flights",
