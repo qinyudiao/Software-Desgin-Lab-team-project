@@ -42,6 +42,10 @@ class Companies extends React.Component{
         {
           Header: "Headquarters",
           accessor: "K",
+        },
+        {
+          Header: "Launch Cost($M)",
+          accessor: "D"
         }
         ]
         return(
