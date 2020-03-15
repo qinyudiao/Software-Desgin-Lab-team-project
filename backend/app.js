@@ -1,36 +1,36 @@
 const express = require('express');
 const app = express();
-const fetch = require('node-fetch');
-var cors = require('cors');
-var country = require('./routes/country.js');
+const cors = require('cors');
+const mongoose = require('mongoose');
 
-app.use('/country', country); 
 app.use(cors());
 
+// Routes
+var country = require('./routes/country');
+var about = require('./routes/about');
+var launch = require('./routes/launch');
 
-app.get('/', (req, res) => {
-    res.send("Hello World!");
+app.use('/country', country); 
+app.use('/about', about);
+app.use('/launch', launch);
+
+
+// MongoDB stuff
+const uri = 'mongodb+srv://admin:admin@softwarelab-zbga3.mongodb.net/test?retryWrites=true&w=majority';
+mongoose.connect(uri, { useNewUrlParser: true });
+let db = mongoose.connection;
+
+// Check connection
+db.once('open', function() {
+    console.log('Connected to MongoDB');
 });
 
-app.get('/launch', async (request, response) => {
-  console.log(request.params);
-
-  const launches_url = `https://launchlibrary.net/1.4/launch?limit=10000`;
-  const launches_response = await fetch(launches_url);
-  const launches_data = await launches_response.json();
-
-  response.json(launches_data);
+// Check for errors
+db.on('error', function(err) {
+    console.log(err);
 });
 
-app.get('/launch/next/5', async (request, response) => {
-  console.log(request.params);
 
-  const launches_url = `https://launchlibrary.net/1.4/launch/next/5`;
-  const launches_response = await fetch(launches_url);
-  const launches_data = await launches_response.json();
 
-  response.json(launches_data);
-});
-
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

@@ -4,15 +4,17 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "google-maps-react": "^2.0.2",
     "got": "^10.6.0",
+    "mongoose": "^5.9.4",
     "node-fetch": "^2.6.0",
     "request": "^2.88.2"
   }

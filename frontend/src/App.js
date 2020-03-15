@@ -8,7 +8,6 @@ import USAstronauts from './USAstronauts.js';
 import RussianAstronauts from './RussianAstronauts.js';
 import InternationalAstronauts from './InternationalAstronauts.js';
 import Launches from './Launches.js';
-import Launches_backup from './Launches_backup.js';
 import Companies from './Companies.js';
 import Fail from './Fail.js';
 import Map from './Map.js';

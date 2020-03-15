@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './assets/rocket_launch.gif';
 import Navigation from './components/Navigation.js';
 import './Header.css';
 

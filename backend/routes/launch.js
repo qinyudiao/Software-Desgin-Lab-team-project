@@ -1,5 +1,26 @@
-const req = require('request')
+const express = require('express');
+const app = express();
 const moment = require('moment')
+
+app.get('/launch', async (request, response) => {
+  console.log(request.params);
+
+  const launches_url = `https://launchlibrary.net/1.4/launch?limit=10000`;
+  const launches_response = await fetch(launches_url);
+  const launches_data = await launches_response.json();
+
+  response.json(launches_data);
+});
+
+app.get('/launch/next/5', async (request, response) => {
+  console.log(request.params);
+
+  const launches_url = `https://launchlibrary.net/1.4/launch/next/5`;
+  const launches_response = await fetch(launches_url);
+  const launches_data = await launches_response.json();
+
+  response.json(launches_data);
+});
 
 class LaunchJS {
   constructor() {
@@ -20,6 +41,8 @@ class LaunchJS {
   _generateReqUrl(reqType, param) {
     (param && reqType) ? this.url = `https://launchlibrary.net/${this.version}/${reqType}${param}`: this.url = ``
   }
+
+  
 
   get(reqType, param) {
     switch (reqType) {

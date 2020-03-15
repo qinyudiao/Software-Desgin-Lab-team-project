@@ -21,13 +21,13 @@ class Landing extends React.Component{
         <Header />
         <Carousel autoPlay showThumbs={false}>
           <div>
-            <img src='https://i.insider.com/5d0d02fde3ecba05703614b3?width=1600&format=jpeg&auto=webp' />
+            <img alt ="rocket" src='https://i.insider.com/5d0d02fde3ecba05703614b3?width=1600&format=jpeg&auto=webp' />
           </div>
           <div>
-            <img src={gif2} />
+            <img alt="rocket" src={gif2} />
           </div>
           <div>
-            <img src={gif1} />
+            <img alt="rocket" src={gif1} />
           </div>
         </Carousel>
         

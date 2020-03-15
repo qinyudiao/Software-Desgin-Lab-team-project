@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from './Header.js';
 import ReactTable from "react-table-6"
-import {Link} from 'react-router-dom'
 import "react-table-6/react-table.css"
 
 
