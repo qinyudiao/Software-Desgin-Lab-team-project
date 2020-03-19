@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Route, Router, Switch} from 'react-router-dom';
+import {Route, BrowserRouter, Switch} from 'react-router-dom';
 import Landing from './Landing.js';
 import About from './About.js';
 import Astronauts from './Astronauts.js';
@@ -28,7 +28,7 @@ class App extends React.Component{
 
     render(){
         return(
-            <div>
+            <BrowserRouter>
                 <Switch>
                     <Route path="/" component={Landing} exact />
                     <Route path="/about" component={About} />
@@ -49,7 +49,7 @@ class App extends React.Component{
                     <Route path="/education" component={Education} />
                     <Route path="/about" component={About} />
                 </Switch>
-            </div>
+            </BrowserRouter>
             
         )
     }
