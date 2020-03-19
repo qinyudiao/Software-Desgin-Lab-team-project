@@ -14,4 +14,4 @@ RUN npm install
 COPY ./frontend .
 
 #Setting the default RUN command for our built container to run our test suite.
-CMD ["npm", "run", "test", "--", "--coverage", "--forceExit"]
+CMD ["npm", "run", "test", "--", "--coverage"]
