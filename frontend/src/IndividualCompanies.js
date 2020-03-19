@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from './Header';
 
 class IndividualCompanies extends React.Component{
     constructor(props){
@@ -8,7 +9,10 @@ class IndividualCompanies extends React.Component{
 
     render(){
         return(
-            <div>{this.props.match.params.companyId}</div>
+            <div>
+                <Header />
+                {this.props.match.params.companyId}
+            </div>
         )
     }
 }
