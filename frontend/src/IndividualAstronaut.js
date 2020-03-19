@@ -18,7 +18,6 @@ class IndividualAstronaut extends React.Component{
         return(
             <div>
                 <Header />
-                <p> astronaut individual page</p>
                 <p>{this.state.temp}</p>
             </div>
         )
