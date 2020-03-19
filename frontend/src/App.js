@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Router, Switch} from 'react-router-dom';
 import Landing from './Landing.js';
 import About from './About.js';
 import Astronauts from './Astronauts.js';
@@ -50,6 +50,7 @@ class App extends React.Component{
                     <Route path="/about" component={About} />
                 </Switch>
             </div>
+            
         )
     }
 }

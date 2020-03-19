@@ -1,16 +1,19 @@
 language: node_js
+
 #Request root permissions to the TravisCI runtime environment
 sudo: required
+
 #Tell TravisCI that we're using docker to run our tests
 services:
     - docker
-#Build our test Docker container
-# before_install:
-#   - docker build -t everyrocketlaunch-test -f ./frontend/Dockerfile.test .
 
-# #Run our test Docker container
-# script:
-#   - docker run everyrocketlaunch-test
+# Build test container
+before_install:
+  - docker build -t everyrocketlaunch.com-test -f ./frontend/Dockerfile.test .
+
+#Run our test Docker container
+script:
+  - docker run everyrocketlaunch.com-test
 
 #Build our deployment container
 before_deploy:
