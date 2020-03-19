@@ -1,3 +1,4 @@
+language: node_js
 #Request root permissions to the TravisCI runtime environment
 sudo: required
 #Tell TravisCI that we're using docker to run our tests
