@@ -28,7 +28,7 @@ class Companies extends React.Component{
           accessor: "A",
           // Cell: e =><a href={'/' + e.value}> {e.value} hi </a>
           // Cell: e => <Link to={`/launch/${e.value}`}>{e.value}</Link>
-          Cell: e => <Link to={`/launch/${e.value}`}>{e.value}</Link>
+          Cell: e => <Link to={`/company/${e.value}`}>{e.value}</Link>
 
         },
         {

@@ -15,6 +15,7 @@ import Country from './Country.js';
 import Education from './Education.js';
 import IndividualLaunch from './IndividualLaunch.js';
 import IndividualAstronaut from './IndividualAstronaut.js';
+import IndividualCompanies from './IndividualCompanies.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component{
@@ -31,6 +32,7 @@ class App extends React.Component{
                 <Switch>
                     <Route path="/" component={Landing} exact />
                     <Route path="/about" component={About} />
+                    <Route path="/company/:companyId" component={IndividualCompanies} />
                     <Route path="/company" component={Companies} />
                     <Route path="/launch/:launchId" component={IndividualLaunch} />
                     <Route path="/launch" component={Launches} />
