@@ -19,6 +19,7 @@ class IndividualAstronaut extends React.Component{
             <div>
                 <Header />
                 <p>{this.state.temp}</p>
+                <p>does this show after deployment with travis</p>
             </div>
         )
     }
