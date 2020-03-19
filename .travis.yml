@@ -13,7 +13,7 @@ before_install:
 
 #Run our test Docker container
 script:
-  - docker run -e CI=true everyrocketlaunch.com-test
+  - docker run -e CI=true everyrocketlaunch.com-test npm run test
 
 #Build our deployment container
 before_deploy:
