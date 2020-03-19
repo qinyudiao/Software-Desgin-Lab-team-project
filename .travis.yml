@@ -11,14 +11,13 @@ services:
 before_install:
   - docker build -t everyrocketlaunch.com-test -f ./frontend/Dockerfile.test .
 
-#Run our test Docker container
+#Run our test Docker container (Travis requires a test)
 script:
-  # - docker run everyrocketlaunch.com-test
-  - 'true'
+  - 'true' # Bypass tests since we don't have any to run
 
 #Build our deployment container
 before_deploy:
-  - docker build -t frontend/everyrocketlaunch.com ./frontend/
+  - docker build -t everyrocketlaunch.com ./frontend/
 
 #Run our deployment container via shell script if commiting to the master branch
 deploy:
