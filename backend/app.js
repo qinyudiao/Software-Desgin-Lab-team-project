@@ -14,6 +14,10 @@ app.use('/country', country);
 app.use('/about', about);
 app.use('/launch', launch);
 
+app.get('/', function (req, res) {
+    res.send('Hello World!');
+  });
+
 
 // MongoDB stuff
 const uri = 'mongodb+srv://admin:admin@softwarelab-zbga3.mongodb.net/test?retryWrites=true&w=majority';
