@@ -79,11 +79,39 @@ class About extends React.Component{
     combineIssuesCommits = () =>{
       // 'contributor': ['name', issues, commits]
       let parent = {
-        'musa': ['Musa Rafik', 0, 0],
-        'jack': ['Jack Diao', 0, 0],
-        'kenan': ['Kenan Hurd', 0, 0],
-        'lucas': ['Lucas Best', 0, 0],
-        'shawn': ['Shawn Victor', 0, 0]
+        'musa': [
+          'Musa Rafik', 
+          0, 
+          0, 
+          "Fifth Year Electrical & Computer Engineering Major (Software Engineering Track) at UT Austin",
+          "Fullstack and Deployment"
+        ],
+        'jack': [
+          'Jack Diao', 
+          0, 
+          0,
+          "TODO"
+        ],
+        'kenan': [
+          'Kenan Hurd', 
+          0, 
+          0,
+          "Third Year Electrical & Computer Engineering Major (Software Engineering Track) at UT Austin",
+          "Frontend"
+        ],
+        'lucas': [
+          'Lucas Best', 
+          0, 
+          0,
+          "TODO"
+        ],
+        'shawn': [
+          'Shawn Victor', 
+          0, 
+          0,
+          "Fourth Year Electrical & Computer Engineering Major (Embedded Systems & Software Engineering Tracks) at UT Austin",
+          "Frontend"
+        ]
       };
 
       // Iterate through issues and add info to parent 
@@ -114,8 +142,13 @@ class About extends React.Component{
 
       // Create an array of Contributor components with parent info passed to each component
       let githubStatsContainer = Object.keys(parent).map(obj =>{
-        return <Contributor name={parent[obj][0]} commits={parent[obj][2]} 
-          issues={parent[obj][1]} />
+        return <Contributor 
+          name={parent[obj][0]} 
+          commits={parent[obj][2]}
+          issues={parent[obj][1]}
+          major={parent[obj][3]} 
+          responsibilities={parent[obj][4]} 
+          src={parent[obj][5]} />
       })
 
       this.setState({githubStats: githubStatsContainer});
@@ -125,21 +158,48 @@ class About extends React.Component{
       return(
         <div>
           <Header />
+
           <h1>About</h1>
+
           <p> 
-            EveryRocketLaunch is a comprehensive database of rocket launches designed to giv eyou as much relevant information
+            EveryRocketLaunch is a comprehensive database of rocket launches designed to give you as much relevant information
             as possible about each and every rocket launch.
           </p>
+          
           <p>
-            Due ot the diverse information available for each rocket launch, this website is designed so that the user can 
+            Due to the diverse information available for each rocket launch, this website is designed so that the user can 
             easily navigate to whichever sub-section of information regarding rocket launches they want to look at. 
           </p>
+
           <p>
             Lastly, EveryRocketLaunch is still in development, and our team welcomes any feedback regarding how to make your
             experience using our site better!
           </p>
-          <h3>GitHub Statistics</h3>
-          {this.state.githubStats ? (this.state.githubStats) : <h3>Loading</h3>}
+
+          {this.state.githubStats ?
+            (<div>
+              <h3>Meet the Team</h3>
+              {this.state.githubStats}
+            </div>)
+          :
+            (null)
+          }
+
+          <h3>Statistics</h3>
+          {/* TODO: get statistics from github */}
+
+          <h3>Data</h3>
+          {/* TODO: get data sources */}
+
+          <h3>Tools</h3>
+          <p>React</p>
+          <p>Node</p>
+          <p>Bootstrap</p>
+          <p>Amazon Web Services</p>
+          <p>Docker</p>
+          <p>Travis CI</p>
+
+          <a href="https://github.com/qinyudiao/Software-Desgin-Lab-team-project">Take a look at our repo!</a>
         </div>
       );
     }

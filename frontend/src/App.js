@@ -50,7 +50,6 @@ class App extends React.Component{
                     <Route path="/about" component={About} />
                 </Switch>
             </BrowserRouter>
-            
         )
     }
 }
