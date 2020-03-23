@@ -155,6 +155,25 @@ class About extends React.Component{
      }
     
     render(){
+      const renderTeamCommits = () =>{
+        let totalCommits = 0;
+        for(let i = 0; i < this.state.contributors.length; i++){
+          totalCommits += this.state.contributors[i].contributions;
+        }
+
+        return <p>{totalCommits} total commits</p>
+      }
+
+      const renderTeamIssues = () =>{
+        let totalIssues = 0; 
+        for(let key of Object.entries(this.state.issuesCount)){
+          console.log(key[1]);
+          totalIssues += key[1];
+        }
+
+        return <p>{totalIssues} total issues</p>
+      }
+
       return(
         <div>
           <Header />
@@ -186,6 +205,8 @@ class About extends React.Component{
           }
 
           <h3>Statistics</h3>
+          {renderTeamCommits()}
+          {renderTeamIssues()}
           {/* TODO: get statistics from github */}
 
           <h3>Data</h3>

@@ -16,20 +16,20 @@ class Contributor extends React.Component{
 
     render(){
         const renderImage = ()=>{
-            if(this.props.name == 'Musa Rafik'){
-                return <img class="pic" alt="contributor headshot" src={musaPic} />
+            if(this.props.name === 'Musa Rafik'){
+                return <img className="pic" alt="contributor headshot" src={musaPic} />
             }
-            else if(this.props.name == 'Jack Diao'){
-                return <img alt="contributor headshot" src={jackPic} class="pic"/>
+            else if(this.props.name === 'Jack Diao'){
+                return <img alt="contributor headshot" src={jackPic} className="pic"/>
             }
-            else if(this.props.name == 'Kenan Hurd'){
-                return <img alt="contributor headshot" src={kenanPic} class="pic" />
+            else if(this.props.name === 'Kenan Hurd'){
+                return <img alt="contributor headshot" src={kenanPic} className="pic" />
             }
-            else if(this.props.name == 'Shawn Victor'){
-                return <img alt="contributor headshot" src={shawnPic} class="pic" />
+            else if(this.props.name === 'Shawn Victor'){
+                return <img alt="contributor headshot" src={shawnPic} className="pic" />
             }
-            else if(this.props.name == 'Lucas Best'){
-                return <img alt="contributor headshot" src={lucasPic} class="pic" />
+            else if(this.props.name === 'Lucas Best'){
+                return <img alt="contributor headshot" src={lucasPic} className="pic" />
             }
         }
 
