@@ -90,7 +90,8 @@ class About extends React.Component{
           'Jack Diao', 
           0, 
           0,
-          "TODO"
+          "Fourth Year Electrical & Computer Engineering Major (Software Engineering & Integrated Circuits Tracks) at UT Austin",
+          "Fullstack and Deployment"
         ],
         'kenan': [
           'Kenan Hurd', 
@@ -103,7 +104,8 @@ class About extends React.Component{
           'Lucas Best', 
           0, 
           0,
-          "TODO"
+          "Fourth Year Electrical & Computer Engineering Major (Software Engineering Track) at UT Austin",
+          "Backend"
         ],
         'shawn': [
           'Shawn Victor', 
@@ -207,7 +209,6 @@ class About extends React.Component{
           <h3>Statistics</h3>
           {renderTeamCommits()}
           {renderTeamIssues()}
-          {/* TODO: get statistics from github */}
 
           <h3>Data</h3>
           {/* TODO: get data sources */}

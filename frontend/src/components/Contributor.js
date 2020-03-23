@@ -2,8 +2,8 @@ import React from 'react';
 import musaPic from '../assets/musaPic.jpg';
 import shawnPic from '../assets/shawnPic.png';
 import kenanPic from '../assets/kenanPic.jpeg';
-import lucasPic from '../assets/musaPic.jpg';
-import jackPic from '../assets/musaPic.jpg';
+import lucasPic from '../assets/lucasPic.jpg';
+import jackPic from '../assets/jackPic.png';
 import './Contributor.css';
 
 class Contributor extends React.Component{
