@@ -214,12 +214,11 @@ class About extends React.Component{
           {/* TODO: get data sources */}
 
           <h3>Tools</h3>
-          <p>React</p>
-          <p>Node</p>
-          <p>Bootstrap</p>
-          <p>Amazon Web Services</p>
-          <p>Docker</p>
-          <p>Travis CI</p>
+          <p>Frontend built with React, JavaScript, CSS, HTML and Bootstrap</p>
+          <p>Backend built with NodeJS</p>
+          <p>Stored data in MongoDB</p>
+          <p>Hosted on Amazon Webservices (Frontend: S3 Backend: EC2)</p>
+          <p>Automatic Deployment with Docker and Travis CI</p>
 
           <a href="https://github.com/qinyudiao/Software-Desgin-Lab-team-project">Take a look at our repo!</a>
         </div>
