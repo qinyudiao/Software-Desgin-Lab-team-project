@@ -5,8 +5,22 @@ class Country extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            data: null
 
         }
+    }
+
+    getCountry = () =>{
+        fetch('http://ec2-54-226-123-223.compute-1.amazonaws.com/country')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            this.setState({data});
+        })
+    }
+
+    componentDidMount(){
+        this.getCountry();
     }
 
     render(){
@@ -14,6 +28,7 @@ class Country extends React.Component{
             <div>
                 <Header />
                 <h1>Country</h1>
+                <p>{this.state.data}</p>
             </div>
         )
     }

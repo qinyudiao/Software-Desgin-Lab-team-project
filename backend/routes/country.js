@@ -270,9 +270,9 @@ router.get('/', function (req, res){
         if(!error && response.statusCode == 200){
             let countryCode = JSON.parse(response.body);
             let countries = [];
-            for(let i = 0; i < countryCode.agencies.length(); i++){
+            for(let i = 0; i < countryCode.agencies.length; i++){
                 let temp = countryCode.agencies[i].countryCode;
-                countries.append(getCountryName(temp));
+                countries.push(getCountryName(temp));
             }
             res.send(countries);
         }
