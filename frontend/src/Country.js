@@ -11,7 +11,7 @@ class Country extends React.Component{
     }
 
     getCountry = () =>{
-        fetch('/country')
+        fetch('http://ec2-54-226-123-223.compute-1.amazonaws.com/country')
         .then(response => response.json())
         .then(data => {
             console.log(data);
