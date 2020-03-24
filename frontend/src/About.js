@@ -18,7 +18,8 @@ class About extends React.Component{
     // Sends get request to node server
     // Response comes in an array with order issues, contributors
     getGitHubStats = () => {
-      fetch('/about')
+      fetch('http://ec2-54-226-123-223.compute-1.amazonaws.com/about')
+      // fetch('/about')
       .then(response => response.json())
       .then(data => {
         console.log(data);
