@@ -11,7 +11,14 @@ class Country extends React.Component{
     }
 
     getCountry = () =>{
-        fetch('http://ec2-54-226-123-223.compute-1.amazonaws.com/country')
+        let url = '';
+        if(process.env.NODE_ENV == 'production'){
+            url = 'http://ec2-54-226-123-223.compute-1.amazonaws.com/country';
+        }
+        else{
+            url = '/country'
+        }
+        fetch(url)
         .then(response => response.json())
         .then(data => {
             console.log(data);

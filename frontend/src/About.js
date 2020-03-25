@@ -18,9 +18,14 @@ class About extends React.Component{
     // Sends get request to node server
     // Response comes in an array with order issues, contributors
     getGitHubStats = () => {
-      fetch('http://ec2-54-226-123-223.compute-1.amazonaws.com/about')
-      // fetch(process.env.REACT_APP_BACKEND_URL)
-      // fetch('/about')
+      let url = '';
+      if(process.env.NODE_ENV == 'production'){ // Use full url when deployed on AWS
+        url = 'http://ec2-54-226-123-223.compute-1.amazonaws.com/about';
+      }
+      else{ // Just use relative url when working on localhost
+        url = '/about'
+      }
+      fetch(url)
       .then(response => response.json())
       .then(data => {
         if(process.env.NODE_ENV == 'production'){
