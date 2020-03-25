@@ -19,12 +19,19 @@ class About extends React.Component{
     // Response comes in an array with order issues, contributors
     getGitHubStats = () => {
       fetch('http://ec2-54-226-123-223.compute-1.amazonaws.com/about')
+      // fetch(process.env.REACT_APP_BACKEND_URL)
       // fetch('/about')
       .then(response => response.json())
       .then(data => {
+        if(process.env.NODE_ENV == 'production'){
+          console.log('production');
+        }
+        else{
+          console.log('development')
+        }
         console.log(data);
-        this.setState({contributors: data[1]})
-        this.setState({issues: data[0]})
+        this.setState({contributors: data[1]});
+        this.setState({issues: data[0]});
         this.computeIssues();
         console.log(this.state.contributors); 
         console.log(this.state.issuesCount);
@@ -170,7 +177,6 @@ class About extends React.Component{
       const renderTeamIssues = () =>{
         let totalIssues = 0; 
         for(let key of Object.entries(this.state.issuesCount)){
-          console.log(key[1]);
           totalIssues += key[1];
         }
 
