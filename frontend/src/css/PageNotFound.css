@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300,500');
+
+body {
+    width: 100%;
+    height: 100%;
+    background-image: url(./../assets/andy-holmes-698828-unsplash.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.message {
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    position: relative;
+}
+
+.number {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    font-weight: 500;
+    font-family: "Roboto Mono", "Liberation Mono", Consolas, monospace;
+    color: rgba(255,255,255,.87); 
+    padding: 10px;
+}
+    
+.text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: 300;
+    font-family: "Roboto Mono", "Liberation Mono", Consolas, monospace;
+    color: rgba(255,255,255,.87); 
+    padding: 10px;
+}
+
+/* #countUp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+} */
+
