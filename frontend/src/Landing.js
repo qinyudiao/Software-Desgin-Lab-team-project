@@ -5,7 +5,7 @@ import { Carousel } from 'react-responsive-carousel';
 import Header from './Header.js';
 import gif1 from './assets/rocket_launch.gif'
 import gif2 from './assets/launching-rocket-dribble.gif';
-
+import SubscriberForm from './components/SubscriberForm';
 
 class Landing extends React.Component{
   constructor(props){
@@ -43,7 +43,9 @@ class Landing extends React.Component{
     return(
       <div className="landing">
         <Header />
+
         {this.state.renderRecentLaunch ? (<h3>Next Launch: {this.state.recentLaunch['launchDescription']}</h3>) : (null)}
+        
         <Carousel autoPlay showThumbs={false}>
           <div>
             <img alt ="rocket" src='https://i.insider.com/5d0d02fde3ecba05703614b3?width=1600&format=jpeg&auto=webp' />
@@ -56,6 +58,7 @@ class Landing extends React.Component{
           </div>
         </Carousel>
         
+        <SubscriberForm />
       </div>
     );
   }

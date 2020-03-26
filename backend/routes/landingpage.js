@@ -39,7 +39,7 @@ let transporter = nodemailer.createTransport({
 });
 
 // Send scheduled email using cron job
-let job = cron.schedule('* 1 * * * *', () => {
+let job = cron.schedule('* 30 * * * *', () => {
     console.log("running cron");
 
 }, {timezone: "America/Chicago"});
