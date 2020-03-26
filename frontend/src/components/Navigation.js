@@ -1,53 +1,71 @@
 import React from 'react';
 import '../css/Navigation.css';
-import { NavLink } from 'react-router-dom';
-import { Navbar} from 'react-bootstrap'
+import { Nav, Navbar, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
+import styled from 'styled-components';
+
+const Styles = styled.div`
+    .navbar{
+        background-color: #252525;
+    }
+
+    .navbar-brand{
+        color: #e0e0d5;
+        font-style: italic;
+        font-family: Comic Sans MS, Comic Sans, cursive;
+        &:hover {
+            color: white;
+        }
+    }
+    
+    .navbar-nav, .nav-link {
+        color: white;
+        &:hover {
+            color: #92f2fc;
+        }
+    }
+
+    #basic-nav-dropdown {
+        color: #d0d2c9;
+        font-style: oblique;
+        &:hover {
+            color: #de6262;
+        }
+    }
+`;
 
 function Navigation(){
-    
+ 
     return(
-            <Navbar className="navbar navbar-expand-sm navbar-dark bg-dark">
-                <NavLink className="navbar-brand" to="/">Every_Rocket_Launch</NavLink>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item active">
-                            <NavLink className="nav-link" to="/about">About</NavLink>
-                        </li>
-                        <li className="nav-item active">
-                            <NavLink className="nav-link" to="/launch">Launches</NavLink>
-                        </li>
-                        <li className="nav-item active">
-                            <NavLink className="nav-link" to="/company">Companies</NavLink>
-                        </li>
-                        <li className="nav-item active">
-                            <NavLink className="nav-link" to="/country">Countries</NavLink>
-                        </li>
-                       <li className="nav-item active">
-                            <NavLink className="nav-link" to="/astronaut">Astronauts</NavLink>
-                        </li>
-                        <li className="nav-item active">
-                            <NavLink className="nav-link" to="/fail">Failed_Launches</NavLink>
-                        </li>
-                        <li className="nav-item active">
-                            <NavLink className="nav-link" to="/education">Education</NavLink>
-                        </li>
-                        <li className="nav-item active">
-                            <NavLink className="nav-link" to="/map">Map</NavLink>
-                        </li>
-                    </ul>
-                    <form className="form-inline my-2 my-md-0">
-                        <ul className="navbar-nav mr-auto">
-                            <li><input className="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search"/></li>
-                            <li><button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></li>
-                        </ul>
-                    </form>
-                </div>
+        <Styles>
+            <Navbar expand="sm">
+                <Navbar.Brand href="/">
+                    <img alt="" src="/logo512.png" width="28" height="28" className="d-inline-block align-top" />
+                    {' '}Every Rocket Launch
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+                    <Nav.Item><Nav.Link href="/about">About</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link href="/launch">Launches</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link href="/company">Companies</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link href="/country">Countries</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link href="/astronaut">Astronauts</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link href="/map">Map</Nav.Link></Nav.Item>
+                    <NavDropdown title="More" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="/fail">Failed Launches</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">Manned Launches</NavDropdown.Item>
+                        <NavDropdown.Item href="education">Education</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item href="#action/3.4">Log in</NavDropdown.Item>
+                    </NavDropdown>
+                    <Form inline>
+                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                        <Button variant="outline-success">Search</Button>
+                    </Form>
+                </Navbar.Collapse>
             </Navbar>
+        </Styles>
     )
 }
 
 export default Navigation;
+

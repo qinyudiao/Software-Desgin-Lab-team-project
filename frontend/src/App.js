@@ -16,7 +16,7 @@ import Education from './Education.js';
 import IndividualLaunch from './IndividualLaunch.js';
 import IndividualAstronaut from './IndividualAstronaut.js';
 import IndividualCompanies from './IndividualCompanies.js';
-import PageNotFound from './PageNotFound/PageNotFound.js';
+import PageNotFound from './PageNotFound.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component{
@@ -45,12 +45,12 @@ class App extends Component{
     }
 
     render(){
-        const { windowWidth } = this.state;
+        // const { windowWidth } = this.state;
 
-        const styles = {
-          white: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          black: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-        };
+        // const styles = {
+        //   white: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+        //   black: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+        // };
         
         return(
             <React.Fragment>

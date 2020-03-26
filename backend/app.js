@@ -9,16 +9,12 @@ app.use(cors());
 var country = require('./routes/country');
 var about = require('./routes/about');
 var launch = require('./routes/launch');
+var landing = require('./routes/landingpage');
 
+app.use('/landing', landing);
 app.use('/country', country); 
 app.use('/about', about);
 app.use('/launch', launch);
-
-app.get('/', function (req, res) {
-    res.send('Hello World!');
-    console.log("hello");
-  });
-
 
 // MongoDB stuff
 const uri = 'mongodb+srv://admin:admin@softwarelab-zbga3.mongodb.net/test?retryWrites=true&w=majority';
@@ -34,8 +30,6 @@ db.once('open', function() {
 db.on('error', function(err) {
     console.log(err);
 });
-
-
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

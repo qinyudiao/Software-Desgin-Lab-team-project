@@ -19,7 +19,7 @@ class About extends React.Component{
     // Response comes in an array with order issues, contributors
     getGitHubStats = () => {
       let url = '';
-      if(process.env.NODE_ENV == 'production'){ // Use full url when deployed on AWS
+      if(process.env.NODE_ENV === 'production'){ // Use full url when deployed on AWS
         url = 'http://ec2-54-226-123-223.compute-1.amazonaws.com/about';
       }
       else{ // Just use relative url when working on localhost
@@ -28,12 +28,6 @@ class About extends React.Component{
       fetch(url)
       .then(response => response.json())
       .then(data => {
-        if(process.env.NODE_ENV == 'production'){
-          console.log('production');
-        }
-        else{
-          console.log('development')
-        }
         console.log(data);
         this.setState({contributors: data[1]});
         this.setState({issues: data[0]});

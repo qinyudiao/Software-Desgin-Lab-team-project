@@ -12,7 +12,7 @@ class Country extends React.Component{
 
     getCountry = () =>{
         let url = '';
-        if(process.env.NODE_ENV == 'production'){
+        if(process.env.NODE_ENV === 'production'){
             url = 'http://ec2-54-226-123-223.compute-1.amazonaws.com/country';
         }
         else{

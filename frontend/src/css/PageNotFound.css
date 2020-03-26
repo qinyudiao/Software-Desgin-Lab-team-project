@@ -20,6 +20,8 @@ body {
     margin-right: auto;
     height: 100%;
     position: relative;
+    font-family: "Roboto Mono", "Liberation Mono", Consolas, monospace;
+    color: rgba(255,255,255,.87); 
 }
 
 .number {
@@ -29,8 +31,7 @@ body {
     align-items: center;
     font-size: 4rem;
     font-weight: 500;
-    font-family: "Roboto Mono", "Liberation Mono", Consolas, monospace;
-    color: rgba(255,255,255,.87); 
+    
     padding: 10px;
 }
     
@@ -41,8 +42,6 @@ body {
     align-items: center;
     font-size: 3rem;
     font-weight: 300;
-    font-family: "Roboto Mono", "Liberation Mono", Consolas, monospace;
-    color: rgba(255,255,255,.87); 
     padding: 10px;
 }
 
