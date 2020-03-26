@@ -20,4 +20,11 @@ getLastLaunch = (recentLaunches) =>{
     return launch;
 }
 
+router.get('/subscribe', (req, res) =>{
+    console.log('subscribe request');
+})
+
 module.exports = router;
+
+
+
