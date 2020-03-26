@@ -1,5 +1,5 @@
 import React from 'react';
-import './Landing.css';
+import './css/Landing.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import Header from './Header.js';
