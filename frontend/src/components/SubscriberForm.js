@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Form, FormGroup, Label, Input, FormText} from 'reactstrap';
+import {Button, Form, FormGroup, Input} from 'reactstrap';
 
 class SubscriberForm extends React.Component{
     constructor(props){
@@ -9,9 +9,25 @@ class SubscriberForm extends React.Component{
         }
     }
 
+    sendEmail = (email) =>{
+        let url = '';
+        if(process.env.NODE_ENV === 'production'){
+            url = 'http://ec2-54-226-123-223.compute-1.amazonaws.com/landing/subscribe';
+        }
+        else{
+            url = '/landing/subscribe';
+        }
+
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({'email': email})
+        })
+        .then(response => console.log(response));
+    }
+
     handleSubmit = (event) =>{
         event.preventDefault();
-        console.log(event.target.email.value);
+        this.sendEmail(event.target.email.value);
     }
 
     handleOnClick = () =>{

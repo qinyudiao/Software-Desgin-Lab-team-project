@@ -3,7 +3,11 @@ var router = express.Router();
 var request = require('request');
 const mongoose = require('mongoose');
 const cron = require('node-cron');
-let nodemailer = require('nodemailer')
+let nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
+
+var app = express();
+app.use(bodyParser.json());
 
 // Handle next launch stuff
 router.get('/', (req, res) =>{
@@ -27,6 +31,11 @@ getLastLaunch = (recentLaunches) =>{
 // Handle subscribers for next launches stuff
 router.get('/subscribe', (req, res) =>{
     console.log('subscribe request');
+});
+
+router.post('/subscribe', (req, res) =>{
+    // console.log(req);
+    console.log("goes here");
 });
 
 // Mailer for cron job
