@@ -1,10 +1,10 @@
 import React from 'react';
-import './Landing.css';
+import './css/Landing.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import Header from './Header.js';
 import gif1 from './assets/rocket_launch.gif'
-import gif2 from './assets/launching-rocket-dribbble.gif';
+import gif2 from './assets/launching-rocket-dribble.gif';
 
 
 class Landing extends React.Component{

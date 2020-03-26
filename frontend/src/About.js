@@ -1,5 +1,5 @@
 import React from 'react';
-import './About.css';
+import './css/About.css';
 import Header from './Header';
 import Contributor from './components/Contributor';
 
