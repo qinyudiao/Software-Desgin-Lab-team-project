@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
-const mongoose = require('mongoose');
 const cron = require('node-cron');
 let nodemailer = require('nodemailer');
 
-// Handle next launch stuff
+let Subscriber = require('../models/subscriber.js');
+
+// Send response to api to get next 5 launches then take the first one and send it back to frontend
 router.get('/', (req, res) =>{
     request('https://fdo.rocketlaunch.live/json/launches/next/5', (error, response, body) =>{
         if(!error && response.statusCode == 200){
@@ -24,13 +25,28 @@ getLastLaunch = (recentLaunches) =>{
     return launch;
 }
 
-// Handle subscribers for next launches stuff
-router.get('/subscribe', (req, res) =>{
-    console.log('subscribe request');
-});
-
+// When a subscriber submits the form, email address gets sent here
+// Check if address is already in database. If not, add it, otherwise send message that they are already subscribed
 router.post('/subscribe', (req, res) =>{
     console.log(req.body);
+    Subscriber.findOne({email: req.body.email}, (err, user) => {
+        if(err){
+            console.log(err);
+        }
+        if(user){
+            console.log("Subscriber already in database");
+        }
+        else{
+            Subscriber.create({email: req.body.email}, (err, result) =>{
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    console.log("Saved new subscriber to database");
+                }
+            });
+        }
+    });
 });
 
 // Mailer for cron job
@@ -43,7 +59,7 @@ let transporter = nodemailer.createTransport({
 });
 
 // Send scheduled email using cron job
-let job = cron.schedule('* 30 * * * *', () => {
+let job = cron.schedule('* 5 * * * *', () => {
     console.log("running cron");
 
 }, {timezone: "America/Chicago"});

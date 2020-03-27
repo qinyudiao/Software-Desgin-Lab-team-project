@@ -8,4 +8,4 @@ let subscriberSchema = mongoose.Schema({
     }
 });
 
-let Subcriber = module.exports = mongoose.model('Subscribers', subscriberSchema);
+module.exports = mongoose.model('Subscribers', subscriberSchema);
