@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import { Layout } from "./components/Layout.js";
  
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 const handleApiLoaded = (map, maps) => {
@@ -21,9 +20,7 @@ class Map extends Component {
         return(
             <React.Fragment style={{ height: '100vh', width: '100%' }}>
               <Header></Header>
-              <Layout>
 
-              </Layout>
 
             </React.Fragment>
         )

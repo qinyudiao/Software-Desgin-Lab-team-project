@@ -2,7 +2,6 @@ import React from 'react';
 import './css/About.css';
 import Header from './Header';
 import Contributor from './components/Contributor';
-import { Layout } from "./components/Layout.js";
 
 class About extends React.Component{
     constructor(props){
