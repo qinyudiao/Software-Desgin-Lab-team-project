@@ -183,53 +183,53 @@ class About extends React.Component{
       }
 
       return(
-        <div>
-          <Header />
+        <React.Fragment>
 
-          <h1>About</h1>
+            <Header />
+            <h1>About</h1>
 
-          <p> 
-            EveryRocketLaunch is a comprehensive database of rocket launches designed to give you as much relevant information
-            as possible about each and every rocket launch.
-          </p>
-          
-          <p>
-            Due to the diverse information available for each rocket launch, this website is designed so that the user can 
-            easily navigate to whichever sub-section of information regarding rocket launches they want to look at. 
-          </p>
+            <p> 
+              EveryRocketLaunch is a comprehensive database of rocket launches designed to give you as much relevant information
+              as possible about each and every rocket launch.
+            </p>
+            
+            <p>
+              Due to the diverse information available for each rocket launch, this website is designed so that the user can 
+              easily navigate to whichever sub-section of information regarding rocket launches they want to look at. 
+            </p>
 
-          <p>
-            Lastly, EveryRocketLaunch is still in development, and our team welcomes any feedback regarding how to make your
-            experience using our site better!
-          </p>
+            <p>
+              Lastly, EveryRocketLaunch is still in development, and our team welcomes any feedback regarding how to make your
+              experience using our site better!
+            </p>
 
-          <h3>Meet the Team</h3>
+            <h3>Meet the Team</h3>
 
 
-          {this.state.githubStats ?
-            (<div>
-              {this.state.githubStats}
-            </div>)
-          :
-            (null)
-          }
+            {this.state.githubStats ?
+              (<div>
+                {this.state.githubStats}
+              </div>):
+              (null)
+            }
 
-          <h3>Statistics</h3>
-          {renderTeamCommits()}
-          {renderTeamIssues()}
+            <h3>Statistics</h3>
+            {renderTeamCommits()}
+            {renderTeamIssues()}
 
-          <h3>Data</h3>
-          {/* TODO: get data sources */}
+            <h3>Data</h3>
+            {/* TODO: get data sources */}
 
-          <h3>Tools</h3>
-          <p>Frontend built with React, JavaScript, CSS, HTML and Bootstrap</p>
-          <p>Backend built with NodeJS</p>
-          <p>Stored data in MongoDB</p>
-          <p>Hosted on Amazon Webservices (Frontend: S3 Backend: EC2)</p>
-          <p>Automatic Deployment with Docker and Travis CI</p>
+            <h3>Tools</h3>
+            <p>Frontend built with React, JavaScript, CSS, HTML and Bootstrap</p>
+            <p>Backend built with NodeJS</p>
+            <p>Stored data in MongoDB</p>
+            <p>Hosted on Amazon Webservices (Frontend: S3 Backend: EC2)</p>
+            <p>Automatic Deployment with Docker and Travis CI</p>
 
-          <a href="https://github.com/qinyudiao/Software-Desgin-Lab-team-project">Take a look at our repo!</a>
-        </div>
+            <a href="https://github.com/qinyudiao/Software-Desgin-Lab-team-project">Take a look at our repo!</a>
+
+        </React.Fragment>
       );
     }
 }
