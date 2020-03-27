@@ -35,6 +35,7 @@ router.post('/subscribe', (req, res) =>{
         }
         if(user){
             console.log("Subscriber already in database");
+            res.json({message: "You have already subscribed"});
         }
         else{
             Subscriber.create({email: req.body.email}, (err, result) =>{
@@ -45,6 +46,32 @@ router.post('/subscribe', (req, res) =>{
                     console.log("Saved new subscriber to database");
                 }
             });
+        }
+    });
+});
+
+// Handles requests to unsubscribe from the launch email
+// Search for the email in the database, if it exists delete the document, else send a message saying they aren't subscribed
+router.post('/unsubscribe', (req, res) =>{
+    console.log(req.body);
+    Subscriber.findOne({email: req.body.email}, (err, user) =>{
+        if(err){
+            console.log(err);
+        }
+        if(user){
+            console.log("Subscriber will be removed");
+            Subscriber.deleteOne({email: req.body.email}, (err, result) =>{
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    console.log("Subscriber deleted");
+                    res.send({message: 'You are no longer a subscriber'});
+                }
+            });
+        }
+        else{
+            console.log("You are not subscribed")
         }
     });
 });

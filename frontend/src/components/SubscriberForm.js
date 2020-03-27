@@ -26,7 +26,9 @@ class SubscriberForm extends React.Component{
         };
 
         fetch(url, requestOptions)
-        .then(response => console.log(response));
+        .then(response => console.log(response))
+        // .then(response => response.json())
+        // .then(data => console.log(data));
     }
 
     handleSubmit = (event) =>{

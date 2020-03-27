@@ -21,8 +21,6 @@ app.use('/country', country);
 app.use('/about', about);
 app.use('/launch', launch);
 
-let Subscriber = require('./models/subscriber.js');
-
 // MongoDB stuff
 const uri = 'mongodb+srv://admin:admin@softwarelab-zbga3.mongodb.net/SoftwareLab?retryWrites=true&w=majority';
 mongoose.connect(uri, { useNewUrlParser: true });
@@ -31,18 +29,6 @@ let db = mongoose.connection;
 // Check connection
 db.once('open', function() {
     console.log('Connected to MongoDB');
-    mongoose.connection.db.listCollections().toArray(function (err, names) {
-        console.log(names); // [{ name: 'dbname.myCollection' }]
-        module.exports.Collection = names;
-    });
-    Subscriber.create({email: 'test'}, (err, result) =>{
-        if(err){
-            console.log(err);
-        }
-        else{
-            console.log('added');
-        }
-    });
 });
 
 // Check for errors
