@@ -106,19 +106,29 @@ getLaunches = () =>{
 }
 
 sendEmails = (emailBody) =>{
-    let mailOptions = ({
-        from: "everyrocketlaunch.com", 
-        to: "moosarafik@gmail.com",
-        subject: "updates from the rocket",
-        text: emailBody.toString()
-    });
-
-    transporter.sendMail(mailOptions, (err, info) =>{
+    Subscriber.find({}, (err, res) =>{
         if(err){
-            throw err;
+            console.log(err);
         }
         else{
-            console.log("Email sent");
+            console.log(res);
+            for(let i = 0; i < res.length; i++){
+                let mailOptions = ({
+                    from: "everyrocketlaunch.com",
+                    to: res[i]['email'],
+                    subject: "Weekly Update About Upcoming Launches",
+                    text: emailBody
+                });
+
+                transporter.sendMail(mailOptions, (err) =>{
+                    if(err){
+                        throw err;
+                    }
+                    else{
+                        console.log("Email sent");
+                    }
+                });
+            }
         }
     });
 }
