@@ -5,7 +5,7 @@ import { Carousel } from 'react-responsive-carousel';
 import Header from './Header.js';
 import gif1 from './assets/rocket_launch.gif'
 import gif2 from './assets/launching-rocket-dribble.gif';
-
+import { Layout } from "./components/Layout.js";
 
 class Landing extends React.Component{
   constructor(props){

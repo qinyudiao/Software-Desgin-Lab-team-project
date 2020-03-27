@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header';
+import { Layout } from "./components/Layout.js";
 
 class IndividualCompanies extends React.Component{
     constructor(props){

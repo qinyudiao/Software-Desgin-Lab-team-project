@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header.js';
 import ReactPlayer from 'react-player'; 
+import { Layout } from "./components/Layout.js";
 
 class Fail extends React.Component{
     constructor(props){

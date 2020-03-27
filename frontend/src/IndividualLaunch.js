@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header.js';
+import { Layout } from "./components/Layout.js";
 
 class IndividualLaunch extends React.Component{
     constructor(props){

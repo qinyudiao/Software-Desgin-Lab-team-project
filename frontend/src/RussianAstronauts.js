@@ -4,7 +4,6 @@ import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
 import {Link} from 'react-router-dom';
 
-
 class RussianAstronauts extends React.Component{
     constructor(props){
         super(props);
