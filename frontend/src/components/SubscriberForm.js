@@ -61,6 +61,7 @@ class SubscriberForm extends React.Component{
         event.preventDefault();
         this.subscribe(event.target.email.value);
         document.getElementById('emailForm').reset();
+        this.setState({renderCancelButton: false});
     }
 
     handleOnClick = () =>{
