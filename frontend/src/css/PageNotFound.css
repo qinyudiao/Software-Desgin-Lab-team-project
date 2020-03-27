@@ -40,17 +40,7 @@
     font-size: 3rem;
     font-weight: bold;
     padding: 10px;
-}
-
-#home {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    font-weight: normal;
-    text-decoration: underline;
-    padding: 10px;
+    margin-bottom: 5rem;
 }
 
 /* #countUp {
