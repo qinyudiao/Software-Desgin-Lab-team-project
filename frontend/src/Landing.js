@@ -6,13 +6,14 @@ import Header from './Header.js';
 import gif1 from './assets/rocket_launch.gif'
 import gif2 from './assets/launching-rocket-dribble.gif';
 import SubscriberForm from './components/SubscriberForm';
+import UnsubscriberForm from './components/UnsubscriberForm';
 
 class Landing extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       recentLaunch: null,
-      renderRecentLaunch: false
+      renderRecentLaunch: false,
     }
   }
 
@@ -35,8 +36,6 @@ class Landing extends React.Component{
 
   componentDidMount(){
     this.getRecentLaunch();
-    // fetch('/landing/subscribe')
-    // .then(response => console.log("subscribers endpoint works"));
   }
 
   render(){
@@ -48,17 +47,19 @@ class Landing extends React.Component{
         
         <Carousel autoPlay showThumbs={false}>
           <div>
-            <img alt ="rocket" src='https://i.insider.com/5d0d02fde3ecba05703614b3?width=1600&format=jpeg&auto=webp' />
+            <img alt="rocket" src={gif2} />
           </div>
           <div>
-            <img alt="rocket" src={gif2} />
+            <img alt ="rocket" src='https://i.insider.com/5d0d02fde3ecba05703614b3?width=1600&format=jpeg&auto=webp' />
           </div>
           <div>
             <img alt="rocket" src={gif1} />
           </div>
         </Carousel>
-        
+
         <SubscriberForm />
+
+        <UnsubscriberForm />
       </div>
     );
   }

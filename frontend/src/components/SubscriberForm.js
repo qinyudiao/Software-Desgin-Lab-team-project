@@ -10,7 +10,7 @@ class SubscriberForm extends React.Component{
         }
     }
 
-    sendEmail = (email) =>{
+    subscribe = (email) =>{
         let url = '';
         if(process.env.NODE_ENV === 'production'){
             url = 'http://ec2-54-226-123-223.compute-1.amazonaws.com/landing/subscribe';
@@ -26,18 +26,17 @@ class SubscriberForm extends React.Component{
         };
 
         fetch(url, requestOptions)
-        .then(response => console.log(response))
-        // .then(response => response.json())
-        // .then(data => console.log(data));
+        .then(response => response.json())
+        .then(data => console.log(data))
     }
 
     handleSubmit = (event) =>{
         event.preventDefault();
-        this.sendEmail(event.target.email.value);
+        this.subscribe(event.target.email.value);
+        document.getElementById('emailForm').reset();
     }
 
     handleOnClick = () =>{
-        console.log('goes here')
         this.setState({renderCancelButton: true});
     }
 
@@ -51,7 +50,7 @@ class SubscriberForm extends React.Component{
         return(
             <Form onSubmit={this.handleSubmit} id="emailForm" className="emailForm">
                 <FormGroup>
-                    <h3>Enter your email to get weekly updates about upcoming launches!</h3>
+                    <h3>Subscribe to get weekly updates about upcoming launches!</h3>
                     <Input type="email" name="email" id="email" placeholder="Enter email here" onClick={this.handleOnClick} />
                     <Button>Submit</Button> 
                     {this.state.renderCancelButton ? (<Button onClick={this.onClickCancel}>Cancel</Button>) : (null)}

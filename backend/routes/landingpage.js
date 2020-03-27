@@ -35,7 +35,8 @@ router.post('/subscribe', (req, res) =>{
         }
         if(user){
             console.log("Subscriber already in database");
-            res.json({message: "You have already subscribed"});
+            res.setHeader('Content-Type', 'application/json');
+            res.send({message: "You have already subscribed"});
         }
         else{
             Subscriber.create({email: req.body.email}, (err, result) =>{
@@ -44,6 +45,8 @@ router.post('/subscribe', (req, res) =>{
                 }
                 else{
                     console.log("Saved new subscriber to database");
+                    res.setHeader('Content-Type', 'application/json');
+                    res.send({message: 'You have been added as a subscriber'});
                 }
             });
         }
@@ -66,12 +69,15 @@ router.post('/unsubscribe', (req, res) =>{
                 }
                 else{
                     console.log("Subscriber deleted");
+                    res.setHeader('Content-Type', 'application/json');
                     res.send({message: 'You are no longer a subscriber'});
                 }
             });
         }
         else{
             console.log("You are not subscribed")
+            res.setHeader('Content-Type', 'application/json');
+            res.send({message: 'You are not subscribed'});
         }
     });
 });

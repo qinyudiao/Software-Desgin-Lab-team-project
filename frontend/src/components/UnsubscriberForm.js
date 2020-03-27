@@ -1,8 +1,7 @@
 import React from 'react';
 import {Button, Form, FormGroup, Input} from 'reactstrap';
-import '../css/SubscriberForm.css'
 
-class SubscriberForm extends React.Component{
+class UnsubscriberForm extends React.Component{
     constructor(props){
         super(props);
         this.state ={
@@ -10,13 +9,13 @@ class SubscriberForm extends React.Component{
         }
     }
 
-    sendEmail = (email) =>{
+    unsubscribe = (email) =>{
         let url = '';
         if(process.env.NODE_ENV === 'production'){
-            url = 'http://ec2-54-226-123-223.compute-1.amazonaws.com/landing/subscribe';
+            url = 'http://ec2-54-226-123-223.compute-1.amazonaws.com/landing/unsubscribe';
         }
         else{
-            url = '/landing/subscribe';
+            url = '/landing/unsubscribe';
         }
 
         const requestOptions = {
@@ -26,30 +25,31 @@ class SubscriberForm extends React.Component{
         };
 
         fetch(url, requestOptions)
-        .then(response => console.log(response));
+        .then(response => response.json())
+        .then(data => console.log(data))
     }
 
     handleSubmit = (event) =>{
         event.preventDefault();
-        this.sendEmail(event.target.email.value);
+        this.unsubscribe(event.target.email.value);
+        document.getElementById("unsubscribeForm").reset();
     }
 
     handleOnClick = () =>{
-        console.log('goes here')
         this.setState({renderCancelButton: true});
     }
 
     onClickCancel = () =>{
-        document.getElementById("emailForm").reset();
+        document.getElementById("unsubscribeForm").reset();
         this.setState({renderCancelButton: false});
     }
 
 
     render(){
         return(
-            <Form onSubmit={this.handleSubmit} id="emailForm" className="emailForm">
+            <Form onSubmit={this.handleSubmit} id="unsubscribeForm" className="emailForm">
                 <FormGroup>
-                    <h3>Enter your email to get weekly updates about upcoming launches!</h3>
+                    <h3>Unsubscribe from our weekly newsletter about upcoming launches!</h3>
                     <Input type="email" name="email" id="email" placeholder="Enter email here" onClick={this.handleOnClick} />
                     <Button>Submit</Button> 
                     {this.state.renderCancelButton ? (<Button onClick={this.onClickCancel}>Cancel</Button>) : (null)}
@@ -59,4 +59,4 @@ class SubscriberForm extends React.Component{
     }
 }
 
-export default SubscriberForm;
+export default UnsubscriberForm;
