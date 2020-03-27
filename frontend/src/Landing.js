@@ -35,8 +35,8 @@ class Landing extends React.Component{
 
   componentDidMount(){
     this.getRecentLaunch();
-    fetch('/landing/subscribe')
-    .then(response => console.log("subscribers endpoint works"));
+    // fetch('/landing/subscribe')
+    // .then(response => console.log("subscribers endpoint works"));
   }
 
   render(){

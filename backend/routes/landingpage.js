@@ -4,10 +4,6 @@ var request = require('request');
 const mongoose = require('mongoose');
 const cron = require('node-cron');
 let nodemailer = require('nodemailer');
-const bodyParser = require('body-parser');
-
-var app = express();
-app.use(bodyParser.json());
 
 // Handle next launch stuff
 router.get('/', (req, res) =>{
@@ -34,8 +30,7 @@ router.get('/subscribe', (req, res) =>{
 });
 
 router.post('/subscribe', (req, res) =>{
-    // console.log(req);
-    console.log("goes here");
+    console.log(req.body);
 });
 
 // Mailer for cron job

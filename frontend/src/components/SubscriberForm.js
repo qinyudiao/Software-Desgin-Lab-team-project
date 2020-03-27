@@ -1,11 +1,12 @@
 import React from 'react';
 import {Button, Form, FormGroup, Input} from 'reactstrap';
+import '../css/SubscriberForm.css'
 
 class SubscriberForm extends React.Component{
     constructor(props){
         super(props);
         this.state ={
-            renderCancelButton: false
+            renderCancelButton: false,
         }
     }
 
@@ -18,10 +19,13 @@ class SubscriberForm extends React.Component{
             url = '/landing/subscribe';
         }
 
-        fetch(url, {
+        const requestOptions = {
             method: 'POST',
-            body: JSON.stringify({'email': email})
-        })
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email: email})
+        };
+
+        fetch(url, requestOptions)
         .then(response => console.log(response));
     }
 
@@ -43,7 +47,7 @@ class SubscriberForm extends React.Component{
 
     render(){
         return(
-            <Form onSubmit={this.handleSubmit} id="emailForm">
+            <Form onSubmit={this.handleSubmit} id="emailForm" className="emailForm">
                 <FormGroup>
                     <h3>Enter your email to get weekly updates about upcoming launches!</h3>
                     <Input type="email" name="email" id="email" placeholder="Enter email here" onClick={this.handleOnClick} />
