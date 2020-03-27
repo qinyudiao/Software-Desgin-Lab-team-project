@@ -31,6 +31,11 @@ const Styles = styled.div`
             color: #de6262;
         }
     }
+
+    #search-button { 
+        color: #c0d1c6;
+        font-style: oblique;
+    }
 `;
 
 function Navigation(){
@@ -59,7 +64,7 @@ function Navigation(){
                     </NavDropdown>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-success">Search</Button>
+                        <Button variant="outline-secondary" id="search-button">Search</Button>
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
