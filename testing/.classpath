@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Shawn-Laptop/Downloads/selenium-server-standalone-3.141.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Shawn-Laptop/Downloads/selenium-server-3.141.0/libs/bundle-jars.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Shawn-Laptop/Downloads/selenium-server-3.141.0/libs/byte-buddy-1.8.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Shawn-Laptop/Downloads/selenium-server-3.141.0/libs/commons-exec-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Shawn-Laptop/Downloads/selenium-server-3.141.0/libs/guava-25.0-jre.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Shawn-Laptop/Downloads/selenium-server-3.141.0/libs/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Shawn-Laptop/Downloads/selenium-server-3.141.0/libs/jcip-annotations-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Shawn-Laptop/Downloads/selenium-server-3.141.0/libs/jcommander-1.72.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Shawn-Laptop/Downloads/selenium-server-3.141.0/libs/okhttp-3.11.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Shawn-Laptop/Downloads/selenium-server-3.141.0/libs/okio-1.14.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Shawn-Laptop/Downloads/selenium-server-3.141.0/libs/snakeyaml-1.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Shawn-Laptop/Downloads/selenium-server-3.141.0/selenium-3.141.0-nodeps.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Shawn-Laptop/Downloads/selenium-server-3.141.0/selenium-3.141.0-nodeps-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Shawn-Laptop/Downloads/junit-4.13.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Shawn-Laptop/Downloads/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
