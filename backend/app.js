@@ -15,11 +15,13 @@ var country = require('./routes/country');
 var about = require('./routes/about');
 var launch = require('./routes/launch');
 var landing = require('./routes/landingpage');
+var usAstronauts = require('./routes/usAstronauts');
 
 app.use('/landing', landing);
 app.use('/country', country); 
 app.use('/about', about);
 app.use('/launch', launch);
+app.use('/USAstronauts', usAstronauts);
 
 // MongoDB stuff
 const uri = 'mongodb+srv://admin:admin@softwarelab-zbga3.mongodb.net/SoftwareLab?retryWrites=true&w=majority';
