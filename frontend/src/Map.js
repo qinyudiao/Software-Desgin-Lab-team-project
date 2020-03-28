@@ -63,7 +63,7 @@ class Map extends Component {
               </span>
               <span id="right-column" className="column">
                 <div id="launches-plot-year" className="column-item">
-                  <p>Plot: Launches per year</p>
+                  <p>Launches per year plot</p>
                 </div>
               </span>
             </div>
