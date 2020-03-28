@@ -91,13 +91,76 @@ let transporter = nodemailer.createTransport({
     }
 });
 
+// Send a request to get the next 5 launches for the cron job
+getLaunches = () =>{
+    request('https://fdo.rocketlaunch.live/json/launches/next/5', (error, response, body) =>{
+        if(!error && response.statusCode == 200){
+            let launches = JSON.parse(response.body);
+            console.log("in function" + launches);
+            return launches;
+        }
+        else{
+            console.log(error);
+        }
+    })
+    .then(console.log('hi'));
+}
+
+// Query database for all email addresses and for each address send an email with the launch
+// information as the body of the email
+sendEmails = (emailBody) =>{
+    Subscriber.find({}, (err, res) =>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log(res);
+            for(let i = 0; i < res.length; i++){
+                let mailOptions = ({
+                    from: "everyrocketlaunch.com",
+                    to: res[i]['email'],
+                    subject: "Weekly Update About Upcoming Launches",
+                    text: emailBody
+                });
+
+                transporter.sendMail(mailOptions, (err) =>{
+                    if(err){
+                        throw err;
+                    }
+                    else{
+                        console.log("Email sent");
+                    }
+                });
+            }
+        }
+    });
+}
+
+// Take information from launch request and convert to a usable string
+processInformation = (info) =>{
+    let infoArray = info['result'];
+    let infoString = 'Here are the next five upcoming launches:\n\n';
+    for(let i = 0; i < infoArray.length; i++){
+        infoString += [i + 1] + ') ' + infoArray[i]['launch_description'] + '\n\n';
+    }
+    return infoString;
+}
+
 // Send scheduled email using cron job
-let job = cron.schedule('* 5 * * * *', () => {
+// NOTE: set 1 hour before actual time
+cron.schedule('0 0 * * Saturday', function(){
     console.log("running cron");
-
+    request('https://fdo.rocketlaunch.live/json/launches/next/5', (error, response) =>{
+        if(!error && response.statusCode == 200){
+            let launches = JSON.parse(response.body);
+            let emailBodyString = processInformation(launches);
+            sendEmails(emailBodyString);
+        }
+        else{
+            console.log(error);
+        }
+    })
 }, {timezone: "America/Chicago"});
-
-job.start();
 
 module.exports = router;
 
