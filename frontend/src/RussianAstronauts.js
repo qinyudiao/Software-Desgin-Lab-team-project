@@ -13,12 +13,25 @@ class RussianAstronauts extends React.Component{
     }
 
     componentDidMount(){
-      const url = "https://raw.githubusercontent.com/ShawnVictor/demo/master/db3.json";
-      fetch(url, {
-        method: "GET"
-      }).then(response => response.json()).then(posts => {
-        this.setState({posts: posts})
-      })
+      let url = '';
+      if(process.env.NODE_ENV === 'production'){
+        url = 'http://ec2-54-226-123-223.compute-1.amazonaws.com/RussianAstronauts';
+      }
+      else{
+        url = '/RussianAstronauts';
+      }
+      fetch(url)
+      .then(response => response.json())
+      .then(posts => this.setState({posts: posts}));
+
+
+
+      // const url = "https://raw.githubusercontent.com/ShawnVictor/demo/master/db3.json";
+      // fetch(url, {
+      //   method: "GET"
+      // }).then(response => response.json()).then(posts => {
+      //   this.setState({posts: posts})
+      // })
     }
 
     render(){

@@ -44,12 +44,12 @@ class SubscriberForm extends React.Component{
         .then(data => {
             console.log(data);
             console.log(data['message']);
-            if(data['message'] =='success'){
+            if(data['message'] ==='success'){
                 this.setState({renderSuccess: true});
                 this.setState({renderGreen: true});
                 setTimeout(this.hideSuccess, 2000);
             }
-            else if(data['message'] == 'fail'){
+            else if(data['message'] === 'fail'){
                 this.setState({renderFail: true});
                 this.setState({renderRed: true});
                 setTimeout(this.hideFail, 2000);

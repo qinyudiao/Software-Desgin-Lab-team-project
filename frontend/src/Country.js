@@ -35,7 +35,8 @@ class Country extends React.Component{
             <div>
                 <Header />
                 <h1>Country</h1>
-                <p>{this.state.data}</p>
+                {/* <p>{this.state.data}</p> */}
+                <p>Under Construction</p>
             </div>
         )
     }
