@@ -1,16 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+const cron = require('node-cron');
 
 let usAstronaut = require('../models/usAstronautSchema.js');
 
-router.get('/', (req, res) =>{
-    request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db.json', (error, response) =>{
-        if(!error && response.statusCode == 200){
-            console.log(JSON.parse(response.body));
-            let responseArray = JSON.parse(response.body);
+// At a periodic time update database with US astronaut information
+cron.schedule('* * * * Sunday', () =>{
+    console.log('running astronaut cron job');
+    request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db.json', (err, res) =>{
+        if(!err && res.statusCode === 200){
+            let responseArray = JSON.parse(res.body);
             for(let i = 0; i < responseArray.length; i++){
-                usAstronaut.findOne(responseArray[i], (err, document) =>{
+                usAstronaut.findOne(responseArray[i], (error, document) =>{
                     if(err){
                         console.log(err);
                     }
@@ -23,15 +25,25 @@ router.get('/', (req, res) =>{
                                 console.log(err);
                             }
                             else{
-                                console.log("Adding astronaut to database");
+                                console.log("Astronaut saved to database");
                             }
                         });
                     }
-                }
-            )};
+                } );
+            }
+        }
+    });
+});
+
+// Query database to get all US astronauts then send results to frontend
+router.get('/', (req, res) =>{
+    usAstronaut.find({}, (err, response) =>{
+        if(err){
+            console.log(err);
         }
         else{
-            console.log(error);
+            res.setHeader('Content-Type', 'application/json');
+            res.send(response);
         }
     });
 });
