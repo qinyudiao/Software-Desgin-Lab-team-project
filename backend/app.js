@@ -18,6 +18,7 @@ var landing = require('./routes/landingpageRoute');
 var usAstronauts = require('./routes/usAstronautsRoute');
 var internationalAstronauts = require('./routes/internationalAstronautsRoute');
 var russianAstronauts = require('./routes/russianAstronautsRoute');
+var companies = require('./routes/companyRoute');
 
 app.use('/landing', landing);
 app.use('/country', country); 
@@ -26,6 +27,7 @@ app.use('/launch', launch);
 app.use('/USAstronauts', usAstronauts);
 app.use('/InternationalAstronauts', internationalAstronauts);
 app.use('/RussianAstronauts', russianAstronauts);
+app.use('/companies', companies);
 
 // MongoDB stuff
 const uri = 'mongodb+srv://admin:admin@softwarelab-zbga3.mongodb.net/SoftwareLab?retryWrites=true&w=majority';
