@@ -1,0 +1,56 @@
+.black-board{
+    display: flex;
+    justify-content: center;
+    background-color: #020202;
+    color: white;
+    height: 100vw;
+}
+
+.column{
+    margin: 0.5vw;
+}
+
+#left-column {
+    width: 22vw;
+}
+
+#middle-column {
+    width: 48vw;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#right-column {
+    width: 30vw;
+}
+
+.column-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #222;
+    padding: 1vw;
+    margin-bottom: 0.5vw;
+}
+
+#total-launches {
+    color: white;
+}
+
+#total-launches-number {
+    color: red;
+    font-size: 3rem;
+}
+
+#launches-by-region {
+    color: aliceblue;
+}
+
+#map-container {
+    color: aliceblue;
+}
+
+
+#launches-plot-year {
+    width: 100%;
+}
