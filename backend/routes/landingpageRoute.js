@@ -148,7 +148,7 @@ processInformation = (info) =>{
 
 // Send scheduled email using cron job
 // NOTE: set 1 hour before actual time
-cron.schedule('0 0 * * Saturday', function(){
+cron.schedule('* * * * Sunday', function(){
     console.log("running cron");
     request('https://fdo.rocketlaunch.live/json/launches/next/5', (error, response) =>{
         if(!error && response.statusCode == 200){
