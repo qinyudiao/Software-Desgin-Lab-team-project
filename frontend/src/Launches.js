@@ -2,7 +2,6 @@ import React from 'react';
 import Header from './Header.js';
 import ReactTable from "react-table-6"
 import "react-table-6/react-table.css"
-import { Layout } from "./components/Layout.js";
 
 class Launches extends React.Component{
     constructor(props){
