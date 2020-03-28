@@ -4,7 +4,7 @@ var request = require('request');
 const cron = require('node-cron');
 let nodemailer = require('nodemailer');
 
-let Subscriber = require('../models/subscriber.js');
+let Subscriber = require('../models/subscriberSchema.js');
 
 // Send response to api to get next 5 launches then take the first one and send it back to frontend
 router.get('/', (req, res) =>{
