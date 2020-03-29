@@ -92,7 +92,7 @@ const MapWithMarkers = withScriptjs(
         <GoogleMap
             defaultZoom={1.6}
             minZoom={1}
-            defaultCenter={{ lat: 28, lng: 10 }}
+            defaultCenter={{ lat: 20, lng: 10 }}
             options={{
                 styles: mapStyles,
                 scrollwheel: false,
@@ -167,7 +167,7 @@ export default class MapContainer extends Component {
                     isMarkerShown
                     googleMapURL={`https:/maps.googleapis.com/maps/api/js?key=${mapAPIKey}&v=3.exp&libraries=geometry,drawing,places`}
                     loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={<div style={{ height: `60vh` }} />}
+                    containerElement={<div style={{ height: `62vh` }} />}
                     mapElement={<div style={{ height: `100%` }} />}
                     marks={marks}
                 />

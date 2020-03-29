@@ -8,7 +8,7 @@
     border-width: 1px;
     border-color: #444;
     padding: 1vw;
-    margin-top: 0.5vw;
+    margin-top: 0.8vh;
     margin-left: 0.5vw;
     margin-right: 0.5vw;
     width: 99vw;
@@ -27,11 +27,11 @@
     justify-content: center;
     background-color: #020202;
     color: white;
-    height: 94vh;
+    height: 86vh;
 }
 
 .column{
-    margin: 0.5vw;
+    margin: 0.8vh 0.5vw;
 }
 
 #left-column {
@@ -58,7 +58,7 @@
     border-width: 1px;
     border-color: #444;
     padding: 1vw;
-    margin-bottom: 0.5vw;
+    margin-bottom: 0.8vh;
 }
 
 .column-item-heading {
@@ -94,6 +94,6 @@
 }
 
 #launch-rank-list {
-    height: 50vh;
+    height: 60vh;
     overflow-y: scroll;
 }
