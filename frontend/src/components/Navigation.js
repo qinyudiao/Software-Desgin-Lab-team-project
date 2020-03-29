@@ -5,6 +5,8 @@ import styled from 'styled-components';
 const Styles = styled.div`
     .navbar{
         background-color: #252525;
+        display: flex;
+        justify-content: space-evenly;
     }
 
     .navbar-brand{
@@ -50,8 +52,7 @@ function Navigation(){
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                     <Nav.Item><Nav.Link href="/about">About</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/launch">Launches</Nav.Link></Nav.Item>
-                    <Nav.Item><Nav.Link href="/company">Companies</Nav.Link></Nav.Item>
-                    <Nav.Item><Nav.Link href="/country">Countries</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link href="/agency">Agencies</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/astronaut">Astronauts</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/map">Map</Nav.Link></Nav.Item>
                     <NavDropdown title="More" id="basic-nav-dropdown">

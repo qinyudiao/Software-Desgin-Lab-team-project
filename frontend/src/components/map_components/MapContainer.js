@@ -91,29 +91,27 @@ const MapWithMarkers = withScriptjs(
     withGoogleMap(props => (
         <GoogleMap
             defaultZoom={1.6}
-            defaultCenter={{ lat: 30, lng: 20 }}
+            minZoom={1}
+            defaultCenter={{ lat: 20, lng: 10 }}
             options={{
                 styles: mapStyles,
                 scrollwheel: false,
                 streetViewControl: false
             }}
-            mapContainerStyle={{
-              height: "500px",
-              width: "100%"
-            }}
         >
             {props.isMarkerShown && props.marks.map((mark, index) => (
                 <Marker
-                    icon={{
-                        url: require('../../assets/launchpad-marker.png'),
-                        anchor: {x: 15, y: 50},
-                        scaledSize: {width: 12, height: 24}
-                    }}
-                    key = {index}
-                    position={mark}
-                    onClick={MapContainer.handleMouseClick}
-                    onMouseOver={MapContainer.handleMouseOver}
-                    onMouseOut={MapContainer.handleMouseExit}
+
+                  icon={{
+                      url: require('../../assets/launchpad-marker.png'),
+                      anchor: {x: 7, y: 28},
+                      scaledSize: {width: 14, height: 28}
+                  }}
+                  key = {index}
+                  position={mark}
+                  onClick={MapContainer.handleMouseClick}
+                  onMouseOver={MapContainer.handleMouseOver}
+                  onMouseOut={MapContainer.handleMouseExit}
                 />
             ))}
         </GoogleMap>
@@ -169,7 +167,7 @@ export default class MapContainer extends Component {
                     isMarkerShown
                     googleMapURL={`https:/maps.googleapis.com/maps/api/js?key=${mapAPIKey}&v=3.exp&libraries=geometry,drawing,places`}
                     loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={<div style={{ height: `400px` }} />}
+                    containerElement={<div style={{ height: `62vh` }} />}
                     mapElement={<div style={{ height: `100%` }} />}
                     marks={marks}
                 />

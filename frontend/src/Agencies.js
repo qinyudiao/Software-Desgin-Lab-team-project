@@ -4,7 +4,7 @@ import ReactTable from "react-table-6"
 import {Link} from 'react-router-dom'
 import "react-table-6/react-table.css"
 
-class Companies extends React.Component{
+class Agencies extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -56,18 +56,16 @@ class Companies extends React.Component{
         return(
             <div>
               <Header />
-              <h1>Companies</h1>
+              <h1>Agencies</h1>
               <ReactTable
                 columns={columns}
                 data={this.state.posts}
                 filterable
               >
-
-
               </ReactTable>
           </div>
         )
     }
 }
 
-export default Companies;
+export default Agencies;

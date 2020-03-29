@@ -44,7 +44,7 @@ export default class LaunchRank extends Component {
     render() {
         return (
             <React.Fragment>
-                <p className="column-item-heading">Launches by Region</p>
+                <p id="launch-rank-title">Launches by Country</p>
                 <ListGroup variant="flush" style={{
                         color: "white",
                         width: "100%",
