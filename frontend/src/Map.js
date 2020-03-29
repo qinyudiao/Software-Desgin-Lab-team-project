@@ -25,7 +25,7 @@ class Map extends Component {
     this.state = {
       launch_number: ""
     }
-}
+  }
 
   componentDidMount(){
     const date = moment().format("YYYY-MM-DD");
@@ -37,7 +37,7 @@ class Map extends Component {
     })
     .then(response => response.json())
     .then(data => {
-        this.setState({launch_number: data.count})
+        this.setState({launch_number: data.total})
         //console.log(data.count);
     });
   }

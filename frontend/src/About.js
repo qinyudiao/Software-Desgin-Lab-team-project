@@ -112,14 +112,14 @@ class About extends React.Component{
           0, 
           0,
           "Fourth Year Electrical & Computer Engineering Major (Software Engineering Track) at UT Austin",
-          "Backend"
+          "Backend and Testing"
         ],
         'shawn': [
           'Shawn Victor', 
           0, 
           0,
           "Fourth Year Electrical & Computer Engineering Major (Embedded Systems & Software Engineering Tracks) at UT Austin",
-          "Frontend"
+          "Frontend and Testing"
         ]
       };
 
