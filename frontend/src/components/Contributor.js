@@ -45,6 +45,8 @@ class Contributor extends React.Component{
                 <p>{this.props.commits} commits</p>
 
                 <p>{this.props.issues} issues</p>
+
+                <p>{this.props.tests} unit tests</p>
             </div>
 
         );

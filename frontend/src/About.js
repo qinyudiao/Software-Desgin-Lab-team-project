@@ -91,35 +91,40 @@ class About extends React.Component{
           0, 
           0, 
           "Fifth Year Electrical & Computer Engineering Major (Software Engineering Track) at UT Austin",
-          "Fullstack and Deployment"
+          "Fullstack and Deployment",
+          0
         ],
         'jack': [
           'Jack Diao', 
           0, 
           0,
           "Fourth Year Electrical & Computer Engineering Major (Software Engineering & Integrated Circuits Tracks) at UT Austin",
-          "Fullstack and Deployment"
+          "Fullstack and Deployment",
+          0
         ],
         'kenan': [
           'Kenan Hurd', 
           0, 
           0,
           "Third Year Electrical & Computer Engineering Major (Software Engineering Track) at UT Austin",
-          "Frontend"
+          "Frontend",
+          0
         ],
         'lucas': [
           'Lucas Best', 
           0, 
           0,
           "Fourth Year Electrical & Computer Engineering Major (Software Engineering Track) at UT Austin",
-          "Backend and Testing"
+          "Backend and Testing",
+          0
         ],
         'shawn': [
           'Shawn Victor', 
           0, 
           0,
           "Fourth Year Electrical & Computer Engineering Major (Embedded Systems & Software Engineering Tracks) at UT Austin",
-          "Frontend and Testing"
+          "Frontend and Testing",
+          5
         ]
       };
 
@@ -157,7 +162,7 @@ class About extends React.Component{
           issues={parent[obj][1]}
           major={parent[obj][3]} 
           responsibilities={parent[obj][4]} 
-          src={parent[obj][5]} />
+          tests={parent[obj][5]} />
       })
 
       this.setState({githubStats: githubStatsContainer});
@@ -216,13 +221,18 @@ class About extends React.Component{
             <h3>Statistics</h3>
             {renderTeamCommits()}
             {renderTeamIssues()}
+            <p>5 total unit tests</p>
 
             <h3>Data</h3>
-            {/* TODO: get data sources */}
+            <a href="https://www.theguardian.com/news/datablog/2011/jul/08/us-astronauts-listed-nasa#data">Astronauts</a><br />
+            <a href="https://spacefund.com/launch-database/">Companies</a><br />
+            <a href="https://www.rocketlaunch.live/api">Recent Launches</a><br />
+            <a href="https://launchlibrary.net/docs/1.3/api.html">Launches</a><br />
 
             <h3>Tools</h3>
             <p>Frontend built with React, JavaScript, CSS, HTML and Bootstrap</p>
             <p>Backend built with NodeJS</p>
+            <p>Testing done with Mocha and Selenium</p>
             <p>Stored data in MongoDB</p>
             <p>Hosted on Amazon Webservices (Frontend: S3 Backend: EC2)</p>
             <p>Automatic Deployment with Docker and Travis CI</p>

@@ -6,7 +6,7 @@ const cron = require('node-cron');
 let company = require('../models/companySchema.js');
 
 // At a periodic time update database with company information
-cron.schedule('* * * * Sunday', () =>{
+cron.schedule('0 13 * * Sunday', () =>{
 // cron.schedule('2 * * * * *', () => {
     console.log('running company cron job');
     request('https://raw.githubusercontent.com/ShawnVictor/demo/master/launches.json', (err, res) =>{

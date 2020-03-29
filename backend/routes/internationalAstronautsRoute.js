@@ -6,7 +6,7 @@ const cron = require('node-cron');
 let internationalAstronaut = require('../models/internationalAstronautSchema.js');
 
 // At a periodic time update database with international astronaut information
-cron.schedule('* * * * Sunday', () =>{
+cron.schedule('0 13 * * Sunday', () =>{
 // cron.schedule('2 * * * * *', () => {
     console.log('running international astronaut cron job');
     request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db4.json', (err, res) =>{
