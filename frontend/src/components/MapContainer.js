@@ -1,5 +1,6 @@
+/*global google*/
 import React, { Component } from 'react';
-import { GoogleMap, Marker, withScriptjs, withGoogleMap, InfoWindow, Circle } from "react-google-maps";
+import { GoogleMap, Marker, withScriptjs, withGoogleMap, InfoWindow } from "react-google-maps";
 
 const mapAPIKey = `AIzaSyD4MYem9eEY7_iLZSCyOdy-40GBCq4x2vY`
 
@@ -85,24 +86,30 @@ const mapStyles = [
     }
   ];
 
-  // wrap up google map
+// wrap up google map
 const MapWithMarkers = withScriptjs(
     withGoogleMap(props => (
         <GoogleMap
-            defaultZoom={1.2}
-            defaultCenter={{ lat: 12, lng: 20 }}
-            defaultOptions={{
-                scrollwheel: false,
-                streetViewControl: false
-            }}
+            defaultZoom={1.6}
+            defaultCenter={{ lat: 30, lng: 20 }}
             options={{
                 styles: mapStyles,
+                scrollwheel: false,
+                streetViewControl: false
             }}
         >
             {props.isMarkerShown && props.marks.map((mark, index) => (
                 <Marker
+                    icon={{
+                        url: require('../assets/launchpad-marker.png'),
+                        anchor: {x: 15, y: 50},
+                        scaledSize: {width: 12, height: 24}
+                    }}
                     key = {index}
                     position={mark}
+                    onClick={MapContainer.handleMouseClick}
+                    onMouseOver={MapContainer.handleMouseOver}
+                    onMouseOut={MapContainer.handleMouseExit}
                 />
             ))}
         </GoogleMap>
@@ -113,11 +120,20 @@ export default class MapContainer extends Component {
     constructor(props){
         super(props);
         this.state = {
-          marks: []
+          marks: [],
+          showInfoWindow: false,
         }
     }
+    handleMouseClick = e => {
+        this.setState({
+            showInfoWindow: true
+        });
+    };
 
-   componentDidMount(){
+    handleMouseOver = e => { this.setState({ showInfoWindow: true }); };
+    handleMouseExit = e => { this.setState({ showInfoWindow: false }); };
+
+    componentDidMount(){
         const url = `https://launchlibrary.net/1.4/pad?limit=1000/`;
         fetch(url, {
             method: "GET"

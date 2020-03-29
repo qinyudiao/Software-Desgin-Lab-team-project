@@ -12,14 +12,6 @@ import MapContainer from './components/MapContainer.js';
 
 
 class Map extends Component {
-  static defaultProps = {
-    center: {
-      lat: 25.997402,
-      lng: -97.157329
-    },
-    zoom: 15
-  };
-
   constructor(props){
     super(props);
     this.state = {

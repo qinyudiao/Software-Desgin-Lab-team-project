@@ -11,17 +11,17 @@
 }
 
 #left-column {
-    width: 22vw;
+    width: 18vw;
 }
 
 #middle-column {
-    width: 48vw;
+    width: 58vw;
     margin-left: 0;
     margin-right: 0;
 }
 
 #right-column {
-    width: 30vw;
+    width: 24vw;
 }
 
 .column-item{
