@@ -7,6 +7,7 @@ import gif1 from './assets/rocket_launch.gif'
 import gif2 from './assets/launching-rocket-dribble.gif';
 import SubscriberForm from './components/SubscriberForm';
 import UnsubscriberForm from './components/UnsubscriberForm';
+import ec2url from './EC2Link';
 
 class Landing extends React.Component{
   constructor(props){
@@ -20,7 +21,7 @@ class Landing extends React.Component{
   getRecentLaunch = () =>{
     let url = '';
     if(process.env.NODE_ENV === 'production'){
-      url = 'http://ec2-54-226-123-223.compute-1.amazonaws.com/landing';
+      url = ec2url + '/landing';
     }
     else{
       url = '/landing';
