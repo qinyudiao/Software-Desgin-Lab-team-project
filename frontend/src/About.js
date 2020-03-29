@@ -2,6 +2,7 @@ import React from 'react';
 import './css/About.css';
 import Header from './Header';
 import Contributor from './components/Contributor';
+import ec2url from './EC2Link';
 
 class About extends React.Component{
     constructor(props){
@@ -20,7 +21,7 @@ class About extends React.Component{
     getGitHubStats = () => {
       let url = '';
       if(process.env.NODE_ENV === 'production'){ // Use full url when deployed on AWS
-        url = 'http://ec2-54-226-123-223.compute-1.amazonaws.com/about';
+        url = ec2url + '/about';
       }
       else{ // Just use relative url when working on localhost
         url = '/about'

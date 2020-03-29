@@ -3,6 +3,7 @@ import Header from './Header.js';
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
 import {Link} from 'react-router-dom';
+import ec2url from './EC2Link';
 
 class RussianAstronauts extends React.Component{
     constructor(props){
@@ -15,7 +16,7 @@ class RussianAstronauts extends React.Component{
     componentDidMount(){
       let url = '';
       if(process.env.NODE_ENV === 'production'){
-        url = 'http://ec2-54-226-123-223.compute-1.amazonaws.com/RussianAstronauts';
+        url = ec2url + '/RussianAstronauts';
       }
       else{
         url = '/RussianAstronauts';
