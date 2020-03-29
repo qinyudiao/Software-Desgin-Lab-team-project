@@ -97,11 +97,15 @@ const MapWithMarkers = withScriptjs(
                 scrollwheel: false,
                 streetViewControl: false
             }}
+            mapContainerStyle={{
+              height: "500px",
+              width: "100%"
+            }}
         >
             {props.isMarkerShown && props.marks.map((mark, index) => (
                 <Marker
                     icon={{
-                        url: require('../assets/launchpad-marker.png'),
+                        url: require('../../assets/launchpad-marker.png'),
                         anchor: {x: 15, y: 50},
                         scaledSize: {width: 12, height: 24}
                     }}
@@ -124,13 +128,18 @@ export default class MapContainer extends Component {
           showInfoWindow: false,
         }
     }
+
     handleMouseClick = e => {
         this.setState({
             showInfoWindow: true
         });
+        console.log(this.state.showInfoWindow);
     };
 
-    handleMouseOver = e => { this.setState({ showInfoWindow: true }); };
+    handleMouseOver = e => {
+        this.setState({ showInfoWindow: true });
+        console.log('hover');
+    };
     handleMouseExit = e => { this.setState({ showInfoWindow: false }); };
 
     componentDidMount(){
@@ -148,7 +157,7 @@ export default class MapContainer extends Component {
             ));
             
             this.setState({marks: pads})
-            console.log(pads);
+            // console.log(pads);
         });
     };
 

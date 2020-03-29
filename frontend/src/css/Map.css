@@ -1,4 +1,4 @@
-.black-board{
+.blackboard{
     display: flex;
     justify-content: center;
     background-color: #020202;
@@ -24,33 +24,41 @@
     width: 24vw;
 }
 
-.column-item{
+.column-item {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: #222;
     padding: 1vw;
     margin-bottom: 0.5vw;
 }
 
+.column-item-heading {
+    font-size: 3vmin;
+}
+
 #total-launches {
     color: white;
+    height: 16vh;
+    line-height: 1;
 }
 
 #total-launches-number {
     color: red;
-    font-size: 3rem;
-}
-
-#launches-by-region {
-    color: aliceblue;
+    font-size: 8vh;
+    font-weight: normal;
 }
 
 #map-container {
     color: aliceblue;
 }
 
-
 #launches-plot-year {
     width: 100%;
+}
+
+#launch-rank-list {
+    height: 40vh;
+    overflow-y: scroll;
 }
