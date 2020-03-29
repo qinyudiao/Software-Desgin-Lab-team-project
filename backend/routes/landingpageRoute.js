@@ -28,7 +28,6 @@ getLastLaunch = (recentLaunches) =>{
 // When a subscriber submits the form, email address gets sent here
 // Check if address is already in database. If not, add it, otherwise send message that they are already subscribed
 router.post('/subscribe', (req, res) =>{
-    console.log(req.body);
     Subscriber.findOne({email: req.body.email}, (err, user) => {
         if(err){
             console.log(err);
@@ -56,7 +55,6 @@ router.post('/subscribe', (req, res) =>{
 // Handles requests to unsubscribe from the launch email
 // Search for the email in the database, if it exists delete the document, else send a message saying they aren't subscribed
 router.post('/unsubscribe', (req, res) =>{
-    console.log(req.body);
     Subscriber.findOne({email: req.body.email}, (err, user) =>{
         if(err){
             console.log(err);
@@ -96,7 +94,6 @@ getLaunches = () =>{
     request('https://fdo.rocketlaunch.live/json/launches/next/5', (error, response, body) =>{
         if(!error && response.statusCode == 200){
             let launches = JSON.parse(response.body);
-            console.log("in function" + launches);
             return launches;
         }
         else{

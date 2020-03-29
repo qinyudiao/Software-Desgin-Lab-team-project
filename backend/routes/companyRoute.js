@@ -11,7 +11,6 @@ cron.schedule('0 13 * * Sunday', () =>{
     console.log('running company cron job');
     request('https://raw.githubusercontent.com/ShawnVictor/demo/master/launches.json', (err, res) =>{
         if(!err && res.statusCode === 200){
-            console.log(JSON.parse(res.body));
             let responseArray = JSON.parse(res.body);
             for(let i = 0; i < responseArray.length; i++){
                 company.findOne(responseArray[i], (error, document) =>{
@@ -44,7 +43,6 @@ router.get('/', (req, res) =>{
             console.log(err);
         }
         else{
-            console.log(response);
             res.setHeader('Content-Type', 'application/json');
             res.send(response);
         }

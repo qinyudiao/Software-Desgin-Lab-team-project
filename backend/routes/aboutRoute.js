@@ -20,7 +20,6 @@ const config = {
   }
 
 router.get('/', (req, res, next) => {
-    console.log("'/' call");
     axios.all([
         axios.get('https://api.github.com/repos/qinyudiao/Software-Desgin-Lab-team-project/issues?state=all', config),
         axios.get('https://api.github.com/repos/qinyudiao/Software-Desgin-Lab-team-project/contributors', config)
