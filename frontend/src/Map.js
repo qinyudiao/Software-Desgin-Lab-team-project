@@ -30,27 +30,34 @@ class Map extends Component {
   render(){
       return(
           <React.Fragment>
-            <Header />
-            <div className="blackboard">
-              <span id="left-column" className="column">
-                <div id="total-launches" className="column-item">
-                  <p className="column-item-heading">Total Launches</p>
-                  <p id="total-launches-number"> {this.state.launch_number}</p>
+            <div style={ {height:"100vh"} }>
+              <Header/>
+              <div className="blackboard" style={ {height:"8vh"} }>
+                <div id="headline-container">
+                  <p id="headline">Every rocket launch since 1960 - Launches information provided by Launch Library at https://launchlibrary.net/ - updating</p>
                 </div>
-                <div className="column-item" >
-                  <LaunchRank />
-                </div>
-              </span>
-              <span id="middle-column" className="column">
-                <div>
-                  <MapContainer />
-                </div>
-              </span>
-              <span id="right-column" className="column">
-                <div id="launches-plot-year" className="column-item">
-                  <p className="column-item-heading">Plot: Launches per year</p>
-                </div>
-              </span>
+              </div>
+              <div className="blackboard">
+                <span id="left-column" className="column">
+                  <div id="total-launches" className="column-item">
+                    <p className="column-item-heading">Total Launches</p>
+                    <p id="total-launches-number"> {this.state.launch_number}</p>
+                  </div>
+                  <div className="column-item" >
+                    <LaunchRank />
+                  </div>
+                </span>
+                <span id="middle-column" className="column">
+                  <div id="map-container">
+                    <MapContainer />
+                  </div>
+                </span>
+                <span id="right-column" className="column">
+                  <div id="launches-plot-year" className="column-item">
+                    <p className="column-item-heading">Plot: Launches per year</p>
+                  </div>
+                </span>
+              </div>
             </div>
           </React.Fragment>
       )
