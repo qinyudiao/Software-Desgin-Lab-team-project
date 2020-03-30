@@ -117,7 +117,7 @@ class About extends React.Component{
           0,
           "Fourth Year Electrical & Computer Engineering Major (Software Engineering Track) at UT Austin",
           "Backend and Testing",
-          0
+          7
         ],
         'shawn': [
           'Shawn Victor', 
@@ -222,7 +222,7 @@ class About extends React.Component{
             <h3>Statistics</h3>
             {renderTeamCommits()}
             {renderTeamIssues()}
-            <p>5 total unit tests</p>
+            <p>12 total unit tests</p>
 
             <h3>Data</h3>
             <a href="https://www.theguardian.com/news/datablog/2011/jul/08/us-astronauts-listed-nasa#data">Astronauts</a><br />
