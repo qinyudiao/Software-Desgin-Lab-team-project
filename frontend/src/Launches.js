@@ -12,7 +12,7 @@ class Launches extends React.Component{
     }
 
     componentDidMount(){
-      const url = "https://launchlibrary.net/1.4/launch?limit=1755";
+      const url = "https://launchlibrary.net/1.4/launch?limit=5000";
         fetch(url, {
             method: "GET"
         }).then(response => response.json()).then(posts => {
