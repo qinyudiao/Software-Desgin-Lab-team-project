@@ -7,24 +7,30 @@ class PageNotFound extends Component {
     constructor(props){
         super(props);
         this.state = {
-          isTimedUp: false
+          timeToRedirect: 5
         }
     }
 
     componentDidMount() {
         setTimeout(() => {
-            this.setState({isTimedUp: true})
-        }, 5000)
+            this.setState({timeToRedirect: this.state.timeToRedirect - 1})
+        }, 1000)
+    }
+
+    componentDidUpdate() {
+        setTimeout(() => {
+            this.setState({timeToRedirect: this.state.timeToRedirect - 1})
+        }, 1000)
     }
 
     render() {
         return(
-            (this.state.isTimedUp === true) ? <Redirect to="/"/> :
+            (this.state.timeToRedirect <= 0) ? <Redirect to="/upcoming"/> :
             <React.Fragment>
                 <Header/>
                 <div class="container">
                     <div class="message">
-                        <div class="notification">You will be redirected back to the home page in 5 seconds</div>
+                        <div class="notification">You will be redirected back to the upcoming launches page in {this.state.timeToRedirect} seconds</div>
                         <div class="number">404</div>
                         <div class="text">Page Not Found</div>
                     </div>
