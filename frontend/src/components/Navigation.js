@@ -51,12 +51,17 @@ function Navigation(){
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+                    <Nav.Item><Nav.Link href="/upcoming">Upcoming Launches</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/about">About</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link href="/map">Map</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/launch">Launches</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/agency">Agencies</Nav.Link></Nav.Item>
-                    <Nav.Item><Nav.Link href="/astronaut">Astronauts</Nav.Link></Nav.Item>
-                    <Nav.Item><Nav.Link href="/map">Map</Nav.Link></Nav.Item>
-                    <Nav.Item><Nav.Link href="/upcoming">Upcoming Launches</Nav.Link></Nav.Item>
+                    <NavDropdown title="Astronauts">
+                        <NavDropdown.Item href="/astronaut">All Astronauts</NavDropdown.Item>
+                        <NavDropdown.Item href="/USAstronauts">US Astronauts</NavDropdown.Item>
+                        <NavDropdown.Item href="/RussianAstronauts">Russian Astronauts</NavDropdown.Item>
+                        <NavDropdown.Item href="/InternationalAstronauts">International Astronauts</NavDropdown.Item>
+                    </NavDropdown>
                     <NavDropdown title="More" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/fail">Failed Launches</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.3">Manned Launches (phase3)</NavDropdown.Item>
