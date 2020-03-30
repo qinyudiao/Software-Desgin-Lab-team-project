@@ -1,0 +1,41 @@
+.flex-container{
+    background-image: url(./../assets/andy-holmes-698828-unsplash.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    min-height: 100vh;
+    min-width: 100vw;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+    font-family: "Roboto Mono", "Liberation Mono", Consolas, monospace;
+    color: rgba(255,255,255,.87);
+}
+
+.upcoming-item {
+    display: absolute;
+    padding: 1vh;
+    margin: 0 20vw;
+}
+
+.Launch-box {
+    display: flex;
+    background-color: #e9f1e1;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #444;
+    border-radius: 12px;
+    margin-bottom: 0.8vh;
+}
+
+.rocket-image {
+    margin: 2vh;
+    border-radius: 12px;
+}
+
+.info-box {
+    margin: 2vh;
+    color: #121212;
+    font-weight: 400;
+    font-size: 1.4vh;
+}

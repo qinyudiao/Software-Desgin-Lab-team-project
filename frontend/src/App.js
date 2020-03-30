@@ -17,6 +17,7 @@ import IndividualAstronaut from './IndividualAstronaut.js';
 import IndividualCompanies from './IndividualCompanies.js';
 import PageNotFound from './PageNotFound.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import UpcomingLaunches from './UpcomingLaunches';
 
 class App extends Component{
     constructor(props){
@@ -64,6 +65,7 @@ class App extends Component{
                             <Route path="/astronaut" component={Astronauts} />
                             <Route path="/fail" component={Fail} />
                             <Route path="/map" component={Map} />
+                            <Route path="/upcoming" component={UpcomingLaunches} />
                             <Route path="/USAstronauts/:astronautId" component={IndividualAstronaut} />
                             <Route path="/USAstronauts" component={USAstronauts} />
                             <Route path="/RussianAstronauts/:astronautId" component={IndividualAstronaut} />

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from './Header.js';
+import Header from './components/Header.js';
 import './css/PageNotFound.css';
 
 class PageNotFound extends Component {

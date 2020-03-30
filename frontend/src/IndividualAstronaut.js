@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './Header.js';
+import Header from './components/Header.js';
 
 class IndividualAstronaut extends React.Component{
     constructor(props){

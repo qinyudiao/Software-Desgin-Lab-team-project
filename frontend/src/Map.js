@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './css/Map.css';
 import moment from 'moment';
 import 'moment-timezone';
-import Header from './Header';
+import Header from './components/Header';
 import MapContainer from './components/map_components/MapContainer';
 import LaunchRank from './components/map_components/LaunchRank';
 import LastUpdateTime from './components/map_components/LastUpdateTime';

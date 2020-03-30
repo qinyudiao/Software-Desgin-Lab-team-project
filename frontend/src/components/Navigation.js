@@ -55,15 +55,16 @@ function Navigation(){
                     <Nav.Item><Nav.Link href="/agency">Agencies</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/astronaut">Astronauts</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/map">Map</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link href="/upcoming">Upcoming Launches</Nav.Link></Nav.Item>
                     <NavDropdown title="More" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/fail">Failed Launches</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Manned Launches</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">Manned Launches (phase3)</NavDropdown.Item>
                         <NavDropdown.Item href="education">Education</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Log in</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.4">Log in (phase3)</NavDropdown.Item>
                     </NavDropdown>
                     <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                        <FormControl type="text" placeholder="For phase 3" className="mr-sm-2" />
                         <Button variant="outline-secondary" id="search-button">Search</Button>
                     </Form>
                 </Navbar.Collapse>

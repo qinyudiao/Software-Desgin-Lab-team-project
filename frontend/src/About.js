@@ -1,6 +1,6 @@
 import React from 'react';
 import './css/About.css';
-import Header from './Header';
+import Header from './components/Header';
 import Contributor from './components/Contributor';
 import ec2url from './EC2Link';
 
