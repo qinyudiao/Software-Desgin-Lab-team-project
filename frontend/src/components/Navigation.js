@@ -7,6 +7,7 @@ const Styles = styled.div`
         background-color: #252525;
         display: flex;
         justify-content: space-evenly;
+        width: 100vw;
     }
 
     .navbar-brand{
@@ -43,7 +44,7 @@ function Navigation(){
  
     return(
         <Styles>
-            <Navbar expand="sm">
+            <Navbar expand="lg">
                 <Navbar.Brand href="/">
                     <img alt="" src="/logo512.png" width="28" height="28" className="d-inline-block align-top" />
                     {' '}Every Rocket Launch
