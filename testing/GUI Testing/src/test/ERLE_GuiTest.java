@@ -87,7 +87,7 @@ public class ERLE_GuiTest
 				{
 					System.out.println(cell_contents);
 					wd.navigate().to(cell_contents);
-					if(wd.findElements(By.id("error-screen")).size() != 0) 
+					if(wd.findElements(By.xpath("//*[@id=\"container\"]/yt-player-error-message-renderer/yt-icon")).size() > 0) 
 					{
 						brokenYouTubeLinkFound = true;
 						System.out.println("Bad Link Found: "+ cell_contents);
@@ -100,6 +100,7 @@ public class ERLE_GuiTest
 		assertEquals(false, brokenYouTubeLinkFound);
 		
 	}
+	
 	
 	public static boolean checkFor404ErrorsOnSite(WebDriver driver)
 	{
@@ -125,7 +126,7 @@ public class ERLE_GuiTest
 			driver.navigate().to(link);
 			System.out.println(link);
 			if(checkFor404ErrorsOnSite(driver) == true) {return true;}
-			if(driver.getTitle().contains("404")){found404Error = true;}
+			if(driver.findElements(By.xpath("//*[@id=\"main-content\"]/div[1]")).size() > 0){found404Error = true;}
 		}
 		return found404Error;
 	}
