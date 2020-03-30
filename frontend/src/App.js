@@ -28,11 +28,6 @@ class App extends Component{
         }
     }
 
-    // componentDidMount() {
-    //     this.updateDimensions();
-    //     window.addEventListener("resize", this.updateDimensions.bind(this));
-    //   }
-    
     // componentWillUnmount() {
     //     window.removeEventListener("resize", this.updateDimensions.bind(this));
     // }
