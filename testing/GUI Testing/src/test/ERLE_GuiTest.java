@@ -31,13 +31,13 @@ public class ERLE_GuiTest
 	}
 	
 	// Test checks for any 404 Errors existent on our site
-	/*@Test public void t0() throws InterruptedException
+	@Test public void t0() throws InterruptedException
 	{
 		wd.get("https://www.everyrocketlaunch.com/about");
 		boolean no404errors = checkFor404ErrorsOnSite(wd);
 		
 		assertEquals(false, no404errors);
-	}*/
+	}
 	
 	// Test checks if all YouTube Links for Launches are valid
 	@Test public void t1() throws InterruptedException
@@ -87,7 +87,7 @@ public class ERLE_GuiTest
 				{
 					System.out.println(cell_contents);
 					wd.navigate().to(cell_contents);
-					if(wd.getTitle().contains("404")) 
+					if(wd.findElements(By.id("error-screen")).size() != 0) 
 					{
 						brokenYouTubeLinkFound = true;
 						System.out.println("Bad Link Found: "+ cell_contents);
