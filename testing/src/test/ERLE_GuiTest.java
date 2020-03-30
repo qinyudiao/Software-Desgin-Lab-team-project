@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -44,19 +45,22 @@ public class ERLE_GuiTest
 		boolean brokenYouTubeLinkFound = false;
 		
 		wd.get("https://www.everyrocketlaunch.com/launch");
-		Thread.sleep(10000);
-		WebElement we = wd.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/span[1]/div/input"));
+		Thread.sleep(3000);
+		WebElement we;
 		System.out.println(wd.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/span[1]/span")).getText());
 		int maxNoPages = Integer.parseInt(wd.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/span[1]/span")).getText());
 		System.out.println("Max number of pages: " + maxNoPages);
 		String currentPageIndex = "";
 		for(int i = 1; i <= maxNoPages; i++)
 		{
-			System.out.println(i);
 			currentPageIndex = Integer.toString(i);
+			System.out.println("Current Page Index: " + currentPageIndex);
 			try
 			{
-				we.sendKeys(currentPageIndex + "\n");
+					wd.get("https://www.everyrocketlaunch.com/launch");
+					Thread.sleep(3000);
+					we = wd.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/span[1]/div/input"));
+					we.sendKeys(Keys.BACK_SPACE + currentPageIndex + "\n");
 			}
 			catch(Exception e) {continue;}
 			List<WebElement> cells = wd.findElements(By.className("rt-td"));
