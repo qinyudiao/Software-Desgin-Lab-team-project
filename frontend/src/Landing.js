@@ -43,27 +43,34 @@ class Landing extends React.Component{
     return(
       <div className="landing">
         <Header />
+        <div className="nextLaunchContainer">
+          {this.state.renderRecentLaunch ? (<h3>Next Launch: {this.state.recentLaunch['launchDescription']}</h3>) : (null)}
+        </div>
+        <table>
+        <tr className="tableContainer">
+        <td width="200vw">
+            <Carousel autoPlay showThumbs={false}>
+              <div>
+                <img alt="rocket" src={gif2} />
+                </div>
+              <div>
+                <img alt ="rocket" src='https://i.insider.com/5d0d02fde3ecba05703614b3?width=1600&format=jpeg&auto=webp' />
+                </div>
+              <div>
+                <img alt="rocket" src={gif1} />
+              </div>
+              </Carousel>
+            </td>
+          <td width="30vw">
+            <SubscriberForm />
 
-        {this.state.renderRecentLaunch ? (<h3>Next Launch: {this.state.recentLaunch['launchDescription']}</h3>) : (null)}
-        
-        <Carousel autoPlay showThumbs={false}>
-          <div>
-            <img alt="rocket" src={gif2} />
-          </div>
-          <div>
-            <img alt ="rocket" src='https://i.insider.com/5d0d02fde3ecba05703614b3?width=1600&format=jpeg&auto=webp' />
-          </div>
-          <div>
-            <img alt="rocket" src={gif1} />
-          </div>
-        </Carousel>
-
-        <SubscriberForm />
-
-        <UnsubscriberForm />
+            <UnsubscriberForm />
+            </td>
+            </tr>
+            </table>
       </div>
     );
   }
 }
 
-export default Landing; 
+export default Landing;
