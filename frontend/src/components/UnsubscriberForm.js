@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, Form, FormGroup, Input, FormFeedback} from 'reactstrap';
+import ec2url from '../EC2Link';
 
 class UnsubscriberForm extends React.Component{
     constructor(props){
@@ -26,7 +27,7 @@ class UnsubscriberForm extends React.Component{
     unsubscribe = (email) =>{
         let url = '';
         if(process.env.NODE_ENV === 'production'){
-            url = 'http://ec2-54-226-123-223.compute-1.amazonaws.com/landing/unsubscribe';
+            url = ec2url + '/landing/unsubscribe';
         }
         else{
             url = '/landing/unsubscribe';

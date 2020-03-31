@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Form, FormGroup, Input, FormFeedback} from 'reactstrap';
 import '../css/SubscriberForm.css'
+import ec2url from '../EC2Link';
 
 class SubscriberForm extends React.Component{
     constructor(props){
@@ -27,7 +28,7 @@ class SubscriberForm extends React.Component{
     subscribe = (email) =>{
         let url = '';
         if(process.env.NODE_ENV === 'production'){
-            url = 'http://ec2-54-226-123-223.compute-1.amazonaws.com/landing/subscribe';
+            url = ec2url + '/landing/subscribe';
         }
         else{
             url = '/landing/subscribe';
