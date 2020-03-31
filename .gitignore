@@ -3,3 +3,4 @@ backend/node_modules/
 ec2.sh
 node_modules
 .DS_Store
+.vscode
