@@ -53,6 +53,7 @@ export default class UpcomingLaunches extends Component {
 
     render() {
         const launches = this.state.launches.map((launch, index) => <div  key={index} className="upcoming-item">
+            <br/>
             <h2>Launch {index+1}</h2>
             <div className="Launch-box">
                 <span style={{width: "55%"}}>

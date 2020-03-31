@@ -208,7 +208,7 @@ class About extends React.Component{
                   experience using our site better!
                   </p>
                   </div>
-
+                  <br/>
                 <h2>Meet the Team</h2>
 
               <div className="info-box-2">
@@ -220,6 +220,7 @@ class About extends React.Component{
               }
               </div>
 
+              <br/>
               <h2>Statistics</h2>
               <div className="info-box-2">
                 <p>
@@ -228,6 +229,7 @@ class About extends React.Component{
                 12 total unit tests</p>
                 </div>
 
+                <br/>
               <h2>Data</h2>
               <div className="info-box-2">
               <p>
@@ -240,6 +242,7 @@ class About extends React.Component{
                 <a href="https://launchlibrary.net/docs/1.3/api.html">Launches</a>
                 </p>
                 </div>
+                <br/>
               <h2>Tools</h2>
               <div className="info-box-2">
                 <p>Frontend built with React, JavaScript, CSS, HTML and Bootstrap
