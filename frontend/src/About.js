@@ -33,16 +33,16 @@ class About extends React.Component{
         this.setState({contributors: data[1]});
         this.setState({issues: data[0]});
         this.computeIssues();
-        console.log(this.state.contributors); 
+        console.log(this.state.contributors);
         console.log(this.state.issuesCount);
         this.setState({showStats: true});
         this.combineIssuesCommits();
       })
       .catch(err => console.log(err))
-    }  
+    }
 
 
-    // Counts issues for each person 
+    // Counts issues for each person
     // Iterate through issues and increment corresponding person's count
     computeIssues = () => {
       for(let i = 0; i < this.state.issues.length; i++){
@@ -54,7 +54,7 @@ class About extends React.Component{
               switch(this.state.issues[i].assignees[j].login){
                 case 'qinyudiao':
                   incrementedIssues.jack++;
-                  this.setState({issuesCount: incrementedIssues});       
+                  this.setState({issuesCount: incrementedIssues});
                   break;
                 case 'musarafik':
                   incrementedIssues.musa++;
@@ -88,40 +88,40 @@ class About extends React.Component{
       // 'contributor': ['name', issues, commits]
       let parent = {
         'musa': [
-          'Musa Rafik', 
-          0, 
-          0, 
+          'Musa Rafik',
+          0,
+          0,
           "Fifth Year Electrical & Computer Engineering Major (Software Engineering Track) at UT Austin",
           "Fullstack and Deployment",
           0
         ],
         'jack': [
-          'Jack Diao', 
-          0, 
+          'Jack Diao',
+          0,
           0,
           "Fourth Year Electrical & Computer Engineering Major (Software Engineering & Integrated Circuits Tracks) at UT Austin",
           "Fullstack and Deployment",
           0
         ],
         'kenan': [
-          'Kenan Hurd', 
-          0, 
+          'Kenan Hurd',
+          0,
           0,
           "Third Year Electrical & Computer Engineering Major (Software Engineering Track) at UT Austin",
           "Frontend",
           0
         ],
         'lucas': [
-          'Lucas Best', 
-          0, 
+          'Lucas Best',
+          0,
           0,
           "Fourth Year Electrical & Computer Engineering Major (Software Engineering Track) at UT Austin",
           "Backend and Testing",
           7
         ],
         'shawn': [
-          'Shawn Victor', 
-          0, 
+          'Shawn Victor',
+          0,
           0,
           "Fourth Year Electrical & Computer Engineering Major (Embedded Systems & Software Engineering Tracks) at UT Austin",
           "Frontend and Testing",
@@ -129,7 +129,7 @@ class About extends React.Component{
         ]
       };
 
-      // Iterate through issues and add info to parent 
+      // Iterate through issues and add info to parent
       for(let [key, value] of Object.entries(this.state.issuesCount)){
         parent[key][1] = value;
       }
@@ -157,18 +157,18 @@ class About extends React.Component{
 
       // Create an array of Contributor components with parent info passed to each component
       let githubStatsContainer = Object.keys(parent).map(obj =>{
-        return <Contributor 
-          name={parent[obj][0]} 
+        return <Contributor
+          name={parent[obj][0]}
           commits={parent[obj][2]}
           issues={parent[obj][1]}
-          major={parent[obj][3]} 
-          responsibilities={parent[obj][4]} 
+          major={parent[obj][3]}
+          responsibilities={parent[obj][4]}
           tests={parent[obj][5]} />
       })
 
       this.setState({githubStats: githubStatsContainer});
      }
-    
+
     render(){
       const renderTeamCommits = () =>{
         let totalCommits = 0;
@@ -180,7 +180,7 @@ class About extends React.Component{
       }
 
       const renderTeamIssues = () =>{
-        let totalIssues = 0; 
+        let totalIssues = 0;
         for(let key of Object.entries(this.state.issuesCount)){
           totalIssues += key[1];
         }
@@ -191,55 +191,69 @@ class About extends React.Component{
       return(
         <React.Fragment>
 
+        <div width="100vw">
             <Header />
-            <h1>About</h1>
+            <div className="flex-container-2">
+              <h1 id="about-title">About</h1>
+              <div className="gallery-container-2">
+              <div className="info-box-2">
+                <p>
+                  EveryRocketLaunch is a comprehensive database of rocket launches designed to give you as much relevant information
+                  as possible about each and every rocket launch.
 
-            <p> 
-              EveryRocketLaunch is a comprehensive database of rocket launches designed to give you as much relevant information
-              as possible about each and every rocket launch.
-            </p>
-            
-            <p>
-              Due to the diverse information available for each rocket launch, this website is designed so that the user can 
-              easily navigate to whichever sub-section of information regarding rocket launches they want to look at. 
-            </p>
+                  Due to the diverse information available for each rocket launch, this website is designed so that the user can
+                  easily navigate to whichever sub-section of information regarding rocket launches they want to look at.
 
-            <p>
-              Lastly, EveryRocketLaunch is still in development, and our team welcomes any feedback regarding how to make your
-              experience using our site better!
-            </p>
+                  Lastly, EveryRocketLaunch is still in development, and our team welcomes any feedback regarding how to make your
+                  experience using our site better!
+                  </p>
+                  </div>
 
-            <h3>Meet the Team</h3>
+                <h2>Meet the Team</h2>
 
+              <div className="info-box-2">
+              {this.state.githubStats ?
+                (<div>
+                  {this.state.githubStats}
+                  </div>):
+                (null)
+              }
+              </div>
 
-            {this.state.githubStats ?
-              (<div>
-                {this.state.githubStats}
-              </div>):
-              (null)
-            }
+              <h2>Statistics</h2>
+              <div className="info-box-2">
+                <p>
+                {renderTeamCommits()}
+                {renderTeamIssues()}
+                12 total unit tests</p>
+                </div>
 
-            <h3>Statistics</h3>
-            {renderTeamCommits()}
-            {renderTeamIssues()}
-            <p>12 total unit tests</p>
-
-            <h3>Data</h3>
-            <a href="https://www.theguardian.com/news/datablog/2011/jul/08/us-astronauts-listed-nasa#data">Astronauts</a><br />
-            <a href="https://spacefund.com/launch-database/">Companies</a><br />
-            <a href="https://www.rocketlaunch.live/api">Recent Launches</a><br />
-            <a href="https://launchlibrary.net/docs/1.3/api.html">Launches</a><br />
-
-            <h3>Tools</h3>
-            <p>Frontend built with React, JavaScript, CSS, HTML and Bootstrap</p>
-            <p>Backend built with NodeJS</p>
-            <p>Testing done with Mocha and Selenium</p>
-            <p>Stored data in MongoDB</p>
-            <p>Hosted on Amazon Webservices (Frontend: S3 Backend: EC2)</p>
-            <p>Automatic Deployment with Docker and Travis CI</p>
-
-            <a href="https://github.com/qinyudiao/Software-Desgin-Lab-team-project">Take a look at our repo!</a>
-
+              <h2>Data</h2>
+              <div className="info-box-2">
+              <p>
+                <a href="https://www.theguardian.com/news/datablog/2011/jul/08/us-astronauts-listed-nasa#data">Astronauts</a>
+                <br/>
+                <a href="https://spacefund.com/launch-database/">Companies</a>
+                <br/>
+                <a href="https://www.rocketlaunch.live/api">Recent Launches</a>
+                <br/>
+                <a href="https://launchlibrary.net/docs/1.3/api.html">Launches</a>
+                </p>
+                </div>
+              <h2>Tools</h2>
+              <div className="info-box-2">
+                <p>Frontend built with React, JavaScript, CSS, HTML and Bootstrap
+                <br/>Backend built with NodeJS
+                <br/>Testing done with Mocha and Selenium
+                <br/>Stored data in MongoDB
+                <br/>Hosted on Amazon Webservices (Frontend: S3 Backend: EC2)
+                <br/>Automatic Deployment with Docker and Travis CI</p>
+                </div>
+                <br/>
+              <a href="https://github.com/qinyudiao/Software-Desgin-Lab-team-project">Take a look at our repo!</a>
+              </div>
+            </div>
+          </div>
         </React.Fragment>
       );
     }

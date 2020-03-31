@@ -1,0 +1,40 @@
+.flex-container-2 {
+    background-image: url(https://earthsky.org/upl/2019/02/Earth-origins-RPI-2019.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    min-height: 100vh;
+    min-width: 100vw;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+    font-family: "Roboto Mono", "Liberation Mono", Consolas, monospace;
+    color: rgba(255,255,255,.87);
+
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.gallery-container-2 {
+    margin: 0 calc(20vw - 50px);
+}
+
+#about-title {
+    margin: 0 calc(20vw - 50px);
+    margin-top: 1vh;
+    padding: 1vh;
+}
+
+.info-box-2 {
+    display: flex;
+    background-color: #e9f1e1;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #444;
+    border-radius: 12px;
+    width: 100%;
+    padding: 2%;
+    color: #121212;
+    font-weight: 400;
+    font-size: 1.4vh;
+}
