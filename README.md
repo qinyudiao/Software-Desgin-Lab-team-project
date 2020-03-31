@@ -20,5 +20,5 @@ Phase 2 completion time:
   1. Jack Diao: Estimated: 25 hours / Actual: 60 hours
   2. Musa Rafik: Estimated:  hours / Actual:  hours
   3. Shawn Victor: Estimated:  20 hours / Actual: 25 hours
-  4. Kenan Hurd: Estimated:  hours / Actual:  hours
+  4. Kenan Hurd: Estimated: 20 hours / Actual: 15 hours
   5. Lucas Best: Estimated:  hours / Actual:  hours
