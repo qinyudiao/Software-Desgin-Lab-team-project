@@ -14,8 +14,7 @@ class Fail extends React.Component{
         return(
             <div>
                 <Header />
-                <h1>Fail</h1> 
-                <ReactPlayer url="https://www.youtube.com/watch?v=Z99pGVDZhaY&t=166s"/>
+                <ReactPlayer width="100vw" height="100vh" url="https://www.youtube.com/watch?v=Z99pGVDZhaY&t=166s"/>
             </div>
         )
     }
