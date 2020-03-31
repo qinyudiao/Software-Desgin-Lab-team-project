@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './components/Header.js';
 import ReactPlayer from 'react-player'; 
 
-class Fail extends React.Component{
+class Failed extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -20,4 +20,4 @@ class Fail extends React.Component{
     }
 }
 
-export default Fail; 
+export default Failed; 

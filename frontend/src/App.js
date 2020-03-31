@@ -9,7 +9,7 @@ import RussianAstronauts from './RussianAstronauts.js';
 import InternationalAstronauts from './InternationalAstronauts.js';
 import Launches from './Launches.js';
 import Agencies from './Agencies.js';
-import Fail from './Fail.js';
+import Failed from './Failed.js';
 import Map from './Map.js';
 import Education from './Education.js';
 import IndividualLaunch from './IndividualLaunch.js';
@@ -58,7 +58,7 @@ class App extends Component{
                             <Route path="/launch/:launchId" component={IndividualLaunch} />
                             <Route path="/launch" component={Launches} />
                             <Route path="/astronaut" component={Astronauts} />
-                            <Route path="/fail" component={Fail} />
+                            <Route path="/fail" component={Failed} />
                             <Route path="/map" component={Map} />
                             <Route path="/upcoming" component={UpcomingLaunches} />
                             <Route path="/USAstronauts/:astronautId" component={IndividualAstronaut} />
