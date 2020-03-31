@@ -1,5 +1,5 @@
-.flex-container {
-    background-image: url(./../assets/andy-holmes-698828-unsplash.jpg);
+#education-flex-container {
+    background-image: url(../assets/moon_1.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -10,49 +10,30 @@
     position: relative;
     font-family: "Roboto Mono", "Liberation Mono", Consolas, monospace;
     color: rgba(255,255,255,.87);
-
     height: 100vh;
     overflow-y: scroll;
 }
 
-.gallery-container {
-    margin: 0 calc(20vw - 50px);
-}
-
-#upcoming-title {
-    margin: 0 calc(20vw - 50px);
-    margin-top: 1vh;
-    padding: 1vh;
-}
-
-.upcoming-item {
-    display: absolute;
-    padding: 1vh;
-}
-
-.Launch-box {
-    display: flex;
-    background-color: #e9f1e1;
+.education-container {
+    margin: 0.8vh calc(20vw - 50px);
+    background-color: #121212;
+    background-color: #111111e8;
     border-style: solid;
     border-width: 1px;
-    border-color: #444;
-    border-radius: 12px;
-    margin-bottom: 0.8vh;
+    border-color: #333333;
+    border-radius: 6px;
 }
 
-.rocket-image-container {
-    padding: 5%;
+#education-title {
+    color: #eeeeee;
+    padding: 1%;
 }
 
-.rocket-image {
-    border-radius: 12px;
-    width: 100%;
-}
-
-.info-box {
+.education-info-box {
     width: 100%;
     padding: 2%;
-    color: #121212;
-    font-weight: 400;
-    font-size: 1.4vh;
+    color: #eeeeee;
+    font-weight: 200;
+    font-size: 1rem;
+    margin-bottom: 0;
 }

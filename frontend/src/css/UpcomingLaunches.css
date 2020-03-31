@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300,500');
+
 .flex-container {
     background-image: url(./../assets/andy-holmes-698828-unsplash.jpg);
     background-size: cover;
@@ -9,8 +11,7 @@
     height: 100%;
     position: relative;
     font-family: "Roboto Mono", "Liberation Mono", Consolas, monospace;
-    color: rgba(255,255,255,.87);
-
+    color: rgba(255, 255, 255, 0.795);
     height: 100vh;
     overflow-y: scroll;
 }
@@ -26,13 +27,12 @@
 }
 
 .upcoming-item {
-    display: absolute;
     padding: 1vh;
 }
 
 .Launch-box {
     display: flex;
-    background-color: #e9f1e1;
+    background-color: #e9f1e1d8;
     border-style: solid;
     border-width: 1px;
     border-color: #444;

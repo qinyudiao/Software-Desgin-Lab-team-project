@@ -10,7 +10,6 @@
     position: relative;
     font-family: "Roboto Mono", "Liberation Mono", Consolas, monospace;
     color: rgba(255,255,255,.87);
-
     height: 100vh;
     overflow-y: scroll;
 }
