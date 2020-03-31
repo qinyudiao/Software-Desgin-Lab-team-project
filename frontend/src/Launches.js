@@ -7,16 +7,20 @@ class Launches extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+          isLoading: true,
           posts: []
         }
     }
 
     componentDidMount(){
-      const url = "https://launchlibrary.net/1.4/launch?limit=5000";
+      const url = "https://launchlibrary.net/1.4/launch/?limit=5000";
         fetch(url, {
             method: "GET"
         }).then(response => response.json()).then(posts => {
-            this.setState({posts: posts.launches})
+            this.setState({
+              isLoading: false,
+              posts: posts.launches,
+            })
             console.log(posts);
         })
     }
@@ -32,24 +36,25 @@ class Launches extends React.Component{
           accessor: "net",
         },
         {
-          Header: "Fail Reason",
-          accessor: "failreason",
+          Header: "Launch Service Provider",
+          accessor: "lsp.name",
         },
         {
-          Header: "Video",
-          accessor: "vidURLs",
+          Header: "Fail Reason",
+          accessor: "failreason",
         }
       ]
         return(
           <div>
               <Header />
-              <h1>Launches</h1>
-              <ReactTable
-                columns={columns}
-                data={this.state.posts}
-                filterable
-              >
-              </ReactTable>
+              <h1 style={{display: "flex", justifyContent: "center"}}>Launches</h1>
+              {this.state.isLoading ? <h2 style={{display: "flex",  justifyContent: "center"}}>Loading... it takes awhile because of the enormous amount of data!</h2> :
+                <ReactTable
+                  className="-striped -highlight"
+                  columns={columns}
+                  data={this.state.posts}
+                  filterable/>
+              }
           </div>
 
 
