@@ -50,7 +50,7 @@ export default class UpcomingLaunches extends Component {
             this.setState({countdowns: countdowns})
         }, 1000)
     }
-
+    
     render() {
         const launches = this.state.launches.map((launch, index) => <div  key={index} className="upcoming-item">
             <br/>

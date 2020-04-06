@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { GoogleMap, Marker, withScriptjs, withGoogleMap, InfoWindow } from "react-google-maps";
+import { MarkerClusterer as MarkerCluster} from "react-google-maps/lib/components/addons/MarkerClusterer";
+import { compose, withProps, withHandlers } from "recompose";
+import FaAnchor from "react-icons/fa";
 
 const mapAPIKey = `AIzaSyD4MYem9eEY7_iLZSCyOdy-40GBCq4x2vY`
 
@@ -86,8 +89,23 @@ const mapStyles = [
   ];
 
 // wrap up google map
-const MapWithMarkers = withScriptjs(
-    withGoogleMap(props => (
+const MapWithMarkers = compose( 
+  withProps({
+    googleMapURL:`https:/maps.googleapis.com/maps/api/js?key=${mapAPIKey}&v=3.exp&libraries=geometry,drawing,places`,
+    loadingElement: <div style={{ height: `100%` }} />,
+    containerElement: <div style={{ height: `62vh` }} />,
+    mapElement: <div style={{ height: `100%` }} />
+  }),
+  withHandlers({
+    onMarkerClusterClick: () => (markerCluster) => {
+      const clickedMarkers = markerCluster.getMarkers()
+      console.log(`Current clicked markers length: ${clickedMarkers.length}`)
+      console.log(clickedMarkers)
+    },
+  }),
+  withScriptjs,
+  withGoogleMap
+  )(props => (
         <GoogleMap
             defaultZoom={1.6}
             minZoom={1}
@@ -98,46 +116,53 @@ const MapWithMarkers = withScriptjs(
                 streetViewControl: false
             }}
         >
-            {props.isMarkerShown && props.marks.map((mark, index) => (
+          <MarkerCluster
+            onClick={props.onMarkerClusterClick}
+            averageCenter
+            enableRetinaIcons
+            gridSize={1}
+          >
+            { console.log('lol', props),
+              props.isMarkerShown && props.marks.map((mark, index) => (
                 <Marker
-
                   icon={{
                       url: require('../../assets/launchpad-marker.png'),
                       anchor: {x: 7, y: 28},
                       scaledSize: {width: 14, height: 28}
                   }}
-                  key = {index}
+                  key={index}
                   position={mark}
-                  onClick={MapContainer.handleMouseClick}
-                  onMouseOver={MapContainer.handleMouseOver}
-                  onMouseOut={MapContainer.handleMouseExit}
-                />
+                  onClick={props.onMarkerMouseClick}
+                >
+                  {props.showInfoWindow &&
+                    <InfoWindow>
+                      <span>
+                        <p>something</p>
+                      </span>
+                    </InfoWindow>
+                  }
+                </Marker>
             ))}
+            </MarkerCluster>
         </GoogleMap>
-    ))
+    )
 );
 
 export default class MapContainer extends Component {
     constructor(props){
-        super(props);
-        this.state = {
-          marks: [],
-          showInfoWindow: false,
-        }
-    }
+      super(props);
+      this.state = {
+        pads: [],
+        showInfoWindow: false,
+      }
 
-    handleMouseClick = e => {
+      this.handleMarkerMouseClick = e => {
         this.setState({
-            showInfoWindow: true
+            showInfoWindow: !this.state.showInfoWindow
         });
         console.log(this.state.showInfoWindow);
-    };
-
-    handleMouseOver = e => {
-        this.setState({ showInfoWindow: true });
-        console.log('hover');
-    };
-    handleMouseExit = e => { this.setState({ showInfoWindow: false }); };
+      };
+    }
 
     componentDidMount(){
         const url = `https://launchlibrary.net/1.4/pad?limit=1000/`;
@@ -146,29 +171,32 @@ export default class MapContainer extends Component {
         })
         .then(response => response.json())
         .then(data => {
-            let pads = data.pads.map((pad) => (
+            let pads = data.pads.filter(pad => pad.latitude != 0 && pad.longitude != 0)
+            .map((pad) => (
                 {
                     lat: Number(pad.latitude),
                     lng: Number(pad.longitude)
                 }
             ));
             
-            this.setState({marks: pads})
+            this.setState({pads: pads})
             // console.log(pads);
         });
     };
 
+    // componentDidUpdate(){}
+
     render () {
-        const { marks } = this.state;
+        const { pads } = this.state;
+        // const { index } = this.props.Marker;
+        console.log(this.state);
         return (
             <div>
                 <MapWithMarkers
                     isMarkerShown
-                    googleMapURL={`https:/maps.googleapis.com/maps/api/js?key=${mapAPIKey}&v=3.exp&libraries=geometry,drawing,places`}
-                    loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={<div style={{ height: `62vh` }} />}
-                    mapElement={<div style={{ height: `100%` }} />}
-                    marks={marks}
+                    marks={pads}
+                    onMarkerMouseClick={this.handleMarkerMouseClick}
+                    showInfoWindow={this.state.showInfoWindow}
                 />
             </div>
         )
