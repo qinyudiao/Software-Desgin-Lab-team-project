@@ -113,15 +113,18 @@ const MapWithMarkers = compose(
           infoIndexes: new Set(infoIndexes)
         }
       ),
-      onMarkerMouseOver: ({mouseOverIndex}) => (index) => (
-        // console.log(mouseOverIndex),
+      onInfoWindowCloseClick: ({ infoIndexes }) => (index) => (
+        infoIndexes.delete(index),
+        {
+          infoIndexes: new Set(infoIndexes)
+        }
+      ),
+      onMarkerMouseOver: () => (index) => (
         {
           mouseOverIndex: index
         }
-        // console.log(mouseOverIndex)
       ),
-      onMarkerMouseOut: ({mouseOverIndex}) => () => (
-        // console.log(mouseOverIndex),
+      onMarkerMouseOut: () => () => (
         {
           mouseOverIndex: null
         }
@@ -165,7 +168,7 @@ const MapWithMarkers = compose(
                     (//console.log(props.infoIndexes, props.mouseOverIndex, marker.id),
                       props.infoIndexes.has(marker.id) || props.mouseOverIndex == marker.id) &&
                     <InfoWindow 
-                      onCloseClick={props.onClick}
+                      onCloseClick={() => props.onInfoWindowCloseClick(marker.id)}
                     >
                       <div>
                         <p style={{color: 'black'}}>{`Latlon: ${marker.lat}, ${marker.lng}`}</p>
