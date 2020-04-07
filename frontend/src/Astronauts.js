@@ -3,7 +3,6 @@ import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
 import Header from './components/Header.js';
 import {Link} from 'react-router-dom';
-import { Layout } from "./components/Layout.js";
 
 class Astronauts extends React.Component{
     constructor(props){

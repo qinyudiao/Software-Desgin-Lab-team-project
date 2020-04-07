@@ -17,7 +17,7 @@ class Map extends Component {
 
   componentDidMount(){
     const date = moment().format("YYYY-MM-DD");
-    const url = `https://launchlibrary.net/1.4/launch?startdate=1930-03-30&enddate=${date}`;
+    const url = `https://launchlibrary.net/1.4/launch/?enddate=${date}`;
     console.log();
     fetch(url, {
         method: "GET"

@@ -98,8 +98,8 @@ const MapWithMarkers = compose(
   }),
   withStateHandlers(() => 
     ({
-      isOpen: false,
-      infoIndex: null,
+      infoIndexes: new Set(),
+      mouseOverIndex: null
     }),
     {
       onMarkerClusterClick: () => (markerCluster) => {
@@ -107,10 +107,25 @@ const MapWithMarkers = compose(
         console.log(`Current clicked markers length: ${clickedMarkers.length}`)
         console.log(clickedMarkers)
       },
-      onMarkerClick: ({ isOpen, infoIndex }) => (index) => ({
-        isOpen: infoIndex !== index || !isOpen,
-        infoIndex: index
-      })
+      onMarkerClick: ({infoIndexes}) => (index) => (
+        infoIndexes.has(index) ? infoIndexes.delete(index) : infoIndexes.add(index),
+        {
+          infoIndexes: new Set(infoIndexes)
+        }
+      ),
+      onMarkerMouseOver: ({mouseOverIndex}) => (index) => (
+        // console.log(mouseOverIndex),
+        {
+          mouseOverIndex: index
+        }
+        // console.log(mouseOverIndex)
+      ),
+      onMarkerMouseOut: ({mouseOverIndex}) => () => (
+        // console.log(mouseOverIndex),
+        {
+          mouseOverIndex: null
+        }
+      )
     },
   ),
   withScriptjs,
@@ -142,12 +157,19 @@ const MapWithMarkers = compose(
                   }}
                   key={marker.id}
                   position={marker}
-                  onClick={() => props.onMarkerClick(marker.id) }
+                  onClick={() => props.onMarkerClick(marker.id)}
+                  onMouseOver={() => props.onMarkerMouseOver(marker.id)}
+                  onMouseOut={() => props.onMarkerMouseOut()}
                 >
                   {
-                    (props.isOpen && props.infoIndex === marker.id) &&
-                    <InfoWindow onCloseClick={props.showInfo}>
-                      <span><p>something</p></span>
+                    (//console.log(props.infoIndexes, props.mouseOverIndex, marker.id),
+                      props.infoIndexes.has(marker.id) || props.mouseOverIndex == marker.id) &&
+                    <InfoWindow 
+                      onCloseClick={props.onClick}
+                    >
+                      <div>
+                        <p style={{color: 'black'}}>{`Latlon: ${marker.lat}, ${marker.lng}`}</p>
+                      </div>
                     </InfoWindow>
                   }
                 </Marker>
@@ -162,24 +184,12 @@ export default class MapContainer extends Component {
       super(props);
       this.state = {
         pads: [],
-        showInfoWindow: false,
       }
-
-      this.handleMarkerMouseClick = this.handleMarkerMouseClick.bind(this);
-    }
-
-    handleMarkerMouseClick(e) {
-      // this.setState({
-      //   showInfoWindow: !this.state.showInfoWindow
-      // });
-      console.log(e);
-      console.log('in handler');
-      console.log(this);
     }
 
     componentDidMount(){
       console.log('didMount');
-      const url = `https://launchlibrary.net/1.4/pad?limit=1000/`;
+      const url = `https://launchlibrary.net/1.4/pad/?limit=1000/`;
       fetch(url, {
           method: "GET"
       })
@@ -188,7 +198,7 @@ export default class MapContainer extends Component {
           let pads = data.pads.filter(pad => (pad.latitude != 0) && (pad.longitude != 0) )
           .map((pad, index) => (
               {
-                  id: index,
+                  id: pad.id,
                   lat: Number(pad.latitude),
                   lng: Number(pad.longitude),
                   latlng: `${pad.latitude}${pad.longitude}`

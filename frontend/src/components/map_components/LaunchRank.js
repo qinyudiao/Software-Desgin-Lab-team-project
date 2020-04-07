@@ -21,7 +21,7 @@ export default class LaunchRank extends Component {
         });
         // get date
         const date = moment().format("YYYY-MM-DD");
-        const url = `https://launchlibrary.net/1.4/launch/?limit=5000&?fields=location&?startdate=1930-03-30&enddate=${date}`;
+        const url = `https://launchlibrary.net/1.4/launch/?limit=5000&fields=location&enddate=${date}`;
         console.log(url);
         fetch(url, {
             method: "GET"
