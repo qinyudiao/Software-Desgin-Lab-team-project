@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { GoogleMap, Marker, withScriptjs, withGoogleMap, InfoWindow } from "react-google-maps";
 import { MarkerClusterer as MarkerCluster} from "react-google-maps/lib/components/addons/MarkerClusterer";
-import { compose, withProps, withHandlers } from "recompose";
+import { compose, withProps, withStateHandlers } from "recompose";
 import FaAnchor from "react-icons/fa";
 
 const mapAPIKey = `AIzaSyD4MYem9eEY7_iLZSCyOdy-40GBCq4x2vY`
@@ -96,18 +96,28 @@ const MapWithMarkers = compose(
     containerElement: <div style={{ height: `62vh` }} />,
     mapElement: <div style={{ height: `100%` }} />
   }),
-  withHandlers({
-    onMarkerClusterClick: () => (markerCluster) => {
-      const clickedMarkers = markerCluster.getMarkers()
-      console.log(`Current clicked markers length: ${clickedMarkers.length}`)
-      console.log(clickedMarkers)
+  withStateHandlers(() => 
+    ({
+      isOpen: false,
+      infoIndex: null,
+    }),
+    {
+      onMarkerClusterClick: () => (markerCluster) => {
+        const clickedMarkers = markerCluster.getMarkers()
+        console.log(`Current clicked markers length: ${clickedMarkers.length}`)
+        console.log(clickedMarkers)
+      },
+      onMarkerClick: ({ isOpen, infoIndex }) => (index) => ({
+        isOpen: infoIndex !== index || !isOpen,
+        infoIndex: index
+      })
     },
-  }),
+  ),
   withScriptjs,
   withGoogleMap
-  )(props => (
+)(props => (
         <GoogleMap
-            defaultZoom={1.6}
+            defaultZoom={2.0}
             minZoom={1}
             defaultCenter={{ lat: 20, lng: 10 }}
             options={{
@@ -120,25 +130,24 @@ const MapWithMarkers = compose(
             onClick={props.onMarkerClusterClick}
             averageCenter
             enableRetinaIcons
-            gridSize={1}
+            gridSize={30} // group markers that are 15 units away from each other
           >
-            { console.log('lol', props),
-              props.isMarkerShown && props.marks.map((mark, index) => (
+            {
+              props.isMarkerShown && props.marks.map((marker) => (
                 <Marker
                   icon={{
                       url: require('../../assets/launchpad-marker.png'),
                       anchor: {x: 7, y: 28},
                       scaledSize: {width: 14, height: 28}
                   }}
-                  key={index}
-                  position={mark}
-                  onClick={props.onMarkerMouseClick}
+                  key={marker.id}
+                  position={marker}
+                  onClick={() => props.onMarkerClick(marker.id) }
                 >
-                  {props.showInfoWindow &&
-                    <InfoWindow>
-                      <span>
-                        <p>something</p>
-                      </span>
+                  {
+                    (props.isOpen && props.infoIndex === marker.id) &&
+                    <InfoWindow onCloseClick={props.showInfo}>
+                      <span><p>something</p></span>
                     </InfoWindow>
                   }
                 </Marker>
@@ -156,35 +165,48 @@ export default class MapContainer extends Component {
         showInfoWindow: false,
       }
 
-      this.handleMarkerMouseClick = e => {
-        this.setState({
-            showInfoWindow: !this.state.showInfoWindow
-        });
-        console.log(this.state.showInfoWindow);
-      };
+      this.handleMarkerMouseClick = this.handleMarkerMouseClick.bind(this);
+    }
+
+    handleMarkerMouseClick(e) {
+      // this.setState({
+      //   showInfoWindow: !this.state.showInfoWindow
+      // });
+      console.log(e);
+      console.log('in handler');
+      console.log(this);
     }
 
     componentDidMount(){
-        const url = `https://launchlibrary.net/1.4/pad?limit=1000/`;
-        fetch(url, {
-            method: "GET"
-        })
-        .then(response => response.json())
-        .then(data => {
-            let pads = data.pads.filter(pad => pad.latitude != 0 && pad.longitude != 0)
-            .map((pad) => (
-                {
-                    lat: Number(pad.latitude),
-                    lng: Number(pad.longitude)
-                }
-            ));
-            
-            this.setState({pads: pads})
-            // console.log(pads);
-        });
+      console.log('didMount');
+      const url = `https://launchlibrary.net/1.4/pad?limit=1000/`;
+      fetch(url, {
+          method: "GET"
+      })
+      .then(response => response.json())
+      .then(data => {
+          let pads = data.pads.filter(pad => (pad.latitude != 0) && (pad.longitude != 0) )
+          .map((pad, index) => (
+              {
+                  id: index,
+                  lat: Number(pad.latitude),
+                  lng: Number(pad.longitude),
+                  latlng: `${pad.latitude}${pad.longitude}`
+              }
+          ));
+          /* filter duplicated latlng */
+          const uniquePads = Array.from(new Set(pads.map(pad => pad.latlng)))
+            .map((latlng) => {
+             return pads.find(pad => pad.latlng === latlng)
+          })
+          this.setState({pads: uniquePads})
+          // console.log(pads);
+      });
     };
 
-    // componentDidUpdate(){}
+    componentDidUpdate() {
+      console.log('didUpdate');
+    }
 
     render () {
         const { pads } = this.state;
@@ -195,8 +217,6 @@ export default class MapContainer extends Component {
                 <MapWithMarkers
                     isMarkerShown
                     marks={pads}
-                    onMarkerMouseClick={this.handleMarkerMouseClick}
-                    showInfoWindow={this.state.showInfoWindow}
                 />
             </div>
         )
