@@ -6,14 +6,14 @@ import "react-table-6/react-table.css"
 import ec2url from './EC2Link';
 
 class Agencies extends React.Component{
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             posts: []
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
       let url = 'https://launchlibrary.net/1.4/agency?limit=500';
 
       fetch(url)
@@ -23,7 +23,7 @@ class Agencies extends React.Component{
       });
     }
 
-    render(){
+    render() {
       this.state.posts.forEach(post => {
         post.islsp = post.islsp == 0 ? "" : "✓";
       });
@@ -34,7 +34,6 @@ class Agencies extends React.Component{
           // Cell: e =><a href={'/' + e.value}> {e.value} hi </a>
           // Cell: e => <Link to={`/launch/${e.value}`}>{e.value}</Link>
           Cell: e => <Link to={`/agency/${e.value}`}>{e.value}</Link>
-
         },
         {
           Header: "Abbreviation",

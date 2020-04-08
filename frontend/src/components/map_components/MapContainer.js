@@ -165,13 +165,29 @@ const MapWithMarkers = compose(
                   onMouseOut={() => props.onMarkerMouseOut()}
                 >
                   {
-                    (//console.log(props.infoIndexes, props.mouseOverIndex, marker.id),
+                    (console.log(marker),
                       props.infoIndexes.has(marker.id) || props.mouseOverIndex == marker.id) &&
                     <InfoWindow 
                       onCloseClick={() => props.onInfoWindowCloseClick(marker.id)}
                     >
-                      <div>
-                        <p style={{color: 'black'}}>{`Latlon: ${marker.lat}, ${marker.lng}`}</p>
+                      <div style={{
+                        lineHeight: '50%', 
+                        color: '#111111', 
+                        marginTop: '5%'
+                      }}>
+                        <p>{`${marker.name}`}</p>
+                        { marker.agencies !== null ?
+                            marker.agencies.length > 0 ? 
+                              <p>{`Affiliation:${marker.agencies.map(agency => {
+                                return ` ${agency.name}`;
+                              })}`}</p>
+                              : <div></div>   
+                          : <div></div>                         
+                        }
+                        <p>{`Latitude: ${marker.lat}`}</p>
+                        <p>{`Longitude: ${marker.lng}`}</p>
+                        <p>{`${marker.retired ? `retired` : `active`}`}</p>
+                        {marker.padType ? <p>This pad is for landing.</p> : <p></p>}
                       </div>
                     </InfoWindow>
                   }
@@ -198,10 +214,15 @@ export default class MapContainer extends Component {
       })
       .then(response => response.json())
       .then(data => {
+          console.log('data', data.pads);
           let pads = data.pads.filter(pad => (pad.latitude != 0) && (pad.longitude != 0) )
           .map((pad, index) => (
               {
                   id: pad.id,
+                  name: pad.name,
+                  retired: pad.retired,
+                  padType: pad.padType,
+                  agencies: pad.agencies,
                   lat: Number(pad.latitude),
                   lng: Number(pad.longitude),
                   latlng: `${pad.latitude}${pad.longitude}`
@@ -213,7 +234,6 @@ export default class MapContainer extends Component {
              return pads.find(pad => pad.latlng === latlng)
           })
           this.setState({pads: uniquePads})
-          // console.log(pads);
       });
     };
 
