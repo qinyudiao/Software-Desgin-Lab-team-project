@@ -1,44 +1,98 @@
-let mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
 // Schema for launchSchema
-let launchSchema = mongoose.Schema({
-    Astronaut:{
-        type: String,
+const launchSchema = mongoose.Schema({
+    name:{
+        String,
         required: true
     },
-    'Selection Year':{
-        type: String
+    time: {String},
+    location:{
+        "pads": [
+            {
+                "id": {Number},
+                "name": {String},
+                "countryCode": {String},
+                "type": {Number}, // 0 for launching, 1 for landing
+                "infoURL": {String},
+                "wikiURL": {String},
+                "infoURLs": [String],
+                "latitude": {Number},
+                "longitude": {Number},
+                "agencies": [
+                    {
+                        "id": {Number},
+                        "name": {String},
+                        "countryCode": {String},
+                        "type": {Number}, // 1 for government, 2 for international, 3 for commercial
+                        "wikiURL": {String},
+                        "infoURLs": [String],
+                        "islsp": {Number} // 0 for not lsp, 1 for is lsp
+                    }
+                ]
+            }
+        ],
+        "id": {Number},
+        "name": {String},
+        "infoURL": {String},
+        "wikiURL": {String},
+        "countryCode": {String}
     },
-    Group:{
-        type: String
+    rocket: {
+        "id": {Number},
+        "agencies": [
+            {
+                "id": {Number},
+                "name": {String},
+                "countryCode": {String},
+                "type": {Number}, // 1 for government, 2 for international, 3 for commercial
+                "wikiURL": {String},
+                "infoURLs": [String],
+                "islsp": {Number} // 0 for not lsp, 1 for is lsp
+            }
+        ]
     },
-    '# Flights':{
-        type: String,
+    "missions": [
+        {
+            "id": {Number},
+            "name": {String},
+            "description": {String},
+            "type": {Number},
+            "wikiURL": {String},
+            "typeName": {String},
+            "agencies": [
+                {
+                    "id": {Number},
+                    "name": {String},
+                    "countryCode": {String},
+                    "type": {Number}, // 1 for government, 2 for international, 3 for commercial
+                    "wikiURL": {String},
+                    "infoURLs": [String],
+                    "islsp": {Number} // 0 for not lsp, 1 for is lsp
+                }
+            ],
+            "payloads": [
+                {
+                    "id": {Number},
+                    "name": {String}
+                }
+            ]
+        }
+    ],
+    "lsp": {
+        "id": {Number},
+        "name": {String},
+        "countryCode": {String},
+        "type": {Number}, // 1 for government, 2 for international, 3 for commercial
+        "infoURL": {String},
+        "wikiURL": {String},
+        "changed": {String},
+        "infoURLs": [String]
     },
-    Status:{
-        type: String
-    },
-    'Military or civilian':{
-        type: String
-    },
-    Gender:{
-        type: String,
-    },
-    'If military include details':{
-        type: String
-    },
-    'Date of birth':{
-        type: String
-    },
-    'Job':{
-        type: String
-    },
-    'Missions flown':{
-        type: String
-    },
-    'Cumulative hours of space flight time':{
-        type: String
-    }
+    vidURLs: [String],
+    holdreason: {String},
+    failreason: {String},
+    changed: {String}
 });
 
-module.exports = mongoose.model('launch', launchSchema);
+module.exports = mongoose.model('Launch', launchSchema);
