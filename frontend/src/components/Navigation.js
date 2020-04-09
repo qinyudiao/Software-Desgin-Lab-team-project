@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Styles = styled.div`
     .navbar{
-        background-color: #252525;
+        background-color: black;
         display: flex;
         justify-content: space-evenly;
         width: 100vw;
@@ -18,7 +18,7 @@ const Styles = styled.div`
             color: white;
         }
     }
-    
+
     .navbar-nav, .nav-link {
         color: white;
         &:hover {
@@ -34,29 +34,29 @@ const Styles = styled.div`
         }
     }
 
-    #search-button { 
+    #search-button {
         color: #c0d1c6;
         font-style: oblique;
     }
 `;
 
 function Navigation(){
- 
+
     return(
         <Styles>
             <Navbar expand="lg">
                 <Navbar.Brand href="/">
-                    <img alt="" src="/logo512.png" width="28" height="28" className="d-inline-block align-top" />
-                    {' '}Every Rocket Launch
+                    <img alt="" src="/ERLE3.png" width="800" height="60" className="d-inline-block align-top" />
+                    {' '}
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-                    <Nav.Item><Nav.Link href="/upcoming">Upcoming Launches</Nav.Link></Nav.Item>
-                    <Nav.Item><Nav.Link href="/about">About</Nav.Link></Nav.Item>
-                    <Nav.Item><Nav.Link href="/map">Map</Nav.Link></Nav.Item>
-                    <Nav.Item><Nav.Link href="/launch">Launches</Nav.Link></Nav.Item>
-                    <Nav.Item><Nav.Link href="/agency">Agencies</Nav.Link></Nav.Item>
-                    <NavDropdown title="Astronauts">
+                    <Nav.Item><Nav.Link href="/upcoming">UPCOMING LAUNCHES</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link href="/about">ABOUT</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link href="/map">MAP</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link href="/launch">LAUNCHES</Nav.Link></Nav.Item>
+                    <Nav.Item><Nav.Link href="/agency">AGENCIES</Nav.Link></Nav.Item>
+                    <NavDropdown title="ASTRONAUTS">
                         <NavDropdown.Item href="/astronaut">All Astronauts</NavDropdown.Item>
                         <NavDropdown.Item href="/USAstronauts">US Astronauts</NavDropdown.Item>
                         <NavDropdown.Item href="/RussianAstronauts">Russian Astronauts</NavDropdown.Item>
@@ -80,4 +80,3 @@ function Navigation(){
 }
 
 export default Navigation;
-
