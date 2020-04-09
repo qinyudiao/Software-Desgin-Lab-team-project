@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { GoogleMap, Marker, withScriptjs, withGoogleMap, InfoWindow } from "react-google-maps";
 import { MarkerClusterer as MarkerCluster} from "react-google-maps/lib/components/addons/MarkerClusterer";
 import { compose, withProps, withStateHandlers } from "recompose";
-import FaAnchor from "react-icons/fa";
 
 const mapAPIKey = `AIzaSyD4MYem9eEY7_iLZSCyOdy-40GBCq4x2vY`
 
@@ -165,8 +164,8 @@ const MapWithMarkers = compose(
                   onMouseOut={() => props.onMarkerMouseOut()}
                 >
                   {
-                    (console.log(marker),
-                      props.infoIndexes.has(marker.id) || props.mouseOverIndex == marker.id) &&
+                    // (console.log(marker),
+                      (props.infoIndexes.has(marker.id) || props.mouseOverIndex === marker.id) &&
                     <InfoWindow 
                       onCloseClick={() => props.onInfoWindowCloseClick(marker.id)}
                     >
@@ -207,7 +206,7 @@ export default class MapContainer extends Component {
     }
 
     componentDidMount(){
-      console.log('didMount');
+      // console.log('didMount');
       const url = `https://launchlibrary.net/1.4/pad/?limit=1000/`;
       fetch(url, {
           method: "GET"
@@ -238,13 +237,12 @@ export default class MapContainer extends Component {
     };
 
     componentDidUpdate() {
-      console.log('didUpdate');
+      // console.log('didUpdate');
     }
 
     render () {
         const { pads } = this.state;
-        // const { index } = this.props.Marker;
-        console.log(this.state);
+        // console.log(this.state);
         return (
             <div>
                 <MapWithMarkers

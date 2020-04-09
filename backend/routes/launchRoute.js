@@ -5,17 +5,7 @@ const moment = require('moment')
 app.get('/launch', async (request, response) => {
   console.log(request.params);
 
-  const launches_url = `https://launchlibrary.net/1.4/launch?limit=10000`;
-  const launches_response = await fetch(launches_url);
-  const launches_data = await launches_response.json();
-
-  response.json(launches_data);
-});
-
-app.get('/launch/next/5', async (request, response) => {
-  console.log(request.params);
-
-  const launches_url = `https://launchlibrary.net/1.4/launch/next/5`;
+  const launches_url = `https://launchlibrary.net/1.4/launch/?limit=10000`;
   const launches_response = await fetch(launches_url);
   const launches_data = await launches_response.json();
 
@@ -25,7 +15,7 @@ app.get('/launch/next/5', async (request, response) => {
 class LaunchJS {
   constructor() {
     this.timeoutVal = 20000
-    this.version = '1.4.1'
+    this.version = '1.4'
     // added different types of requests parameters for more functionality
   }
 
@@ -35,7 +25,7 @@ class LaunchJS {
   }
 
   _setVersion(version) {
-    (version) ? this.version = version: this.version = '1.4.1'
+    (version) ? this.version = version: this.version = '1.4'
   }
 
   _generateReqUrl(reqType, param) {

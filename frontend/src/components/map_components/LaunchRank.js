@@ -55,7 +55,8 @@ export default class LaunchRank extends Component {
                         { this.state.loading ? <div className="column-item" style={{color:'red', borderWidth:0}}>Loading...</div> :
                             this.state.entries.map((entry, index) => {
                                 return <ListGroup.Item key={index} style={{ backgroundColor: "transparent"}}>
-                                    {`${entry.number} ${entry.name}`}
+                                    <span style={{color: 'red'}}>{`${entry.number} `}</span>
+                                    <span>{`${entry.name}`}</span>
                                 </ListGroup.Item>
                             })
                         }
