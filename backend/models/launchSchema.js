@@ -1,98 +1,83 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 // Schema for launchSchema
 const launchSchema = mongoose.Schema({
-    name:{
-        String,
+    id:{
+        type: Number,
         required: true
     },
-    time: {String},
+    name:{
+        type: String,
+        required: true
+    },
+    isonet: {type: String},
     location:{
         "pads": [
             {
-                "id": {Number},
-                "name": {String},
-                "countryCode": {String},
-                "type": {Number}, // 0 for launching, 1 for landing
-                "infoURL": {String},
-                "wikiURL": {String},
+                "id": {type: Number},
+                "name": {type: String},
+                "countryCode": {type: String},
+                "type": {type: Number}, // 0 for launching, 1 for landing
+                "infoURL": {type: String},
+                "wikiURL": {type: String},
                 "infoURLs": [String],
-                "latitude": {Number},
-                "longitude": {Number},
-                "agencies": [
+                "latitude": {type: Number},
+                "longitude": {type: Number},
+                agencies: [
                     {
-                        "id": {Number},
-                        "name": {String},
-                        "countryCode": {String},
-                        "type": {Number}, // 1 for government, 2 for international, 3 for commercial
-                        "wikiURL": {String},
-                        "infoURLs": [String],
-                        "islsp": {Number} // 0 for not lsp, 1 for is lsp
+                        // type: Schema.Types.ObjectId,
+                        // ref: 'Agency'
                     }
                 ]
             }
         ],
-        "id": {Number},
-        "name": {String},
-        "infoURL": {String},
-        "wikiURL": {String},
-        "countryCode": {String}
+        "id": {type: Number},
+        "name": {type: String},
+        "infoURL": {type: String},
+        "wikiURL": {type: String},
+        "countryCode": {type: String}
     },
     rocket: {
-        "id": {Number},
-        "agencies": [
-            {
-                "id": {Number},
-                "name": {String},
-                "countryCode": {String},
-                "type": {Number}, // 1 for government, 2 for international, 3 for commercial
-                "wikiURL": {String},
-                "infoURLs": [String],
-                "islsp": {Number} // 0 for not lsp, 1 for is lsp
-            }
-        ]
+        // type: Schema.Types.ObjectId,
+        // ref: 'Rocket'
     },
     "missions": [
         {
-            "id": {Number},
-            "name": {String},
-            "description": {String},
-            "type": {Number},
-            "wikiURL": {String},
-            "typeName": {String},
-            "agencies": [
+            "id": {type: Number},
+            "name": {type: String},
+            "description": {type: String},
+            "type": {type: Number},
+            "wikiURL": {type: String},
+            "typeName": {type: String},
+            agencies: [
                 {
-                    "id": {Number},
-                    "name": {String},
-                    "countryCode": {String},
-                    "type": {Number}, // 1 for government, 2 for international, 3 for commercial
-                    "wikiURL": {String},
-                    "infoURLs": [String],
-                    "islsp": {Number} // 0 for not lsp, 1 for is lsp
+                    // type: Schema.Types.ObjectId,
+                    // ref: 'Agency'
                 }
             ],
             "payloads": [
                 {
-                    "id": {Number},
-                    "name": {String}
+                    "id": {type: Number},
+                    "name": {type: String}
                 }
             ]
         }
     ],
     "lsp": {
-        "id": {Number},
-        "name": {String},
-        "countryCode": {String},
-        "type": {Number}, // 1 for government, 2 for international, 3 for commercial
-        "infoURL": {String},
-        "wikiURL": {String},
-        "changed": {String},
+        "id": {type: Number},
+        "name": {type: String},
+        "countryCode": {type: String},
+        "type": {type: Number}, // 1 for government, 2 for international, 3 for commercial
+        "infoURL": {type: String},
+        "wikiURL": {type: String},
+        "changed": {type: String},
         "infoURLs": [String]
     },
     vidURLs: [String],
-    holdreason: {String},
-    failreason: {String},
-    changed: {String}
+    holdreason: {type: String},
+    failreason: {type: String},
+    changed: {type: String}
 });
 
 module.exports = mongoose.model('Launch', launchSchema);
