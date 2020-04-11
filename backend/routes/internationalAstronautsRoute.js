@@ -56,8 +56,10 @@ router.get('/:astronautId/:type', (req, res) =>{
 
     var params = {
         action: "query",
-        prop: "images",
-        titles: req.params.astronautId,
+        formatversion: "2",
+        prop: "pageimages|pageterms",
+        titles: "Frank De Winne",
+        // titles: req.params.astronautId,
         format: "json"
     };
 
@@ -65,11 +67,17 @@ router.get('/:astronautId/:type', (req, res) =>{
     Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
 
     request(url, (error, response, body) =>{
-        if(!error && response.statusCode == 200){
-            
-
+        console.log(JSON.parse(response.body));
+        let temp = JSON.parse(response.body);
+        console.log(temp['query']['pages']);
+        let image = temp['query']['pages'][0]['thumbnail']['source'];
+        if(image != undefined){
+            res.send({"image": image});
         }
-    }
+        else{
+            res.send({"image": "not available"});
+        }
+    });
 
 
 
@@ -86,5 +94,6 @@ router.get('/:astronautId/:type', (req, res) =>{
 //     })
 //     .catch(function(error){console.log(error);});
 });
+
 
 module.exports = router;

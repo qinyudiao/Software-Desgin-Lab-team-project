@@ -7,7 +7,8 @@ class IndividualAstronaut extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            temp: null
+            temp: null,
+            image: null
         }
     }
 
@@ -24,6 +25,7 @@ class IndividualAstronaut extends React.Component{
         .then(response => response.json())
         .then(data =>{
             console.log(data);
+            this.setState({image: data['image']})
         });
     }
 
@@ -38,6 +40,7 @@ class IndividualAstronaut extends React.Component{
             <div>
                 <Header />
                 <p>{this.state.temp}</p>
+                <img src={this.state.image} />
             </div>
         )
     }
