@@ -24,13 +24,6 @@ class USAstronauts extends React.Component{
       fetch(url)
       .then(response => response.json())
       .then(posts => this.setState({posts: posts}));
-
-      // const url = "https://raw.githubusercontent.com/ShawnVictor/demo/master/db.json";
-      // fetch(url, {
-      //   method: "GET"
-      // }).then(response => response.json()).then(posts => {
-      //   this.setState({posts: posts})
-      // })
     }
 
     render(){
@@ -38,7 +31,7 @@ class USAstronauts extends React.Component{
         {
           Header: "Full Name",
           accessor: "Astronaut",
-          Cell: e => <Link to={`/USAstronauts/${e.value}`}>{e.value}</Link>
+          Cell: e => <Link to={`/USAstronauts/${e.value}/USAstronauts`}>{e.value}</Link>
         },
         {
           Header: "DOB",

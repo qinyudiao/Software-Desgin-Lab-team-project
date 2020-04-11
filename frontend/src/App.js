@@ -61,11 +61,11 @@ class App extends Component{
                             <Route path="/fail" component={Failed} />
                             <Route path="/map" component={Map} />
                             <Route path="/upcoming" component={UpcomingLaunches} />
-                            <Route path="/USAstronauts/:astronautId" component={IndividualAstronaut} />
+                            <Route path="/USAstronauts/:astronautId/:type" component={IndividualAstronaut} />
                             <Route path="/USAstronauts" component={USAstronauts} />
-                            <Route path="/RussianAstronauts/:astronautId" component={IndividualAstronaut} />
+                            <Route path="/RussianAstronauts/:astronautId/:type" component={IndividualAstronaut} />
                             <Route path="/RussianAstronauts" component={RussianAstronauts} />
-                            <Route path="/InternationalAstronauts/:astronautId" component={IndividualAstronaut} />
+                            <Route path="/InternationalAstronauts/:astronautId/:type" component={IndividualAstronaut} />
                             <Route path="/InternationalAstronauts" component={InternationalAstronauts} />
                             <Route path="/education" component={Education} />
                             <Route component={PageNotFound} />

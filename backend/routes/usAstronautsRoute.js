@@ -48,4 +48,8 @@ router.get('/', (req, res) =>{
     });
 });
 
+router.get('/:astronautId/:type', (req, res) =>{
+    console.log("us works WORKS")
+});
+
 module.exports = router;

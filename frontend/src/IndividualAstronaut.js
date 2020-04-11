@@ -1,5 +1,7 @@
 import React from 'react';
 import Header from './components/Header.js';
+import ec2url from './EC2Link';
+
 
 class IndividualAstronaut extends React.Component{
     constructor(props){
@@ -9,9 +11,26 @@ class IndividualAstronaut extends React.Component{
         }
     }
 
+    getAstronautImage = () =>{
+        let url = '';
+
+        if(process.env.NODE_ENV === 'production'){
+            url = ec2url + this.props.match.params.type + '/:' + this.props.match.params.astronautId + '/:' + this.props.match.params.type;
+        }
+        else{
+            url = '/' + this.props.match.params.type + '/' + this.props.match.params.astronautId + '/' + this.props.match.params.type;
+        }
+        fetch(url)
+        .then(response => response.json())
+        .then(data =>{
+            console.log(data);
+        });
+    }
+
     componentDidMount(){
         this.setState({temp: this.props.match.params.astronautId});
         console.log(this.props.match.params);
+        this.getAstronautImage();
     }
 
     render(){

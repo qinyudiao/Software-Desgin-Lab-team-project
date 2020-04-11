@@ -49,4 +49,8 @@ router.get('/', (req, res) =>{
     });
 });
 
+router.get('/:astronautId/:type', (req, res) =>{
+    console.log("russian WORKS")
+});
+
 module.exports = router;
