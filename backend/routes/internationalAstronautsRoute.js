@@ -51,73 +51,40 @@ router.get('/', (req, res) =>{
 
 router.get('/:astronautId/:type', (req, res) =>{
     let nameArray = req.params.astronautId.split(" ");
+
+    // Take out extra punctuation like commas or periods
     for(let i = 0; i < nameArray.length; i++){
-        nameArray[i] = nameArray[i].replace(",", "");
+        nameArray[i] = nameArray[i].replace(",", ""); 
+        nameArray[i] = nameArray[i].replace(".", "");
     }
-    console.log(nameArray);
-    let firstName = nameArray[nameArray.length - 1];
-    let lastName = nameArray[nameArray.length - 2];
-    let middleNames = [];
-    if(nameArray.length > 2){
-        middleNames = nameArray.slice(0, nameArray.length - 2);
+
+    // Take out blank spaces and initials since they mess up formation of full name
+    let finalNameArray = []
+    for(let i = 0; i < nameArray.length; i++){
+        if(nameArray[i] !== '' && nameArray[i].length > 1){
+            finalNameArray.push(nameArray[i]);
+        }
     }
-    let middleName = '';
-    for(let i = 0; i < middleNames.length; i++){
-        middleName += middleNames[i];
+
+    // order of names in array is expected to be [middle name, last name, first name]
+    let firstName = finalNameArray[finalNameArray.length - 1];
+    let lastName = finalNameArray[finalNameArray.length - 2];
+    let middleNames = []; // An array for names with multiple middle names
+    if(finalNameArray.length > 2){
+        middleNames = finalNameArray.slice(0, nameArray.length - 2);
     }
-    let fullName = firstName + ' ' + middleName + ' ' + lastName;
-    console.log(fullName);
+    let middleName = ' ';
+    for(let i = 0; i < middleNames.length; i++){ // Combine middle names into one string
+        if(middleNames[i].length > 1){
+            middleName += middleNames[i];
+        }
+    }
+    let fullName = firstName + middleName + ' ' + lastName; // Create full name to pass into request
     let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + fullName;
-    request(url, (req, res) =>{
-        console.log(JSON.parse(res.body));
+    request(url, (req, response) =>{
+        let results = JSON.parse(response.body);
+        res.send(results);
     });
-    // // console.log(req.params.astronautId);
-
-    // var url = "https://en.wikipedia.org/w/api.php"; 
-    // var params = {
-    //     action: "query",
-    //     formatversion: "2",
-    //     prop: "pageimages|pageterms",
-    //     titles: "Frank De Winne",
-    //     // titles: req.params.astronautId,
-    //     format: "json"
-    // };
-
-    // url = url + "?origin=*";
-    // Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
-
-    // request(url, (error, response, body) =>{
-    //     if(error){
-    //         console.log(error);
-    //     }
-    //     else{
-    //         let result = JSON.parse(response.body);
-    //         if(result['query']['pages'][0]['missing']){ // Check if result is valid
-    //             console.log("missing");
-    //             res.send({"image": "none"});
-    //         }
-    //         else{
-    //             let image = result['query']['pages'][0]['missing'];
-    //             console.log(image);
-    //             res.send({"image": image});
-    //         }
-
-    //     }
-
-
-
-
-// fetch(url)
-//     .then(function(response){return response.json();})
-//     .then(function(response) {
-//         var pages = response.query.pages;
-//         for (var page in pages) {
-//             for (var img of pages[page].images) {
-//                 console.log(img.title);
-//             }
-//         }
-//     })
-//     .catch(function(error){console.log(error);});
 });
 
 
