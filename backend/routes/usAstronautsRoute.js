@@ -79,6 +79,7 @@ router.get('/:astronautId/:type', (req, res) =>{
         }
     }
     let fullName = firstName + middleName + ' ' + lastName; // Create full name to pass into request
+    console.log(fullName);
     let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + fullName;
     request(url, (req, response) =>{
         let results = JSON.parse(response.body);

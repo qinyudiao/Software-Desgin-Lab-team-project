@@ -25,7 +25,11 @@ class IndividualAstronaut extends React.Component{
         .then(response => response.json())
         .then(data =>{
             console.log(data);
-            this.setState({image: data['image']})
+            // console.log(data['thumbnail']['source']);
+            if(data['title'] !== 'Not found.'){
+                this.setState({image: data['thumbnail']['source']});
+            }
+            // this.setState({image: data['thumbnail']['source']});
         });
     }
 

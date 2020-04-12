@@ -6,8 +6,7 @@ const cron = require('node-cron');
 let russianAstronaut = require('../models/russianAstronautSchema.js');
 
 // At a periodic time update database with international astronaut information
-cron.schedule('2 * * * * *', () =>{
-// cron.schedule('2 * * * * *', () => {
+cron.schedule('* 0 * * Sunday', () =>{
     console.log('running international astronaut cron job');
     request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db3.json', (err, res) =>{
         if(!err && res.statusCode === 200){
@@ -77,7 +76,6 @@ router.get('/:astronautId/:type', (req, res) =>{
         }
     }
 
-    // order of names in array is expected to be [middle name, last name, first name]
     let firstName = finalNameArray[finalNameArray.length - 1];
     let lastName = finalNameArray[finalNameArray.length - 2];
     let middleNames = []; // An array for names with multiple middle names
