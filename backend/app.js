@@ -18,7 +18,10 @@ var landing = require('./routes/landingpageRoute');
 var usAstronauts = require('./routes/usAstronautsRoute');
 var internationalAstronauts = require('./routes/internationalAstronautsRoute');
 var russianAstronauts = require('./routes/russianAstronautsRoute');
-// var agency = require('./routes/agencyRoute');
+var agency = require('./routes/agencyRoute');
+var rocket = require('./routes/rocketRoute');
+var location = require('./routes/locationRoute');
+var pad = require('./routes/padRoute');
 
 app.use('/landing', landing);
 app.use('/country', country); 
@@ -27,7 +30,7 @@ app.use('/launch', launch);
 app.use('/USAstronauts', usAstronauts);
 app.use('/InternationalAstronauts', internationalAstronauts);
 app.use('/RussianAstronauts', russianAstronauts);
-// app.use('/agency', agency);
+app.use('/agency', agency);
 
 // MongoDB stuff
 const uri = 'mongodb+srv://admin:admin@softwarelab-zbga3.mongodb.net/SoftwareLab?retryWrites=true&w=majority';
