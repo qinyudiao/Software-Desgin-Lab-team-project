@@ -50,34 +50,59 @@ router.get('/', (req, res) =>{
 });
 
 router.get('/:astronautId/:type', (req, res) =>{
-    console.log("international WORKS");
-
-    var url = "https://en.wikipedia.org/w/api.php"; 
-
-    var params = {
-        action: "query",
-        formatversion: "2",
-        prop: "pageimages|pageterms",
-        titles: "Frank De Winne",
-        // titles: req.params.astronautId,
-        format: "json"
-    };
-
-    url = url + "?origin=*";
-    Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
-
-    request(url, (error, response, body) =>{
-        console.log(JSON.parse(response.body));
-        let temp = JSON.parse(response.body);
-        console.log(temp['query']['pages']);
-        let image = temp['query']['pages'][0]['thumbnail']['source'];
-        if(image != undefined){
-            res.send({"image": image});
-        }
-        else{
-            res.send({"image": "not available"});
-        }
+    let nameArray = req.params.astronautId.split(" ");
+    for(let i = 0; i < nameArray.length; i++){
+        nameArray[i] = nameArray[i].replace(",", "");
+    }
+    console.log(nameArray);
+    let firstName = nameArray[nameArray.length - 1];
+    let lastName = nameArray[nameArray.length - 2];
+    let middleNames = [];
+    if(nameArray.length > 2){
+        middleNames = nameArray.slice(0, nameArray.length - 2);
+    }
+    let middleName = '';
+    for(let i = 0; i < middleNames.length; i++){
+        middleName += middleNames[i];
+    }
+    let fullName = firstName + ' ' + middleName + ' ' + lastName;
+    console.log(fullName);
+    let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + fullName;
+    request(url, (req, res) =>{
+        console.log(JSON.parse(res.body));
     });
+    // // console.log(req.params.astronautId);
+
+    // var url = "https://en.wikipedia.org/w/api.php"; 
+    // var params = {
+    //     action: "query",
+    //     formatversion: "2",
+    //     prop: "pageimages|pageterms",
+    //     titles: "Frank De Winne",
+    //     // titles: req.params.astronautId,
+    //     format: "json"
+    // };
+
+    // url = url + "?origin=*";
+    // Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
+
+    // request(url, (error, response, body) =>{
+    //     if(error){
+    //         console.log(error);
+    //     }
+    //     else{
+    //         let result = JSON.parse(response.body);
+    //         if(result['query']['pages'][0]['missing']){ // Check if result is valid
+    //             console.log("missing");
+    //             res.send({"image": "none"});
+    //         }
+    //         else{
+    //             let image = result['query']['pages'][0]['missing'];
+    //             console.log(image);
+    //             res.send({"image": image});
+    //         }
+
+    //     }
 
 
 
