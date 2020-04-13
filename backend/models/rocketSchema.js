@@ -20,4 +20,4 @@ let rocketSchema = Schema({
     "changed": {type: String}
 });
 
-module.exports = mongoose.model('Rocket', rocketSchema);
+module.exports = mongoose.model('rockets', rocketSchema);

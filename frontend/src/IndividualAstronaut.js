@@ -7,16 +7,17 @@ class IndividualAstronaut extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            temp: null,
-            image: null
+            image: null,
+            information: null,
+            showInformation: false
         }
     }
 
-    getAstronautImage = () =>{
+    getAstronautInfo = () =>{
         let url = '';
 
         if(process.env.NODE_ENV === 'production'){
-            url = ec2url + this.props.match.params.type + '/:' + this.props.match.params.astronautId + '/:' + this.props.match.params.type;
+            url = ec2url + this.props.match.params.type + '/' + this.props.match.params.astronautId + '/' + this.props.match.params.type;
         }
         else{
             url = '/' + this.props.match.params.type + '/' + this.props.match.params.astronautId + '/' + this.props.match.params.type;
@@ -25,26 +26,27 @@ class IndividualAstronaut extends React.Component{
         .then(response => response.json())
         .then(data =>{
             console.log(data);
-            // console.log(data['thumbnail']['source']);
             if(data['title'] !== 'Not found.'){
                 this.setState({image: data['thumbnail']['source']});
+                this.setState({information: data});
+                this.setState({showInformation: true});
             }
-            // this.setState({image: data['thumbnail']['source']});
         });
     }
 
     componentDidMount(){
-        this.setState({temp: this.props.match.params.astronautId});
         console.log(this.props.match.params);
-        this.getAstronautImage();
+        this.getAstronautInfo();
     }
 
     render(){
         return(
             <div>
                 <Header />
-                <p>{this.state.temp}</p>
                 <img src={this.state.image} />
+                {this.state.showInformation ? this.state.information.title : null}
+                {this.state.showInformation ? this.state.information.extract : null}
+                {this.state.showInformation ? <a href={this.state.information.content_urls.desktop.page}>See more information</a> : null}
             </div>
         )
     }
