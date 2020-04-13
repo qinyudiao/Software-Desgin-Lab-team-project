@@ -78,4 +78,35 @@ router.get('/:agencyId', (req, res) =>{
     });
 });
 
+cron.schedule('10 * 8 * * Sunday', () =>{
+    console.log('running agencies cron job');
+    request('https://launchlibrary.net/1.4/agency?limit=500', (err, res) => { // api url is different, no '/' between 'agency' and '?limit'
+        if(!err && res.statusCode === 200){
+            let responseObject = JSON.parse(res.body);
+            agenciesArray = responseObject.agencies;
+            agenciesArray.forEach(agency => {
+                Agency.findOne({id: agency.id, changed: agency.changed}, (error, document) =>{
+                    if(error){
+                        console.log(error);
+                    }
+                    if(document){
+                        console.log("agency already in database");
+                    }
+                    else{
+                        console.log("new document");
+                        Agency.create(agency, (err, result) =>{
+                            if(err){
+                                console.log(err);
+                            }
+                            else{
+                                console.log("agency saved to database");
+                            }
+                        });
+                    }
+                });
+            })
+        }
+    });
+});
+
 module.exports = router;

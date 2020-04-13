@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Schema for launchSchema
-const launchSchema = mongoose.Schema({
+const launchSchema = Schema({
     id:{
         type: Number,
         required: true
@@ -26,8 +26,8 @@ const launchSchema = mongoose.Schema({
                 "longitude": {type: Number},
                 agencies: [
                     {
-                        // type: Schema.Types.ObjectId,
-                        // ref: 'Agency'
+                        type: Schema.Types.ObjectId,
+                        ref: 'Agency'
                     }
                 ]
             }
@@ -39,8 +39,8 @@ const launchSchema = mongoose.Schema({
         "countryCode": {type: String}
     },
     rocket: {
-        // type: Schema.Types.ObjectId,
-        // ref: 'Rocket'
+        type: Schema.Types.ObjectId,
+        ref: 'Rocket'
     },
     "missions": [
         {
@@ -52,8 +52,8 @@ const launchSchema = mongoose.Schema({
             "typeName": {type: String},
             agencies: [
                 {
-                    // type: Schema.Types.ObjectId,
-                    // ref: 'Agency'
+                    type: Schema.Types.ObjectId,
+                    ref: 'Agency'
                 }
             ],
             "payloads": [

@@ -16,6 +16,7 @@ let agencySchema = Schema({
     "wikiURL": {type: String},
     "infoURLs": [String],
     "islsp": {type: Number}, // 0 for not lsp, 1 for is lsp
+    "changed": {type: String}
 });
 
 module.exports = mongoose.model('agencies', agencySchema);

@@ -3,34 +3,34 @@ var router = express.Router();
 var request = require('request');
 const cron = require('node-cron');
 
-let Rocket = require('../models/rocketSchema.js');
+let Location = require('../models/locationSchema.js');
 
-cron.schedule('30 * 8 * * Sunday', () =>{
-    console.log('running agencies cron job');
-    request('https://launchlibrary.net/1.4/rocket/?limit=508', (err, res) => {
+cron.schedule('20 * 8 * * Sunday', () =>{
+    console.log('running locations cron job');
+    request('https://launchlibrary.net/1.4/location?limit=50', (err, res) => {
         // console.log('err: ', err, 'res: ', res);
         if(!err && res.statusCode === 200){
             let responseObject = JSON.parse(res.body);
-            rocketsArray = responseObject.rockets;
+            locationsArray = responseObject.locations;
             // console.log('suc');
             // console.log(launchesArray.length);
             // console.log(launchesArray);
-            rocketsArray.forEach(rocket => {
-                Rocket.findOne({id: rocket.id, changed: rocket.changed}, (error, document) =>{
+            locationsArray.forEach(location => {
+                Location.findOne({id: location.id, changed: location.changed}, (error, document) =>{
                     if(error){
                         console.log(error);
                     }
                     if(document){
-                        console.log("rocket already in database");
+                        console.log("location already in database");
                     }
                     else{
                         console.log("new document");
-                        Rocket.create(rocket, (err, result) =>{
+                        Location.create(location, (err, result) =>{
                             if(err){
                                 console.log(err);
                             }
                             else{
-                                console.log("rocket saved to database");
+                                console.log("location saved to database");
                             }
                         });
                     }

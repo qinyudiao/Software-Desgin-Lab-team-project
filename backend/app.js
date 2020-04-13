@@ -19,6 +19,10 @@ var usAstronauts = require('./routes/usAstronautsRoute');
 var internationalAstronauts = require('./routes/internationalAstronautsRoute');
 var russianAstronauts = require('./routes/russianAstronautsRoute');
 var agency = require('./routes/agencyRoute');
+var rocket = require('./routes/rocketRoute');
+var location = require('./routes/locationRoute');
+var pad = require('./routes/padRoute');
+var mission = require('./routes/missionRoute');
 
 app.use('/landing', landing);
 app.use('/country', country); 
