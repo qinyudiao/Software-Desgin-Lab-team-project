@@ -12,7 +12,7 @@ class IndividualAstronaut extends React.Component{
         }
     }
 
-    getAstronautImage = () =>{
+    getAstronautInfo = () =>{
         let url = '';
 
         if(process.env.NODE_ENV === 'production'){
@@ -25,18 +25,16 @@ class IndividualAstronaut extends React.Component{
         .then(response => response.json())
         .then(data =>{
             console.log(data);
-            // console.log(data['thumbnail']['source']);
             if(data['title'] !== 'Not found.'){
                 this.setState({image: data['thumbnail']['source']});
             }
-            // this.setState({image: data['thumbnail']['source']});
         });
     }
 
     componentDidMount(){
         this.setState({temp: this.props.match.params.astronautId});
         console.log(this.props.match.params);
-        this.getAstronautImage();
+        this.getAstronautInfo();
     }
 
     render(){

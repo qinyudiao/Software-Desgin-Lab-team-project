@@ -18,4 +18,4 @@ let agencySchema = Schema({
     "islsp": {type: Number}, // 0 for not lsp, 1 for is lsp
 });
 
-module.exports = mongoose.model('Agency', agencySchema);
+module.exports = mongoose.model('agencies', agencySchema);

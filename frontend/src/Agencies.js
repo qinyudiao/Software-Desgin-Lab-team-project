@@ -14,54 +14,65 @@ class Agencies extends React.Component{
     }
 
     componentDidMount() {
-      let url = 'https://launchlibrary.net/1.4/agency?limit=500';
-
+      let url = '';
+      if(process.env.NODE_ENV === 'production'){
+        url = ec2url + '/agency';
+      }
+      else{
+        url = '/agency';
+      }
       fetch(url)
       .then(response => response.json())
       .then(posts => {
         this.setState({posts: posts.agencies});
       });
     }
-
-    render() {
-      this.state.posts.forEach(post => {
-        post.islsp = post.islsp == 0 ? "" : "✓";
-      });
-      const columns = [
-        {
-          Header: "Agency",
-          accessor: 'name',
-          // Cell: e =><a href={'/' + e.value}> {e.value} hi </a>
-          // Cell: e => <Link to={`/launch/${e.value}`}>{e.value}</Link>
-          Cell: e => <Link to={`/agency/${e.value}`}>{e.value}</Link>
-        },
-        {
-          Header: "Abbreviation",
-          accessor: "abbrev",
-        },
-        {
-          Header: "Country",
-          accessor: "countryCode",
-        },
-        {
-          Header: "Is a Launch Service Provider",
-          accessor: "islsp",
-        },
-      ]
-        return(
-            <div>
-              <Header />
-              <h1 style={{display: "flex", justifyContent: "center"}}>Agencies</h1>
-              {this.state.isLoading ? <h2 style={{display: "flex",  justifyContent: "center"}}>Loading... it takes awhile because of the enormous amount of data!</h2> :
-                <ReactTable
-                  className="-striped -highlight"
-                  columns={columns}
-                  data={this.state.posts}
-                  filterable/>
-              }
-          </div>
-        )
+  
+    render(){
+      return(
+        <p>hi</p>
+      );
     }
+
+    // render() {
+    //   this.state.posts.forEach(post => {
+    //     post.islsp = post.islsp == 0 ? "" : "✓";
+    //   });
+    //   const columns = [
+    //     {
+    //       Header: "Agency",
+    //       accessor: 'name',
+    //       // Cell: e =><a href={'/' + e.value}> {e.value} hi </a>
+    //       // Cell: e => <Link to={`/launch/${e.value}`}>{e.value}</Link>
+    //       Cell: e => <Link to={`/agency/${e.value}`}>{e.value}</Link>
+    //     },
+    //     {
+    //       Header: "Abbreviation",
+    //       accessor: "abbrev",
+    //     },
+    //     {
+    //       Header: "Country",
+    //       accessor: "countryCode",
+    //     },
+    //     {
+    //       Header: "Is a Launch Service Provider",
+    //       accessor: "islsp",
+    //     },
+    //   ]
+    //     return(
+    //         <div>
+    //           <Header />
+    //           <h1 style={{display: "flex", justifyContent: "center"}}>Agencies</h1>
+    //           {this.state.isLoading ? <h2 style={{display: "flex",  justifyContent: "center"}}>Loading... it takes awhile because of the enormous amount of data!</h2> :
+    //             <ReactTable
+    //               className="-striped -highlight"
+    //               columns={columns}
+    //               data={this.state.posts}
+    //               filterable/>
+    //           }
+    //       </div>
+    //     )
+    // }
 }
 
 export default Agencies;

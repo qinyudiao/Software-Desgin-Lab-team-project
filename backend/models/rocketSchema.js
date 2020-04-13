@@ -21,4 +21,4 @@ let rocketSchema = Schema({
     "imageURL": {type: String},
 });
 
-module.exports = mongoose.model('Rocket', rocketSchema);
+module.exports = mongoose.model('rockets', rocketSchema);
