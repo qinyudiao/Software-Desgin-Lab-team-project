@@ -7,7 +7,8 @@ let Launch = require('../models/launchSchema.js');
 let Agency = require('../models/agencySchema.js');
 let Rocket = require('../models/rocketSchema.js');
 
-cron.schedule('20 50 * * * *', () =>{
+
+cron.schedule('20 50 * * * 0', () =>{
     console.log('running launches cron job');
     request('https://launchlibrary.net/1.4/launch/?limit=5000', (err, res) =>{
         // console.log('err: ', err, 'res: ', res);

@@ -5,9 +5,9 @@ const cron = require('node-cron');
 
 let Rocket = require('../models/rocketSchema.js');
 
-cron.schedule('30 * * * * Monday', () =>{
+cron.schedule('30 * 8 * * Sunday', () =>{
     console.log('running agencies cron job');
-    request('https://launchlibrary.net/1.4/rocket/?limit=500', (err, res) => {
+    request('https://launchlibrary.net/1.4/rocket/?limit=508', (err, res) => {
         // console.log('err: ', err, 'res: ', res);
         if(!err && res.statusCode === 200){
             let responseObject = JSON.parse(res.body);

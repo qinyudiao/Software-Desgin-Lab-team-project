@@ -24,15 +24,6 @@ class RussianAstronauts extends React.Component{
       fetch(url)
       .then(response => response.json())
       .then(posts => this.setState({posts: posts}));
-
-
-
-      // const url = "https://raw.githubusercontent.com/ShawnVictor/demo/master/db3.json";
-      // fetch(url, {
-      //   method: "GET"
-      // }).then(response => response.json()).then(posts => {
-      //   this.setState({posts: posts})
-      // })
     }
 
     render(){
@@ -40,7 +31,7 @@ class RussianAstronauts extends React.Component{
         {
           Header: "Full Name",
           accessor: "A",
-          Cell: e => <Link to={`/RussianAstronauts/${e.value}`}>{e.value}</Link>
+          Cell: e => <Link to={`/RussianAstronauts/${e.value}/RussianAstronauts`}>{e.value}</Link>
         },
         {
           Header: "# Flights",

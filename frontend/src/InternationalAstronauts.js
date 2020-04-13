@@ -31,7 +31,7 @@ class InternationalAstronauts extends React.Component{
         {
           Header: "Full Name",
           accessor: "A",
-          Cell: e => <Link to={`/InternationalAstronauts/${e.value}`}>{e.value}</Link>
+          Cell: e => <Link to={`/InternationalAstronauts/${e.value}/InternationalAstronauts`}>{e.value}</Link>
         },
         {
           Header: "Selection",

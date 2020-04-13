@@ -80,4 +80,4 @@ const launchSchema = Schema({
     changed: {type: String}
 });
 
-module.exports = mongoose.model('Launch', launchSchema);
+module.exports = mongoose.model('launches', launchSchema);

@@ -12,7 +12,9 @@ const padSchema = Schema({
         required: true
     },
     "countryCode": {type: String},
-    "type": {type: Number}, // 0 for launching, 1 for landing
+    "mapURL": {type: String},
+    "padType": {type: Number}, // 0 for launching, 1 for landing
+    "retired": {type: Number},
     "infoURL": {type: String},
     "wikiURL": {type: String},
     "infoURLs": [String],
