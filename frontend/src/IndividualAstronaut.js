@@ -7,8 +7,9 @@ class IndividualAstronaut extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            temp: null,
-            image: null
+            image: null,
+            information: null,
+            showInformation: false
         }
     }
 
@@ -16,7 +17,7 @@ class IndividualAstronaut extends React.Component{
         let url = '';
 
         if(process.env.NODE_ENV === 'production'){
-            url = ec2url + this.props.match.params.type + '/:' + this.props.match.params.astronautId + '/:' + this.props.match.params.type;
+            url = ec2url + this.props.match.params.type + '/' + this.props.match.params.astronautId + '/' + this.props.match.params.type;
         }
         else{
             url = '/' + this.props.match.params.type + '/' + this.props.match.params.astronautId + '/' + this.props.match.params.type;
@@ -27,12 +28,13 @@ class IndividualAstronaut extends React.Component{
             console.log(data);
             if(data['title'] !== 'Not found.'){
                 this.setState({image: data['thumbnail']['source']});
+                this.setState({information: data});
+                this.setState({showInformation: true});
             }
         });
     }
 
     componentDidMount(){
-        this.setState({temp: this.props.match.params.astronautId});
         console.log(this.props.match.params);
         this.getAstronautInfo();
     }
@@ -41,8 +43,10 @@ class IndividualAstronaut extends React.Component{
         return(
             <div>
                 <Header />
-                <p>{this.state.temp}</p>
                 <img src={this.state.image} />
+                {this.state.showInformation ? this.state.information.title : null}
+                {this.state.showInformation ? this.state.information.extract : null}
+                {this.state.showInformation ? <a href={this.state.information.content_urls.desktop.page}>See more information</a> : null}
             </div>
         )
     }

@@ -3,82 +3,9 @@ var router = express.Router();
 var request = require('request');
 const cron = require('node-cron');
 
-let agency = require('../models/agencySchema');
+let Agency = require('../models/agencySchema');
 
-// At a periodic time update database with agency information
-// cron.schedule('* 1 * * * Sunday', () =>{
-//     getData();
-// });
-
-getData = () =>{
-    console.log('getting agency data from api');
-    request('https://launchlibrary.net/1.4/agency?limit=500', (err, res) =>{
-        if(!err && res.statusCode === 200){
-            let responseArray = JSON.parse(res.body);
-            for(let i = 0; i < responseArray.length; i++){
-                agency.findOne(responseArray[i], (error, document) =>{
-                    if(error){
-                        console.log(error);
-                    }
-                    if(document){
-                        console.log("Agency already in database");
-                    }
-                    else{
-                        responseArray[i]['A'] = lowerCase(responseArray[i]['A']);
-                        agency.create(responseArray[i], (err, result) =>{
-                            if(err){
-                                console.log(err);
-                            }
-                            else{
-                                console.log("Agency saved to database");
-                            }
-                        });
-                    }
-                });
-            }
-        }
-        else{
-            console.log(err);
-        }
-        console.log("got data");
-    });
-}
-
-lowerCase = (name) =>{
-    convertedName = "";
-    name = name.split(" ")
-    for(let i = 0; i < name.length; i++){
-        convertedName += name[i].charAt(0).toUpperCase() + name[i].slice(1).toLowerCase() + " ";
-    }
-    return convertedName;
-}
-
-// Query database to get all agencies then send results to frontend
-router.get('/', (req, res) =>{
-    getData();
-    agency.find({}, (err, response) =>{
-        if(err){
-            console.log(err);
-        }
-        else{
-            res.setHeader('Content-Type', 'application/json');
-            res.send(response);
-        }
-    });
-    console.log("gets here");
-});
-
-router.get('/:agencyId', (req, res) =>{
-    let agency = req.params.agencyId;
-    console.log(agency);
-    let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + agency;
-    request(url, (req, response) =>{
-        let results = JSON.parse(response.body);
-        res.send(results);
-    });
-});
-
-cron.schedule('10 * 8 * * Sunday', () =>{
+cron.schedule('0 8 * * Sunday', () =>{
     console.log('running agencies cron job');
     request('https://launchlibrary.net/1.4/agency?limit=500', (err, res) => { // api url is different, no '/' between 'agency' and '?limit'
         if(!err && res.statusCode === 200){
@@ -108,5 +35,31 @@ cron.schedule('10 * 8 * * Sunday', () =>{
         }
     });
 });
+
+
+// Query database to get all agencies then send results to frontend
+router.get('/', (req, res) =>{
+    Agency.find({}, (err, response) =>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.setHeader('Content-Type', 'application/json');
+            res.send(response);
+        }
+    });
+});
+
+// Take agency name and pass into Wikipedia api request
+router.get('/:agencyId', (req, res) =>{
+    let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + req.params.agencyId;
+    request(url, (req, response) =>{
+        let results = JSON.parse(response.body);
+        res.send(results);
+    });
+});
+
+
+
 
 module.exports = router;
