@@ -19,4 +19,4 @@ let agencySchema = Schema({
     "changed": {type: String}
 });
 
-module.exports = mongoose.model('Agency', agencySchema);
+module.exports = mongoose.model('agencies', agencySchema);

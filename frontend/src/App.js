@@ -14,7 +14,7 @@ import Map from './Map.js';
 import Education from './Education.js';
 import IndividualLaunch from './IndividualLaunch.js';
 import IndividualAstronaut from './IndividualAstronaut.js';
-import IndividualCompanies from './IndividualCompanies.js';
+import IndividualCompanies from './IndividualAgency.js';
 import PageNotFound from './PageNotFound.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UpcomingLaunches from './UpcomingLaunches';
@@ -53,7 +53,7 @@ class App extends Component{
                         <Switch>
                             <Route exact path="/" component={Landing} />
                             <Route path="/about" component={About} />
-                            <Route path="/agency/:companyId" component={IndividualCompanies} />
+                            <Route path="/agency/:agencyId" component={IndividualCompanies} />
                             <Route path="/agency" component={Agencies} />
                             <Route path="/launch/:launchId" component={IndividualLaunch} />
                             <Route path="/launch" component={Launches} />
