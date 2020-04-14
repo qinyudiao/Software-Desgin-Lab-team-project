@@ -13,7 +13,7 @@ cron.schedule('0 13 * * Sunday', () =>{
         if(!err && res.statusCode === 200){
             let responseArray = JSON.parse(res.body);
             for(let i = 0; i < responseArray.length; i++){
-                internationalAstronaut.findOne(responseArray[i], (error, document) =>{
+                internationalAstronaut.findOne({A: responseArray[i].A}, (error, document) =>{
                     if(error){
                         console.log(error);
                     }
@@ -21,20 +21,40 @@ cron.schedule('0 13 * * Sunday', () =>{
                         console.log("International Astronaut already in database");
                     }
                     else{
-                        internationalAstronaut.create(responseArray[i], (err, result) =>{
-                            if(err){
-                                console.log(err);
-                            }
-                            else{
-                                console.log("International Astronaut saved to database");
-                            }
-                        });
+                        // console.log(responseArray[i]);
+                        getWikiInfo(responseArray[i]);
                     }
                 });
             }
         }
     });
 });
+
+getWikiInfo = (astronaut) =>{
+    let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + astronaut.name;
+    request(url, (req, respose) =>{
+        let results = JSON.parse(responseb.body);
+        if(results.title !== 'Not found.'){
+            let object = '';
+            if(results.thumbnail){
+                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': results.thumbnail.source};
+            }
+            else{
+                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': 'Not found'};
+            }
+            agency.wikiInfo = object;
+            console.log(astronaut)
+            // internationalAstronaut.create(astronaut, (err, result) =>{
+            //     if(err){
+            //         console.log(err);
+            //     }
+            //     else{
+            //         console.log("international astronaut saved to database");
+            //     }
+            // });
+        }
+    });
+}
 
 // Query database to get all International astronauts then send results to frontend
 router.get('/', (req, res) =>{

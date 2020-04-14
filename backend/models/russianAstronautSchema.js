@@ -23,6 +23,12 @@ let russianAstronautSchema = mongoose.Schema({
     },
     G:{
         type: String
+    },
+    "wikiInfo":{
+        "title":{type: String},
+        "page":{type: String},
+        "extract":{type: String},
+        "image":{type: String}
     }
 });
 

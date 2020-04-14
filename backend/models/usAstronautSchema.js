@@ -38,6 +38,12 @@ let usAstronautSchema = mongoose.Schema({
     },
     'Cumulative hours of space flight time':{
         type: String
+    },
+    "wikiInfo":{
+        "title":{type: String},
+        "page":{type: String},
+        "extract":{type: String},
+        "image":{type: String}
     }
 });
 
