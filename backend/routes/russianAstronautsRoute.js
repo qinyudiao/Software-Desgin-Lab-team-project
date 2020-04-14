@@ -7,6 +7,7 @@ let russianAstronaut = require('../models/russianAstronautSchema.js');
 
 // At a periodic time update database with international astronaut information
 cron.schedule('* 0 * * Sunday', () =>{
+// cron.schedule('1 * * * * *', () =>{
     console.log('running international astronaut cron job');
     request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db3.json', (err, res) =>{
         if(!err && res.statusCode === 200){
@@ -76,19 +77,31 @@ router.get('/:astronautId/:type', (req, res) =>{
         }
     }
 
-    let firstName = finalNameArray[finalNameArray.length - 1];
-    let lastName = finalNameArray[finalNameArray.length - 2];
-    let middleNames = []; // An array for names with multiple middle names
+    let firstName = finalNameArray[1];
+    let lastName = finalNameArray[0];
+    let fullName  = '';
     if(finalNameArray.length > 2){
-        middleNames = finalNameArray.slice(0, nameArray.length - 2);
+        let middleName = finalNameArray[2];
+        fullName = firstName + ' ' + middleName + ' ' + lastName;
     }
-    let middleName = ' ';
-    for(let i = 0; i < middleNames.length; i++){ // Combine middle names into one string
-        if(middleNames[i].length > 1){
-            middleName += middleNames[i];
-        }
+    else{
+        fullName = firstName + ' ' + lastName;
     }
-    let fullName = firstName + middleName + ' ' + lastName; // Create full name to pass into request
+    fullName = firstName + ' ' + lastName;
+    // let middleNames = []; // An array for names with multiple middle names
+    // if(finalNameArray.length > 2){
+    //     console.log(finalNameArray);
+    //     // middleNames = finalNameArray.slice(0, nameArray.length - 2);
+    //     middleNames = finalNameArray[2];
+    // }
+    // console.log(middleNames);
+    // let middleName = ' ';
+    // for(let i = 0; i < middleNames.length; i++){ // Combine middle names into one string
+    //     if(middleNames[i].length > 1){
+    //         middleName += middleNames[i];
+    //     }
+    // }
+    // let fullName = firstName + ' ' + middleName + ' ' + lastName; // Create full name to pass into request
     let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + fullName;
     request(url, (req, response) =>{
         let results = JSON.parse(response.body);
