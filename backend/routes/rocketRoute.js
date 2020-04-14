@@ -40,4 +40,29 @@ cron.schedule('30 * 8 * * Sunday', () =>{
     });
 });
 
+// Query database to get all rockets then send results to frontend
+router.get('/', (req, res) =>{
+    Rocket.find({}, async (err, response) =>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.setHeader('Content-Type', 'application/json');
+            res.send(response);
+        }
+    });
+});
+
+// search for rocket by ObjectID
+router.get('/:ObjectId', (req, res) =>{
+    Rocket.findById(req.params.ObjectId, (err, result) =>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(result);
+        }
+    });
+});
+
 module.exports = router;

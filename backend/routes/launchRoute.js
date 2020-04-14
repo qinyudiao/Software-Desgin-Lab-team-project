@@ -64,17 +64,34 @@ cron.schedule('22 * 10 * * 1', () =>{
     }
 });
 
-// Query database to get all US astronauts then send results to frontend
-// router.get('/', (req, res) =>{
-//     Launch.find({}, (err, response) =>{
-//         if(err){
-//             console.log(err);
+// Query database to get all launces then send results to frontend
+router.get('/', (req, res) =>{
+    Launch.find({}, async (err, response) =>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.setHeader('Content-Type', 'application/json');
+            // let updatedResponse = response.map(async (launch) => {
+            //     return await updateResponse(launch);
+            // })
+            // // console.log('sent');
+            // console.log(updatedResponse[2]);
+            res.send(response);
+        }
+    });
+});
+
+// const updateResponse = async (launch) => {
+//     Rocket.findById(launch.rocket, (error, document) => {
+//         if(document) {
 //         }
-//         else{
-//             res.setHeader('Content-Type', 'application/json');
-//             res.send(response);
-//         }
+//     })
+//     .then(document => {
+//         launch.rocket = document;
+//         return launch;
 //     });
-// });
+//     return 0;
+// }
 
 module.exports = router;

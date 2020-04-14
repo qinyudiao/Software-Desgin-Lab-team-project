@@ -7,23 +7,15 @@ import ec2url from './EC2Link';
 
 class Agencies extends React.Component{
     constructor(props) {
-        super(props);
-        this.state = {
-            posts: []
-        }
+      super(props);
+      this.state = {
+          posts: []
+      }
     }
 
     componentDidMount() {
-      let url = '';
-      if(process.env.NODE_ENV === 'production'){
-        url = ec2url + '/agency';
-      }
-      else{
-        url = '/agency';
-      }
-      fetch(url)
-      .then(response => response.json())
-      .then(posts => {
+      fetchAgencies()
+      .then((posts) => {
         this.setState({posts: posts});
       });
     }
@@ -61,6 +53,19 @@ class Agencies extends React.Component{
           </div>
         )
     }
+}
+
+const fetchAgencies = async () => {
+  let url = '';
+  if(process.env.NODE_ENV === 'production'){
+    url = ec2url + '/agency';
+  }
+  else{
+    url = '/agency';
+  }
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
 }
 
 export default Agencies;

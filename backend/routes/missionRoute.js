@@ -146,4 +146,17 @@ cron.schedule('35 * 9 * * 0', () => {
     }
 });
 
+// Query database to get all rockets then send results to frontend
+router.get('/', (req, res) =>{
+    Mission.find({}, async (err, response) =>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.setHeader('Content-Type', 'application/json');
+            res.send(response);
+        }
+    });
+});
+
 module.exports = router;

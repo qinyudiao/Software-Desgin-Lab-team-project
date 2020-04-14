@@ -32,6 +32,10 @@ app.use('/USAstronauts', usAstronauts);
 app.use('/InternationalAstronauts', internationalAstronauts);
 app.use('/RussianAstronauts', russianAstronauts);
 app.use('/agency', agency);
+app.use('/rocket', rocket);
+app.use('/location', location);
+app.use('/mission', mission);
+app.use('/pad', pad);
 
 // MongoDB stuff
 const uri = 'mongodb+srv://admin:admin@softwarelab-zbga3.mongodb.net/SoftwareLab?retryWrites=true&w=majority';

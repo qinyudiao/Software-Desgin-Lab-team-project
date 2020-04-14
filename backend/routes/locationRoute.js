@@ -40,4 +40,17 @@ cron.schedule('20 * 8 * * Sunday', () =>{
     });
 });
 
+// Query database to get all locations then send results to frontend
+router.get('/', (req, res) =>{
+    Location.find({}, async (err, response) =>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.setHeader('Content-Type', 'application/json');
+            res.send(response);
+        }
+    });
+});
+
 module.exports = router;
