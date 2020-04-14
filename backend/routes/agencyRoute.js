@@ -5,7 +5,7 @@ const cron = require('node-cron');
 
 let Agency = require('../models/agencySchema');
 
-cron.schedule('50 * 8 * * 0', () =>{
+cron.schedule('0 8 * * Sunday', () =>{
     console.log('running agencies cron job');
     request('https://launchlibrary.net/1.4/agency?limit=500', (err, res) => { // api url is different, no '/' between 'agency' and '?limit'
         if(!err && res.statusCode === 200){
