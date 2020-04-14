@@ -9,9 +9,9 @@ let Rocket = require('../models/rocketSchema.js');
 let Location = require('../models/locationSchema.js');
 
 
-cron.schedule('35 09 16 * * *', () =>{
+cron.schedule('22 * 10 * * 1', () =>{
     console.log('running launches cron job');
-    for (let i = 1; i<3500; i++) {
+    for (let i = 2200; i<2600; i++) {
         request(`https://launchlibrary.net/1.4/launch/?id=${i}`, (err, res) =>{
             // console.log('err: ', err, 'res: ', res);
             if(!err && res.statusCode === 200){
@@ -31,31 +31,30 @@ cron.schedule('35 09 16 * * *', () =>{
                         else{
                             console.log("new document", launch.id);
                             Location.findOne({ id: launch.location.id }, (err, foundLocation) => {
-                                
+                                // console.log('found location');
                             })
                             .then((foundLocation) => {
                                 launch.location = foundLocation;
                                 Agency.findOne({ id: launch.lsp.id }, (err, foundAgency) => {
-                                    
+                                    // console.log('found agency');
                                 })
-                            })
-                            .then((foundAgency) => {
-                                launch.lsp = foundAgency;
-                                Rocket.findOne({ id: launch.rocket.id }, (err, foundRocket) => {
-                                    
+                                .then((foundAgency) => {
+                                    launch.lsp = foundAgency;
+                                    Rocket.findOne({ id: launch.rocket.id }, (err, foundRocket) => {
+                                        // console.log('found rocket');
+                                    })
+                                    .then((foundRocket) => {
+                                        launch.rocket = foundRocket;
+                                        Launch.create(launch, (err) => {
+                                            if(err) {
+                                                console.log(err);
+                                            }
+                                            else {
+                                                console.log(`Launch ${launch.id} saved to database`);
+                                            }
+                                        });
+                                    })
                                 })
-                            })
-                            .then((foundRocket) => {
-                                launch.rocket = foundRocket;
-                                launch.rockets = launch.rocket;
-                                Launch.create(launch, (err) => {
-                                    if(err) {
-                                        console.log(err);
-                                    }
-                                    else {
-                                        console.log("mission saved to database");
-                                    }
-                                });
                             })
                         }
                     });
