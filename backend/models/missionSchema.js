@@ -14,8 +14,10 @@ const missionSchema = Schema({
     "countryCode": {type: String},
     "description": {type: String},
     "typeName": {type: String},
-    "launch": {
+    launch: {
         "id": {type: Number},
+        "name": {type: String},
+        "net": {type: String}
     },
     agencies: [
         {
