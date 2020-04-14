@@ -5,26 +5,25 @@ const cron = require('node-cron');
 
 let Agency = require('../models/agencySchema');
 
-cron.schedule('50 * 8 * * 0', () =>{
+cron.schedule('0 8 * * Sunday', () =>{
+// cron.schedule('2 * * * * *', () => {
     console.log('running agencies cron job');
     request('https://launchlibrary.net/1.4/agency?limit=500', (err, res) => { // api url is different, no '/' between 'agency' and '?limit'
         if(!err && res.statusCode === 200){
             let responseObject = JSON.parse(res.body);
             agenciesArray = responseObject.agencies;
             agenciesArray.forEach(agency => {
-                Agency.findOne({id: agency.id, changed: agency.changed}, async (error, document) =>{
-                    try{
-                        if(error){
-                            console.log(error);
-                        }
-                        else{
-                            getWikiInfo(agency);
-                        }
+                Agency.findOne({id: agency.id, changed: agency.changed}, (error, document) =>{
+                    if(error){
+                        console.log(error);
                     }
-                    catch (err){
-                        console.log(err);
+                    if(document){
+                        console.log("agency already in database");
                     }
-             });
+                    else{
+                        getWikiInfo(agency);
+                    }
+                });
             });
         }
     });
@@ -32,7 +31,15 @@ cron.schedule('50 * 8 * * 0', () =>{
 
 // Send agency name into wikipedia request and add result to database
 getWikiInfo = (agency) =>{
-    let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + agency.name;
+    let searchTerm = '';
+    if(agency.wikiURL){
+        let temp = agency.wikiURL.split('/');
+        searchTerm = temp[temp.length - 1];
+    }
+    else{
+        searchTerm = agency.name;
+    }
+    let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + searchTerm;
     request(url, (req, response) =>{
         let results = JSON.parse(response.body);
         if(results.title !== 'Not found.'){
@@ -49,7 +56,7 @@ getWikiInfo = (agency) =>{
             let object = {'title': 'Not found', 'page': 'Not found', 'extract': 'Not found', 'image': 'Not found'}; 
             agency.wikiInfo = object;
         }
-
+        
         Agency.create(agency, (err, result) =>{
             if(err){
                 console.log(err);
@@ -76,11 +83,6 @@ router.get('/', (req, res) =>{
 
 // Search for agency name in database and return result
 router.get('/:agencyId', (req, res) =>{
-    let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + req.params.agencyId;
-    request(url, (err, response) =>{
-        console.log(JSON.parse(response.body));
-    });
-
     Agency.findOne({name: req.params.agencyId}, (err, result) =>{
         if(err){
             console.log(err);

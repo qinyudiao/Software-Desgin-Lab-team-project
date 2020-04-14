@@ -35,6 +35,12 @@ let internationalAstronautSchema = mongoose.Schema({
     },
     K:{
         type: String
+    },
+    "wikiInfo":{
+        "title":{type: String},
+        "page":{type: String},
+        "extract":{type: String},
+        "image":{type: String}
     }
 });
 
