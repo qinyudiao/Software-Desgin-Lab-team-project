@@ -12,31 +12,9 @@ const launchSchema = Schema({
         required: true
     },
     isonet: {type: String},
-    location:{
-        "pads": [
-            {
-                "id": {type: Number},
-                "name": {type: String},
-                "countryCode": {type: String},
-                "type": {type: Number}, // 0 for launching, 1 for landing
-                "infoURL": {type: String},
-                "wikiURL": {type: String},
-                "infoURLs": [String],
-                "latitude": {type: Number},
-                "longitude": {type: Number},
-                agencies: [
-                    {
-                        type: Schema.Types.ObjectId,
-                        ref: 'Agency'
-                    }
-                ]
-            }
-        ],
-        "id": {type: Number},
-        "name": {type: String},
-        "infoURL": {type: String},
-        "wikiURL": {type: String},
-        "countryCode": {type: String}
+    location: {
+        type: Schema.Types.ObjectId,
+        ref: 'Location'
     },
     rocket: {
         type: Schema.Types.ObjectId,
@@ -44,35 +22,12 @@ const launchSchema = Schema({
     },
     "missions": [
         {
-            "id": {type: Number},
-            "name": {type: String},
-            "description": {type: String},
-            "type": {type: Number},
-            "wikiURL": {type: String},
-            "typeName": {type: String},
-            agencies: [
-                {
-                    type: Schema.Types.ObjectId,
-                    ref: 'Agency'
-                }
-            ],
-            "payloads": [
-                {
-                    "id": {type: Number},
-                    "name": {type: String}
-                }
-            ]
+            "id": {type: Number, required: true},
         }
     ],
     "lsp": {
-        "id": {type: Number},
-        "name": {type: String},
-        "countryCode": {type: String},
-        "type": {type: Number}, // 1 for government, 2 for international, 3 for commercial
-        "infoURL": {type: String},
-        "wikiURL": {type: String},
-        "changed": {type: String},
-        "infoURLs": [String]
+        type: Schema.Types.ObjectId,
+        ref: 'Agency'
     },
     vidURLs: [String],
     holdreason: {type: String},
