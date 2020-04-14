@@ -16,7 +16,7 @@ class Launches extends React.Component{
     componentDidMount(){
       fetchLaunches()
       .then(data => {
-        console.log(data);
+        console.log('data to setState', data);
         this.setState({
           isLoading: false,
           posts: data,
@@ -72,7 +72,7 @@ const fetchLaunches = async () => {
 
   fetchAllDocuments('rocket')
   .then(rockets => {
-    console.log(rockets);
+    console.log('rockets', rockets);
     launches = launches.map(launch => {
       for(const rocket of rockets) {
         if (launch.rocket === rocket._id){
@@ -110,30 +110,7 @@ const fetchLaunches = async () => {
   //   })
   // })
 
-  // get referenced missions
-  // fetchAllDocuments('mission')
-  // .then(missions => {
-  //   launches = launches.map(launch => {
-  //     if(launch.missions === null){}
-  //     else if(launch.missions.length === 0){}
-  //     else {
-  //       for(const mission of missions) {
-  //         let count = 0;
-  //         // console.log(launch);
-  //         for(const [i, m] of launch.missions.entries()) {
-  //           console.log('i ', i, m);
-  //           if (m.id == mission.id) {
-  //             launch.missions[i] = mission;
-  //             count ++;
-  //           }
-  //         }
-  //         if(count === launch.missions.length) {
-  //           break;
-  //         }
-  //       }
-  //     }
-  //   });
-  // })
+  console.log('launches', launches);
 
   return launches;
 }
