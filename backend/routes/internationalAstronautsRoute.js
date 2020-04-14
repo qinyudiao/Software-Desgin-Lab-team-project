@@ -13,7 +13,7 @@ cron.schedule('0 13 * * Sunday', () =>{
         if(!err && res.statusCode === 200){
             let responseArray = JSON.parse(res.body);
             for(let i = 0; i < responseArray.length; i++){
-                internationalAstronaut.findOne(responseArray[i], (error, document) =>{
+                internationalAstronaut.findOne({A: responseArray[i].A}, (error, document) =>{
                     if(error){
                         console.log(error);
                     }
@@ -21,14 +21,7 @@ cron.schedule('0 13 * * Sunday', () =>{
                         console.log("International Astronaut already in database");
                     }
                     else{
-                        internationalAstronaut.create(responseArray[i], (err, result) =>{
-                            if(err){
-                                console.log(err);
-                            }
-                            else{
-                                console.log("International Astronaut saved to database");
-                            }
-                        });
+                        getInternationalWikiInfo(responseArray[i]);
                     }
                 });
             }
@@ -36,21 +29,39 @@ cron.schedule('0 13 * * Sunday', () =>{
     });
 });
 
-// Query database to get all International astronauts then send results to frontend
-router.get('/', (req, res) =>{
-    internationalAstronaut.find({}, (err, response) =>{
-        if(err){
-            console.log(err);
+getInternationalWikiInfo = (astronaut) =>{
+    let searchTerm = parseInternationalName(astronaut.A);
+    let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + searchTerm;
+    request(url, (req, response) =>{
+        let results = JSON.parse(response.body);
+        let object = {};
+
+        if(results.title !== 'Not found.'){
+            if(results.thumbnail){
+                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': results.thumbnail.source};
+            }
+            else{
+                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': 'Not found'};
+            }
         }
         else{
-            res.setHeader('Content-Type', 'application/json');
-            res.send(response);
+            object = {'title': 'Not found', 'page': 'Not found', 'extract': 'Not found', 'image': 'Not found'}; 
         }
-    });
-});
 
-router.get('/:astronautId/:type', (req, res) =>{
-    let nameArray = req.params.astronautId.split(" ");
+        astronaut.wikiInfo = object;
+        internationalAstronaut.create(astronaut, (err, result) =>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                console.log("international astronaut saved to database");
+            }
+        });
+    });
+}
+
+parseInternationalName = (name) =>{
+    let nameArray = name.split(" ");
 
     // Take out extra punctuation like commas or periods
     for(let i = 0; i < nameArray.length; i++){
@@ -79,12 +90,32 @@ router.get('/:astronautId/:type', (req, res) =>{
             middleName += middleNames[i];
         }
     }
-    let fullName = firstName + middleName + ' ' + lastName; // Create full name to pass into request
-    let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + fullName;
-    request(url, (req, response) =>{
-        let results = JSON.parse(response.body);
-        res.send(results);
+
+    return firstName + middleName + ' ' + lastName; // Create full name to pass into request
+}
+
+// Query database to get all International astronauts then send results to frontend
+router.get('/', (req, res) =>{
+    internationalAstronaut.find({}, (err, response) =>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.setHeader('Content-Type', 'application/json');
+            res.send(response);
+        }
     });
+});
+
+router.get('/:astronautId/:type', (req, res) =>{
+    internationalAstronaut.findOne({A: req.params.astronautId}, (err, result) =>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(result);
+        }
+    })
 });
 
 
