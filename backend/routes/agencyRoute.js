@@ -5,8 +5,8 @@ const cron = require('node-cron');
 
 let Agency = require('../models/agencySchema');
 
-// cron.schedule('0 8 * * Sunday', () =>{
-cron.schedule('2 * * * * *', () => {
+cron.schedule('0 8 * * Sunday', () =>{
+// cron.schedule('2 * * * * *', () => {
     console.log('running agencies cron job');
     request('https://launchlibrary.net/1.4/agency?limit=500', (err, res) => { // api url is different, no '/' between 'agency' and '?limit'
         if(!err && res.statusCode === 200){
@@ -56,7 +56,7 @@ getWikiInfo = (agency) =>{
             let object = {'title': 'Not found', 'page': 'Not found', 'extract': 'Not found', 'image': 'Not found'}; 
             agency.wikiInfo = object;
         }
-
+        
         Agency.create(agency, (err, result) =>{
             if(err){
                 console.log(err);
@@ -83,9 +83,6 @@ router.get('/', (req, res) =>{
 
 // Search for agency name in database and return result
 router.get('/:agencyId', (req, res) =>{
-    // request("https://en.wikipedia.org/wiki/Planet_Labs", (err, res) =>{
-    //     console.log(res.body);
-    // });
     Agency.findOne({name: req.params.agencyId}, (err, result) =>{
         if(err){
             console.log(err);
