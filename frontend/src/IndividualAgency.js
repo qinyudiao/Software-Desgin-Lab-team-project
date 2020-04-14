@@ -38,10 +38,16 @@ class IndividualAgency extends React.Component{
         return(
             <div>
                 <Header />
-                {this.state.showInformation ? this.state.information.title : null}
-                {this.state.showInformation ? this.state.information.extract : null}
-                {this.state.showInformation ? <a href={this.state.information.content_urls.desktop.page}>See more information</a> : null}
-
+                {this.state.showInformation ? this.state.information.wikiInfo.title : null}
+                {this.state.showInformation ? this.state.information.wikiInfo.extract : null}
+                {this.state.showInformation ? <a href={this.state.information.wikiInfo.page}>See more information</a> : null}
+                {this.state.showInformation ? 
+                (
+                    this.state.information.wikiInfo.image !== 'Not found' ? <img src={this.state.information.wikiInfo.image} /> : null
+                ) 
+                : 
+                    null
+                }
             </div>
         )
     }
