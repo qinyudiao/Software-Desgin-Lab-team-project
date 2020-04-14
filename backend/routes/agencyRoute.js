@@ -5,7 +5,6 @@ const cron = require('node-cron');
 
 let Agency = require('../models/agencySchema');
 
-// cron.schedule('0 8 * * Sunday', () =>{
 cron.schedule('0 8 * * Sunday', () =>{
     console.log('running agencies cron job');
     request('https://launchlibrary.net/1.4/agency?limit=500', (err, res) => { // api url is different, no '/' between 'agency' and '?limit'
@@ -31,16 +30,23 @@ cron.schedule('0 8 * * Sunday', () =>{
     });
 });
 
+// Send agency name into wikipedia request and add result to database
 getWikiInfo = (agency) =>{
     let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + agency.name;
     request(url, (req, response) =>{
         let results = JSON.parse(response.body);
         if(results.title !== 'Not found.'){
-            let object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract};
+            let object = '';
+            if(results.thumbnail){
+                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': results.thumbnail.source};
+            }
+            else{
+                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': 'Not found'};
+            }
             agency.wikiInfo = object;
         }
         else{
-            let object = {'title': 'Not found', 'page': 'Not found', 'extract': 'Not found'}; 
+            let object = {'title': 'Not found', 'page': 'Not found', 'extract': 'Not found', 'image': 'Not found'}; 
             agency.wikiInfo = object;
         }
 
@@ -68,12 +74,20 @@ router.get('/', (req, res) =>{
     });
 });
 
-// Take agency name and pass into Wikipedia api request
+// Search for agency name in database and return result
 router.get('/:agencyId', (req, res) =>{
     let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + req.params.agencyId;
-    request(url, (req, response) =>{
-        let results = JSON.parse(response.body);
-        res.send(results);
+    request(url, (err, response) =>{
+        console.log(JSON.parse(response.body));
+    });
+
+    Agency.findOne({name: req.params.agencyId}, (err, result) =>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(result);
+        }
     });
 });
 

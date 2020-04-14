@@ -20,7 +20,8 @@ let agencySchema = Schema({
     "wikiInfo":{
         "title":{type: String},
         "page":{type:String},
-        "extract":{type: String}
+        "extract":{type: String},
+        "image":{type: String}
         }
 });
 
