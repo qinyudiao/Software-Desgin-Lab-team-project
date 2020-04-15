@@ -6,14 +6,16 @@ const cron = require('node-cron');
 let russianAstronaut = require('../models/russianAstronautSchema.js');
 
 // At a periodic time update database with international astronaut information
-cron.schedule('* 0 * * Sunday', () =>{
-// cron.schedule('1 * * * * *', () =>{
-    console.log('running international astronaut cron job');
+cron.schedule('0 13 * * Sunday', () =>{
+// cron.schedule('1 * * * * * ', () =>{
+    console.log('running russian astronaut cron job');
     request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db3.json', (err, res) =>{
         if(!err && res.statusCode === 200){
             let responseArray = JSON.parse(res.body);
             for(let i = 0; i < responseArray.length; i++){
-                russianAstronaut.findOne(responseArray[i], (error, document) =>{
+                let convertedName = lowerCase(parseRussianName(responseArray[i].A));
+                responseArray[i].A = convertedName;
+                russianAstronaut.findOne({A: responseArray[i].A}, (error, document) =>{
                     if(error){
                         console.log(error);
                     }
@@ -21,16 +23,7 @@ cron.schedule('* 0 * * Sunday', () =>{
                         console.log("Russian Astronaut already in database");
                     }
                     else{
-                        console.log("responseas;asfsa", responseArray[i]);
-                        responseArray[i]['A'] = lowerCase(responseArray[i]['A']);
-                        russianAstronaut.create(responseArray[i], (err, result) =>{
-                            if(err){
-                                console.log(err);
-                            }
-                            else{
-                                console.log("Russian Astronaut saved to database");
-                            }
-                        });
+                        getRussianWikiInfo(responseArray[i]);
                     }
                 });
             }
@@ -38,6 +31,7 @@ cron.schedule('* 0 * * Sunday', () =>{
     });
 });
 
+// lowercase all letters except for first letter in words
 lowerCase = (name) =>{
     convertedName = "";
     name = name.split(" ")
@@ -47,23 +41,9 @@ lowerCase = (name) =>{
     return convertedName;
 }
 
-// Query database to get all Russian astronauts then send results to frontend
-router.get('/', (req, res) =>{
-    russianAstronaut.find({}, (err, response) =>{
-        if(err){
-            console.log(err);
-        }
-        else{
-            res.setHeader('Content-Type', 'application/json');
-            res.send(response);
-        }
-    });
-});
-
-router.get('/:astronautId/:type', (req, res) =>{
-    let nameArray = req.params.astronautId.split(" ");
-
-    // Take out extra punctuation like commas or periods
+// Convert name to first name, last name
+parseRussianName = (name) =>{
+    let nameArray = name.split(" ");
     for(let i = 0; i < nameArray.length; i++){
         nameArray[i] = nameArray[i].replace(",", ""); 
         nameArray[i] = nameArray[i].replace(".", "");
@@ -82,30 +62,68 @@ router.get('/:astronautId/:type', (req, res) =>{
     let fullName  = '';
     if(finalNameArray.length > 2){
         let middleName = finalNameArray[2];
-        fullName = firstName + ' ' + middleName + ' ' + lastName;
+        fullName = firstName + ' ' + middleName + ' ' + lastName; // Might not need middle name
     }
     else{
         fullName = firstName + ' ' + lastName;
     }
     fullName = firstName + ' ' + lastName;
-    // let middleNames = []; // An array for names with multiple middle names
-    // if(finalNameArray.length > 2){
-    //     console.log(finalNameArray);
-    //     // middleNames = finalNameArray.slice(0, nameArray.length - 2);
-    //     middleNames = finalNameArray[2];
-    // }
-    // console.log(middleNames);
-    // let middleName = ' ';
-    // for(let i = 0; i < middleNames.length; i++){ // Combine middle names into one string
-    //     if(middleNames[i].length > 1){
-    //         middleName += middleNames[i];
-    //     }
-    // }
-    // let fullName = firstName + ' ' + middleName + ' ' + lastName; // Create full name to pass into request
-    let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + fullName;
-    request(url, (req, response) =>{
-        let results = JSON.parse(response.body);
-        res.send(results);
+    return fullName;
+}
+
+// pass astronaut into request for wikipedia api and then create astronaut based on results and store in database
+getRussianWikiInfo = (astronaut) =>{
+    let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + astronaut.A;
+    request(url, (req, res) =>{
+        let results = JSON.parse(res.body);
+        let object = {};
+        if(results.title !== 'Not found.'){
+            if(results.thumbnail){
+                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': results.thumbnail.source};
+            }
+            else{
+                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': 'Not found'};
+            }
+        }
+        else{
+            object = {'title': 'Not found', 'page': 'Not found', 'extract': 'Not found', 'image': 'Not found'}; 
+        }
+
+        astronaut.wikiInfo = object;
+        russianAstronaut.create(astronaut, (err, result) =>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                console.log("Russian astronaut saved to database");
+            }
+        });
+    });
+}
+
+
+// Query database to get all Russian astronauts then send results to frontend
+router.get('/', (req, res) =>{
+    russianAstronaut.find({}, (err, response) =>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.setHeader('Content-Type', 'application/json');
+            res.send(response);
+        }
+    });
+});
+
+// Send specified astronaut info to instance page
+router.get('/:astronautId/:type', (req, res) =>{
+    russianAstronaut.findOne({A: req.params.astronautId}, (err, result) =>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(result);
+        }
     });
 });
 
