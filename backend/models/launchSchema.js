@@ -32,7 +32,59 @@ const launchSchema = Schema({
     vidURLs: [String],
     holdreason: {type: String},
     failreason: {type: String},
-    changed: {type: String}
+    changed: {type: String},
+    locationData: {
+        "id": {
+            type: Number,
+        },
+        "name": {type: String},
+        "countrycode": {type: String},
+        "wikiURL": {type: String},
+        "infoURLs": [String],
+        "imageURL": {type: String},
+        "changed": {type: String}
+    },
+    rocketData: {
+        "id": {
+            type: Number,
+        },
+        "name": {type: String},
+        "configuration": {type: String},
+        "family": {
+            id: {type: Number},
+            name: {type: String},
+            agencies: {type: String}
+        },
+        "wikiURL": {type: String},
+        "infoURLs": [String],
+        "imageURL": {type: String},
+        "changed": {type: String}
+    },
+    missionData: {
+        "id": {
+            type: Number,
+        },
+        "name": {
+            type: String,
+        },
+        "countryCode": {type: String},
+        "description": {type: String},
+        "typeName": {type: String},
+        launch: {
+            "id": {type: Number},
+            "name": {type: String},
+            "net": {type: String}
+        },
+        agencies: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Agency'
+            }
+        ],
+        "wikiURL": {type: String},
+        "infoURLs": [String],
+        "changed": {type: String},
+    }
 });
 
 module.exports = mongoose.model('launches', launchSchema);

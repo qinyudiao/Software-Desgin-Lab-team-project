@@ -13,16 +13,29 @@ class Launches extends React.Component{
         }
     }
 
-    componentDidMount(){
-      fetchLaunches()
-      .then(data => {
-        console.log('data to setState', data);
-        this.setState({
-          isLoading: false,
-          posts: data,
-        })
-      })
-    }
+componentDidMount(){
+  let url = '';
+  if(process.env.NODE_ENV === 'production'){
+    url = ec2url + '/launch';
+  }
+  else{
+    url = '/launch';
+  }
+  fetch(url)
+  .then(response => response.json())
+  .then(data =>{
+    console.log(data);
+    this.setState({isLoading: false, posts: data});
+  })
+}
+    //   fetchLaunches()
+    //   .then(data => {
+    //     console.log('data to setState', data);
+    //     this.setState({
+    //       isLoading: false,
+    //       posts: data,
+    //     })
+    //   })
 
     render(){
       const columns = [
