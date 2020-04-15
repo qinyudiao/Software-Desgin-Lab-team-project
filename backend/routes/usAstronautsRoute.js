@@ -12,7 +12,9 @@ cron.schedule('0 13 * * Sunday', () =>{
         if(!err && res.statusCode === 200){
             let responseArray = JSON.parse(res.body);
             for(let i = 0; i < responseArray.length; i++){
-                usAstronaut.findOne(responseArray[i], (error, document) =>{
+                let convertedName = parseUSName(responseArray[i].Astronaut);
+                responseArray[i].Astronaut = convertedName;
+                usAstronaut.findOne({Astronaut: responseArray[i].Astronaut}, (error, document) =>{
                     if(error){
                         console.log(error);
                     }
@@ -20,20 +22,73 @@ cron.schedule('0 13 * * Sunday', () =>{
                         console.log("Astronaut already in database");
                     }
                     else{
-                        usAstronaut.create(responseArray[i], (err, result) =>{
-                            if(err){
-                                console.log(err);
-                            }
-                            else{
-                                console.log("Astronaut saved to database");
-                            }
-                        });
+                        getUSWikiInfo(responseArray[i]);
                     }
-                } );
+                });
             }
         }
     });
 });
+
+// convert name into firstname, lastname
+parseUSName = (name) =>{
+    let nameArray = name.split(" ");
+    for(let i = 0; i < nameArray.length; i++){
+        nameArray[i] = nameArray[i].replace(",", ""); 
+        nameArray[i] = nameArray[i].replace(".", "");
+    }
+
+    // Take out blank spaces and initials since they mess up formation of full name
+    let finalNameArray = []
+    for(let i = 0; i < nameArray.length; i++){
+        if(nameArray[i] !== '' && nameArray[i].length > 1){
+            finalNameArray.push(nameArray[i]);
+        }
+    }
+
+    let firstName = finalNameArray[1];
+    let lastName = finalNameArray[0];
+    let fullName  = '';
+    if(finalNameArray.length > 2){
+        let middleName = finalNameArray[2];
+        fullName = firstName + ' ' + middleName + ' ' + lastName; // Might not need middle name
+    }
+    else{
+        fullName = firstName + ' ' + lastName;
+    }
+    fullName = firstName + ' ' + lastName;
+    return fullName;
+}
+
+// pass astronaut into request for wikipedia api and then create astronaut based on results and store in database
+getUSWikiInfo = (astronaut) =>{
+    let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + astronaut.Astronaut;
+    request(url, (req, res) =>{
+        let results = JSON.parse(res.body);
+        let object = {};
+        if(results.title !== 'Not found.'){
+            if(results.thumbnail){
+                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': results.thumbnail.source};
+            }
+            else{
+                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': 'Not found'};
+            }
+        }
+        else{
+            object = {'title': 'Not found', 'page': 'Not found', 'extract': 'Not found', 'image': 'Not found'}; 
+        }
+
+        astronaut.wikiInfo = object;
+        usAstronaut.create(astronaut, (err, result) =>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                console.log("US astronaut saved to database");
+            }
+        });
+    });
+}
 
 // Query database to get all US astronauts then send results to frontend
 router.get('/', (req, res) =>{
@@ -49,41 +104,13 @@ router.get('/', (req, res) =>{
 });
 
 router.get('/:astronautId/:type', (req, res) =>{
-    let nameArray = req.params.astronautId.split(" ");
-
-    // Take out extra punctuation like commas or periods
-    for(let i = 0; i < nameArray.length; i++){
-        nameArray[i] = nameArray[i].replace(",", ""); 
-        nameArray[i] = nameArray[i].replace(".", "");
-    }
-
-    // Take out blank spaces and initials since they mess up formation of full name
-    let finalNameArray = []
-    for(let i = 0; i < nameArray.length; i++){
-        if(nameArray[i] !== '' && nameArray[i].length > 1){
-            finalNameArray.push(nameArray[i]);
+    usAstronaut.findOne({Astronaut: req.params.astronautId}, (err, result) =>{
+        if(err){
+            console.log(err);
         }
-    }
-
-    // order of names in array is expected to be [middle name, last name, first name]
-    let firstName = finalNameArray[finalNameArray.length - 1];
-    let lastName = finalNameArray[finalNameArray.length - 2];
-    let middleNames = []; // An array for names with multiple middle names
-    if(finalNameArray.length > 2){
-        middleNames = finalNameArray.slice(0, nameArray.length - 2);
-    }
-    let middleName = ' ';
-    for(let i = 0; i < middleNames.length; i++){ // Combine middle names into one string
-        if(middleNames[i].length > 1){
-            middleName += middleNames[i];
+        else{
+            res.send(result);
         }
-    }
-    let fullName = firstName + middleName + ' ' + lastName; // Create full name to pass into request
-    console.log(fullName);
-    let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + fullName;
-    request(url, (req, response) =>{
-        let results = JSON.parse(response.body);
-        res.send(results);
     });
 });
 

@@ -7,7 +7,6 @@ let russianAstronaut = require('../models/russianAstronautSchema.js');
 
 // At a periodic time update database with international astronaut information
 cron.schedule('0 13 * * Sunday', () =>{
-// cron.schedule('1 * * * * * ', () =>{
     console.log('running russian astronaut cron job');
     request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db3.json', (err, res) =>{
         if(!err && res.statusCode === 200){
