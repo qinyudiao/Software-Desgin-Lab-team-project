@@ -7,12 +7,13 @@ let internationalAstronaut = require('../models/internationalAstronautSchema.js'
 
 // At a periodic time update database with international astronaut information
 cron.schedule('0 13 * * Sunday', () =>{
-// cron.schedule('2 * * * * *', () => {
     console.log('running international astronaut cron job');
     request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db4.json', (err, res) =>{
         if(!err && res.statusCode === 200){
             let responseArray = JSON.parse(res.body);
             for(let i = 0; i < responseArray.length; i++){
+                let convertedName = parseInternationalName(responseArray[i].A);
+                responseArray[i].A = convertedName;
                 internationalAstronaut.findOne({A: responseArray[i].A}, (error, document) =>{
                     if(error){
                         console.log(error);
@@ -30,8 +31,7 @@ cron.schedule('0 13 * * Sunday', () =>{
 });
 
 getInternationalWikiInfo = (astronaut) =>{
-    let searchTerm = parseInternationalName(astronaut.A);
-    let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + searchTerm;
+    let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + astronaut.A;
     request(url, (req, response) =>{
         let results = JSON.parse(response.body);
         let object = {};
