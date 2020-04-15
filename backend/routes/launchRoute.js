@@ -72,16 +72,11 @@ router.get('/', (req, res) =>{
     });
 });
 
-cron.schedule('2 * * * * *', () =>{
-    console.log("updating locations");
-    // updateLocations();
+cron.schedule('22 * 10 * * 1', () =>{
+// cron.schedule('2 * * * * *', () =>{
+    updateLocations();
     updateRockets();
 });
-
-
-// Mongoose sends a `updateOne({ _id: doc._id }, { $set: { name: 'foo' } })`
-// to MongoDB.
-
 
 updateLocations = () =>{
     Launch.find({}, (err, res) =>{
@@ -146,73 +141,5 @@ updateRockets = () =>{
         }
     });
 }
-
-getExtraInfo = (launches) =>{
-    return new Promise((resolve, reject) =>{
-        let location = {};
-        let rocket = {};
-        for(let i = 0; i < launches.length; i++){
-            if(launches.location){
-                location = getLocation(launches[i]);
-                launches[i].location = location;
-            }
-            if(launches[i].rocket){
-                rocket = getRocket(launches[i]);
-                launches[i].rocket = rocket;
-            }
-        }
-    });
-}
-
-findLaunches = () =>{
-    return new Promise((resolve, reject) =>{
-        Launch.find({}, (err, response) =>{
-            if(err){
-                reject(err);
-            }
-            else{
-                resolve(response);
-            }
-        });
-    });
-}
-
-getLocation = (launch) =>{
-    return new Promise((resolve, reject) =>{
-        Location.findOne({_id: launch.location}, (err, res) =>{
-            if(err){
-                reject(err);
-            }
-            else{
-                resolve(res);
-            }
-        });
-    });
-}
-
-getRocket = (launch) =>{
-    return new Promise((resolve, reject) =>{
-        Rocket.findOne({_id: launch.rocket}, (err, res) =>{
-            if(err){
-                reject(err);
-            }
-            else{
-                resolve(res);
-            }
-        });
-    });
-}
-
-// const updateResponse = async (launch) => {
-//     Rocket.findById(launch.rocket, (error, document) => {
-//         if(document) {
-//         }
-//     })
-//     .then(document => {
-//         launch.rocket = document;
-//         return launch;
-//     });
-//     return 0;
-// }
 
 module.exports = router;
