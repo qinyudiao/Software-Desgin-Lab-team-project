@@ -142,4 +142,15 @@ updateRockets = () =>{
     });
 }
 
+router.get('/:launchId', (req, res) =>{
+    Launch.findOne({name: req.params.launchId}, (err, result) =>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(result);
+        }
+    });
+});
+
 module.exports = router;

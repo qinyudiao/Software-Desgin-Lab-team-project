@@ -3,6 +3,7 @@ import Header from './components/Header.js';
 import ReactTable from "react-table-6"
 import "react-table-6/react-table.css"
 import ec2url from './EC2Link';
+import {Link} from 'react-router-dom';
 
 class Launches extends React.Component{
     constructor(props){
@@ -34,6 +35,7 @@ componentDidMount(){
         {
           Header: "Launch",
           accessor: "name",
+          Cell: e => <Link to={`/launch/${e.value}`}>{e.value}</Link>
         },
         {
           Header: "Time",
