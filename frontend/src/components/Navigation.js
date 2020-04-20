@@ -1,6 +1,7 @@
 import React from 'react';
 import { Nav, Navbar, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
 import styled from 'styled-components';
+import ec2url from '../EC2Link';
 
 const Styles = styled.div`
     .navbar{
@@ -40,8 +41,47 @@ const Styles = styled.div`
     }
 `;
 
-function Navigation(){
+// function Navigation(){
+class Navigation extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {}
 
+        this.textInput = React.createRef(); 
+
+    }
+
+    handleChange = () =>{
+        const value = this.textInput.current.value;
+        console.log(value);
+    }
+
+    handleSubmit = (event) =>{
+        event.preventDefault();
+        document.getElementById("searchform").reset();
+        const searchTerm = this.textInput.current.value;
+        this.sendSearch(searchTerm); 
+        
+    }
+
+    sendSearch = (search) =>{
+        let url = '';
+        
+        if(process.env.NODE_ENV === 'production'){
+            url = ec2url + '/search'
+        }
+        else{
+            url = '/search'
+        }
+        fetch(url)
+        .then(response => response.json())
+        .then(data =>{
+            console.log(data);
+        });
+    }
+
+
+render(){
     return(
         <Styles>
             <Navbar expand="lg">
@@ -70,14 +110,15 @@ function Navigation(){
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#action/3.4">Log in (phase3)</NavDropdown.Item>
                     </NavDropdown>
-                    <Form inline>
-                        <FormControl type="text" placeholder="For phase 3" className="mr-sm-2" />
+                    <Form inline id="searchform" onSubmit={this.handleSubmit}>
+                        <FormControl type="text" name="search" id="search" className="mr-sm-2" ref={this.textInput} onChange={this.handleChange} />
                         <Button variant="outline-secondary" id="search-button">Search</Button>
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
         </Styles>
     )
+}
 }
 
 export default Navigation;

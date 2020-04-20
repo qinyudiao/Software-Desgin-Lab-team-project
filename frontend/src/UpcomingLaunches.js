@@ -32,6 +32,7 @@ export default class UpcomingLaunches extends Component {
         })
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             const curTime = moment().utc().format('YYYYMMDDThhmmss');
             const countdowns = getTimeCountDown(data.launches, new Date(Number(curTime.slice(0,4)), Number(curTime.slice(4,6)), Number(curTime.slice(6,8)),  Number(curTime.slice(9,11)), Number(curTime.slice(11,13)), Number(curTime.slice(13,15))));
             setTimeout(() => {

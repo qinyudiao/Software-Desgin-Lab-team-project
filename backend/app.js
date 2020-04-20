@@ -52,5 +52,13 @@ db.on('error', function(err) {
     console.log(err);
 });
 
+let launchCollection = db.collection('launches');
+launchCollection.createIndex({"$**": "text"});
+
+// db.collection.createIndex( { "$**": "text" } )
+
+// db.collection.createIndex( { "$**": "text" } )
+
+
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
