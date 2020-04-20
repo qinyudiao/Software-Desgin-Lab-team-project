@@ -53,6 +53,7 @@ class App extends Component{
                     <Router>
                         <Switch>
                             <Route exact path="/" component={Landing} />
+                            <Route path="/search" component={Search} />
                             <Route path="/about" component={About} />
                             <Route path="/agency/:agencyId" component={IndividualCompanies} />
                             <Route path="/agency" component={Agencies} />
@@ -69,7 +70,6 @@ class App extends Component{
                             <Route path="/InternationalAstronauts/:astronautId/:type" component={IndividualAstronaut} />
                             <Route path="/InternationalAstronauts" component={InternationalAstronauts} />
                             <Route path="/education" component={Education} />
-                            <Route path="/search" component={Search} />
                             <Route component={PageNotFound} />
                         </Switch>
                     </Router>

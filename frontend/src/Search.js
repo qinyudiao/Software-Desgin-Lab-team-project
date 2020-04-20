@@ -9,11 +9,15 @@ class Search extends React.Component{
         }
     }
 
+    componentDidMount = () =>{
+        console.log(this.props.location.state);
+    }
+
     render(){
         return(
             <div>
                 <Header />
-                {this.props.location.state.data}
+                <p>search</p>
             </div>
         )
     }
