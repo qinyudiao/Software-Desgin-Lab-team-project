@@ -20,7 +20,7 @@ componentDidMount(){
     url = ec2url + '/launch';
   }
   else{
-    url = '/launch';
+    url = 'http://localhost:8080/launch';
   }
   fetch(url)
   .then(response => response.json())

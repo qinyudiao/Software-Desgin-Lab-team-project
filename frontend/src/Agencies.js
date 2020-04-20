@@ -19,7 +19,7 @@ class Agencies extends React.Component{
         this.setState({posts: posts});
       });
     }
-  
+
     render() {
       this.state.posts.forEach(post => {
         post.islsp = post.islsp == 0 ? "" : "✓";
@@ -63,7 +63,7 @@ const fetchAgencies = async () => {
   else{
     url = '/agency';
   }
-  const response = await fetch(url);
+  const response = await fetch('http://localhost:8083/agency');
   const data = await response.json();
   return data;
 }
