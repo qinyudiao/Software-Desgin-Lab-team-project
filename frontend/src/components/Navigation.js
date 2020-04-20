@@ -53,17 +53,19 @@ class Navigation extends React.Component{
 
     handleChange = () =>{
         const value = this.textInput.current.value;
-        console.log(value);
+        // console.log(value);
     }
 
+    // Get search form data and then pass into function to send search to backend
     handleSubmit = (event) =>{
         event.preventDefault();
-        document.getElementById("searchform").reset();
         const searchTerm = this.textInput.current.value;
+        document.getElementById("searchform").reset();
         this.sendSearch(searchTerm); 
         
     }
 
+    // Send post request to backend with user's search
     sendSearch = (search) =>{
         let url = '';
         
@@ -73,7 +75,14 @@ class Navigation extends React.Component{
         else{
             url = '/search'
         }
-        fetch(url)
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({'search': search})
+        };
+
+        fetch(url, requestOptions)
         .then(response => response.json())
         .then(data =>{
             console.log(data);
@@ -111,7 +120,7 @@ render(){
                         <NavDropdown.Item href="#action/3.4">Log in (phase3)</NavDropdown.Item>
                     </NavDropdown>
                     <Form inline id="searchform" onSubmit={this.handleSubmit}>
-                        <FormControl type="text" name="search" id="search" className="mr-sm-2" ref={this.textInput} onChange={this.handleChange} />
+                        <FormControl type="text" name="search" id="search" className="mr-sm-2" placeholder="Search" ref={this.textInput} onChange={this.handleChange} />
                         <Button variant="outline-secondary" id="search-button">Search</Button>
                     </Form>
                 </Navbar.Collapse>

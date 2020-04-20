@@ -73,7 +73,6 @@ cron.schedule('22 * 10 * * 1', () =>{
 
 // Query database to get all launches then send results to frontend
 router.get('/', (req, res) =>{
-    testSearch();
     Launch.find({}, (err, response) =>{
         if(err){
             console.log(err);
