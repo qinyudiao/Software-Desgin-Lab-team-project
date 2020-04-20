@@ -1,6 +1,8 @@
 import React from 'react';
 import { Nav, Navbar, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
+import {Redirect} from 'react-router-dom';
 import styled from 'styled-components';
+import ec2url from '../EC2Link';
 
 const Styles = styled.div`
     .navbar{
@@ -40,7 +42,67 @@ const Styles = styled.div`
     }
 `;
 
-function Navigation(){
+// function Navigation(){
+class Navigation extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            redirect: false,
+            searchResults: ''
+        }
+
+        this.textInput = React.createRef(); 
+
+    }
+
+    handleChange = () =>{
+        const value = this.textInput.current.value;
+        // console.log(value);
+    }
+
+    // Get search form data and then pass into function to send search to backend
+    handleSubmit = (event) =>{
+        event.preventDefault();
+        const searchTerm = this.textInput.current.value;
+        document.getElementById("searchform").reset();
+        this.sendSearch(searchTerm); 
+        this.setState({redirect: true});
+        // this.props.history.push(`/About`);
+    }
+
+    // Send post request to backend with user's search
+    sendSearch = (search) =>{
+        let url = '';
+        
+        if(process.env.NODE_ENV === 'production'){
+            url = ec2url + '/search'
+        }
+        else{
+            url = '/search'
+        }
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({'search': search})
+        };
+
+        fetch(url, requestOptions)
+        .then(response => response.json())
+        .then(data =>{
+            console.log(data);
+            this.setState({searchResults: data});
+        });
+    }
+
+
+render(){
+    if (this.state.redirect === true) {
+        return <Redirect to={{
+            pathname: '/search',
+            state: {data: this.state.data}
+        }}/>
+      }
 
     return(
         <Styles>
@@ -70,14 +132,15 @@ function Navigation(){
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#action/3.4">Log in (phase3)</NavDropdown.Item>
                     </NavDropdown>
-                    <Form inline>
-                        <FormControl type="text" placeholder="For phase 3" className="mr-sm-2" />
+                    <Form inline id="searchform" onSubmit={this.handleSubmit}>
+                        <FormControl type="text" name="search" id="search" className="mr-sm-2" placeholder="Search" ref={this.textInput} onChange={this.handleChange} />
                         <Button variant="outline-secondary" id="search-button">Search</Button>
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
         </Styles>
     )
+}
 }
 
 export default Navigation;

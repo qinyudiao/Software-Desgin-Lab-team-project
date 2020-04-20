@@ -10,6 +10,7 @@ let Subscriber = require('../models/subscriberSchema.js');
 router.get('/', (req, res) =>{
     request('https://fdo.rocketlaunch.live/json/launches/next/5', (error, response, body) =>{
         if(!error && response.statusCode == 200){
+            console.log(JSON.parse(response.body));
             res.send(getLastLaunch(JSON.parse(response.body)));
         }
         else{
