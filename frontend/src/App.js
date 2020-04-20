@@ -18,6 +18,7 @@ import IndividualCompanies from './IndividualAgency.js';
 import PageNotFound from './PageNotFound.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UpcomingLaunches from './UpcomingLaunches';
+import Search from './Search';
 
 class App extends Component{
     constructor(props){
@@ -68,6 +69,7 @@ class App extends Component{
                             <Route path="/InternationalAstronauts/:astronautId/:type" component={IndividualAstronaut} />
                             <Route path="/InternationalAstronauts" component={InternationalAstronauts} />
                             <Route path="/education" component={Education} />
+                            <Route path="/search" component={Search} />
                             <Route component={PageNotFound} />
                         </Switch>
                     </Router>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Nav, Navbar, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
+import {Redirect} from 'react-router-dom';
 import styled from 'styled-components';
 import ec2url from '../EC2Link';
 
@@ -45,7 +46,10 @@ const Styles = styled.div`
 class Navigation extends React.Component{
     constructor(props){
         super(props);
-        this.state = {}
+        this.state = {
+            redirect: false,
+            searchResults: ''
+        }
 
         this.textInput = React.createRef(); 
 
@@ -62,7 +66,8 @@ class Navigation extends React.Component{
         const searchTerm = this.textInput.current.value;
         document.getElementById("searchform").reset();
         this.sendSearch(searchTerm); 
-        
+        this.setState({redirect: true});
+        // this.props.history.push(`/About`);
     }
 
     // Send post request to backend with user's search
@@ -86,11 +91,19 @@ class Navigation extends React.Component{
         .then(response => response.json())
         .then(data =>{
             console.log(data);
+            this.setState({searchResults: data});
         });
     }
 
 
 render(){
+    if (this.state.redirect === true) {
+        return <Redirect to={{
+            pathname: '/search',
+            state: {data: this.state.data}
+        }}/>
+      }
+
     return(
         <Styles>
             <Navbar expand="lg">
