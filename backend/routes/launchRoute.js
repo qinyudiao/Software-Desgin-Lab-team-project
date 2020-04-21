@@ -137,6 +137,54 @@ updateRockets = () =>{
                             console.log("could not find rocket");
                         }
                         else{
+							var rock = Rocket.findOne({_id: launch.rocket}, {});
+							var agencyString = tojson(rock.family.agencies);
+							var agencyArray = agencyString.split(',');
+							for(var i = 0; i < agencyArray.length; i++)
+							{
+								Agency.findOne({id: agencyArray[i]}, (err, res) =>{
+									if(err){
+										console.log("could not find agency");
+									}
+									else
+									{
+										Agency.updateOne({id: agencyArray[i]}, {$set: {agencies: res}}, (err, res) =>{
+			                                if(err){
+			                                    console.log(err);
+			                                }
+			                                else{
+			                                    console.log("updated", launch.id);
+			                                }
+			                            }
+			                            )
+									}
+								})
+							}
+							}
+                    });
+                };
+            });
+        }
+    });
+}
+
+updateAgencies = () =>{
+	Launch.find({}, (err, res) =>{
+        if(err){
+            console.log("Could not find launches");
+        }
+        else{
+            let launches = res;
+            console.log("found launches");
+            console.log(launches);
+            launches.forEach(launch =>{
+                if(launch.rocket){
+                    Rocket.findOne({_id: launch.rocket}, (err, res) =>{
+                        if(err){
+                            console.log("could not find rocket");
+                        }
+                        else{
+							var agencyString = res.
                             Launch.updateOne({id: launch.id}, {$set: {rocketData: res}}, (err, res) =>{
                                 if(err){
                                     console.log(err);

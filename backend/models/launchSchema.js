@@ -25,6 +25,30 @@ const launchSchema = Schema({
             "id": {type: Number, required: true},
         }
     ],
+	agencies: [
+		{
+			"id": {
+		        type: Number,
+		        required: true
+		    },
+		    "name": {
+		        type: String,
+		        required: true
+		    },
+		    "countryCode": {type: String},
+		    "type": {type: Number},
+		    "wikiURL": {type: String},
+		    "infoURLs": [String],
+		    "islsp": {type: Number},
+		    "changed": {type: String},
+		    "wikiInfo":{
+		        "title":{type: String},
+		        "page":{type:String},
+		        "extract":{type: String},
+		        "image":{type: String}
+		        }
+		}
+	],
     "lsp": {
         type: Schema.Types.ObjectId,
         ref: 'Agency'
