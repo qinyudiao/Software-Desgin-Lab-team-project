@@ -18,7 +18,7 @@ class IndividualLaunch extends React.Component{
             url = ec2url + 'launch/' + this.props.match.params.launchId;
         }
         else{
-            url = '/launch/' + this.props.match.params.launchId;
+            url = 'https://localhost:8080/launch/' + this.props.match.params.launchId;
         }
         console.log(url);
         fetch(url)
@@ -31,7 +31,7 @@ class IndividualLaunch extends React.Component{
     }
 
     componentDidMount = () =>{
-        this.getLaunchInfo(); 
+        this.getLaunchInfo();
     }
 
     render(){

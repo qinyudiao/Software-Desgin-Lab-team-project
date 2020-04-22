@@ -12,7 +12,7 @@ class Header extends React.Component{
 
     render(){
         return(
-            <div className="container-full">
+            <div className="container-full" style={{zIndex:"10"}}>
                 <Navigation />
             </div>
         )

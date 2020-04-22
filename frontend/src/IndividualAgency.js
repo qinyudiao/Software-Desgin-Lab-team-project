@@ -18,7 +18,7 @@ class IndividualAgency extends React.Component{
             url = ec2url + 'agency/' + this.props.match.params.agencyId
         }
         else{
-            url = '/agency/' + this.props.match.params.agencyId;
+            url = 'http://localhost:8080/agency/' + this.props.match.params.agencyId;
         }
         console.log(url);
         fetch(url)
@@ -31,7 +31,7 @@ class IndividualAgency extends React.Component{
     }
 
     componentDidMount = () =>{
-        this.getAgencyInfo(); 
+        this.getAgencyInfo();
     }
 
     render(){
@@ -41,11 +41,11 @@ class IndividualAgency extends React.Component{
                 {this.state.showInformation ? this.state.information.wikiInfo.title : null}
                 {this.state.showInformation ? this.state.information.wikiInfo.extract : null}
                 {this.state.showInformation ? <a href={this.state.information.wikiInfo.page}>See more information</a> : null}
-                {this.state.showInformation ? 
+                {this.state.showInformation ?
                 (
                     this.state.information.wikiInfo.image !== 'Not found' ? <img src={this.state.information.wikiInfo.image} /> : null
-                ) 
-                : 
+                )
+                :
                     null
                 }
             </div>

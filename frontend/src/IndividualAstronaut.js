@@ -20,7 +20,7 @@ class IndividualAstronaut extends React.Component{
             url = ec2url + this.props.match.params.type + '/' + this.props.match.params.astronautId + '/' + this.props.match.params.type;
         }
         else{
-            url = '/' + this.props.match.params.type + '/' + this.props.match.params.astronautId + '/' + this.props.match.params.type;
+            url = 'https://localhost:8080/' + this.props.match.params.type + '/' + this.props.match.params.astronautId + '/' + this.props.match.params.type;
         }
         fetch(url)
         .then(response => response.json())
@@ -48,17 +48,17 @@ class IndividualAstronaut extends React.Component{
                 {this.state.showInformation ? this.state.information.wikiInfo.title : null}
                 {this.state.showInformation ? this.state.information.wikiInfo.extract : null}
                 {this.state.showInformation ? <a href={this.state.information.wikiInfo.page}>See more information</a> : null}
-                {this.state.showInformation ? 
+                {this.state.showInformation ?
                 (
                     this.state.information.wikiInfo.image !== 'Not found' ? <img src={this.state.information.wikiInfo.image} /> : null
-                ) 
-                : 
+                )
+                :
                     null
                 }
             </div>
         )
     }
-    
+
 }
 
 export default IndividualAstronaut;
