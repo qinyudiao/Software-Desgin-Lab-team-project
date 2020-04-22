@@ -32,7 +32,7 @@ export default function GenerateUSAstronautCards(props){
                             </CardText>
                           </CardActions>
                       <CardActions border>
-                        <Button>More Info.</Button>
+                        <Button onClick={event =>  window.location.href='/USAstronauts/'+row.Astronaut+'/USAstronauts'}>More Info.</Button>
                       </CardActions>
                       <CardMenu style={{color: '#fff'}}>
                         <IconButton name="share" />
@@ -78,7 +78,7 @@ export function GenerateRussianAstronautCards(props)
                         </CardText>
                       </CardActions>
                   <CardActions border>
-                    <Button>More Info.</Button>
+                    <Button onClick={event =>  window.location.href='/RussianAstronauts/'+row.A+'/RussianAstronauts'}>More Info.</Button>
                   </CardActions>
                   <CardMenu style={{color: '#fff'}}>
                     <IconButton name="share" />
@@ -124,7 +124,7 @@ export function GenerateInternationalAstronautCards(props)
                         </CardText>
                       </CardActions>
                   <CardActions border>
-                    <Button>More Info.</Button>
+                    <Button onClick={event =>  window.location.href='/InternationalAstronauts/'+row.A+'/InternationalAstronauts'}>More Info.</Button>
                   </CardActions>
                   <CardMenu style={{color: '#fff'}}>
                     <IconButton name="share" />
@@ -165,7 +165,7 @@ export function GenerateAgencyCards(props)
                         </CardText>
                       </CardActions>
                   <CardActions border>
-                    <Button>More Info.</Button>
+                    <Button onClick={event =>  window.location.href='/agency/'+row.name}>More Info.</Button>
                   </CardActions>
                   <CardMenu style={{color: '#fff'}}>
                     <IconButton name="share" />
@@ -211,8 +211,8 @@ export function GenerateLaunchCards(props)
                         </CardText>
                       </CardActions>
                   <CardActions border>
-                    <Button>More Info.</Button>
-                    <Button>Youtube Link</Button>
+                    <Button onClick={event =>  window.location.href='/launch/'+row.name+'/launch'}>More Info.</Button>
+                    <Button>YouTube Link</Button>
                   </CardActions>
                   <CardMenu style={{color: '#fff'}}>
                     <IconButton name="share" />
