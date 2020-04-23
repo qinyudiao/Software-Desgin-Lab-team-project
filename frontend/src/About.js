@@ -118,7 +118,7 @@ class About extends React.Component{
           0,
           "Fourth Year Electrical & Computer Engineering Major (Software Engineering Track) at UT Austin",
           "Backend and Testing",
-          7
+          20
         ],
         'shawn': [
           'Shawn Victor',
@@ -227,7 +227,7 @@ class About extends React.Component{
                 <p>
                 {renderTeamCommits()}
                 {renderTeamIssues()}
-                12 total unit tests</p>
+                25 total unit tests</p>
                 </div>
 
                 <br/>
