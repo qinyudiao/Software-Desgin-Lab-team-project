@@ -51,7 +51,7 @@ class Landing extends React.Component{
       </Header>
         <Grid className="landing-grid" style={{width: '100%'}}>
           <Cell col={12}>
-          <Carousel autoPlay showThumbs={false} autoLoop={true} interval="10000" wrap={true} infiniteLoop={true}>
+          <Carousel autoPlay showThumbs={false} autoLoop={true} interval="5000" wrap={true} infiniteLoop={true}>
             <div>
               <img alt ="rocket" src={launch1} height="750"/>
               <div style={{background: '#000', width:'100%', position:'relative', top:'-80px', color:"white", opacity:"0.5"}}>

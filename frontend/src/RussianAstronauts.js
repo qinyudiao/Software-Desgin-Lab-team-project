@@ -19,7 +19,7 @@ class RussianAstronauts extends React.Component{
         url = ec2url + '/RussianAstronauts';
       }
       else{
-        url = 'http://localhost:8080/RussianAstronauts';
+        url = '/RussianAstronauts';
       }
       fetch(url)
       .then(response => response.json())

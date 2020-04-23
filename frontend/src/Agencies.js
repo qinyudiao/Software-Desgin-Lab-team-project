@@ -103,7 +103,11 @@ const fetchAgencies = async () => {
     url = ec2url + '/agency';
   }
   else{
+<<<<<<< HEAD
     url = 'http://localhost:8080/agency';
+=======
+    url = '/agency';
+>>>>>>> ebd0fa3e2daceb3542b389df1205e03e3f6516ee
   }
   const response = await fetch(url);
   const data = await response.json();

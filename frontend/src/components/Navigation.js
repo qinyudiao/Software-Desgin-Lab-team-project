@@ -51,7 +51,7 @@ class Navigation extends React.Component{
             searchResults: ''
         }
 
-        this.textInput = React.createRef(); 
+        this.textInput = React.createRef();
 
     }
 
@@ -65,7 +65,7 @@ class Navigation extends React.Component{
         event.preventDefault();
         const searchTerm = this.textInput.current.value;
         document.getElementById("searchform").reset();
-        this.sendSearch(searchTerm); 
+        this.sendSearch(searchTerm);
         this.setState({redirect: true});
         // this.props.history.push(`/About`);
     }
@@ -73,7 +73,7 @@ class Navigation extends React.Component{
     // Send post request to backend with user's search
     sendSearch = (search) =>{
         let url = '';
-        
+
         if(process.env.NODE_ENV === 'production'){
             url = ec2url + '/search'
         }
@@ -118,11 +118,7 @@ render(){
                         <NavDropdown.Item href="/launch">All Launches</NavDropdown.Item>
                         <NavDropdown.Item href="/upcoming">Upcoming Launches</NavDropdown.Item>
                     </NavDropdown>
-                    <NavDropdown title="ASTRONAUTS">
-                        <NavDropdown.Item href="/USAstronauts">US Astronauts</NavDropdown.Item>
-                        <NavDropdown.Item href="/RussianAstronauts">Russian Astronauts</NavDropdown.Item>
-                        <NavDropdown.Item href="/InternationalAstronauts">International Astronauts</NavDropdown.Item>
-                    </NavDropdown>
+                    <Nav.Item><Nav.Link href="/USAstronauts">ASTRONAUTS</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/map">MAP</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/about">ABOUT</Nav.Link></Nav.Item>
                     <NavDropdown title="More" id="basic-nav-dropdown">

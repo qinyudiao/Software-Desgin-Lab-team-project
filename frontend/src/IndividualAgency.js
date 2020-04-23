@@ -1,4 +1,5 @@
 import React from 'react';
+import './css/IndividualAgency.css';
 import Header from './components/Header';
 import ec2url from './EC2Link';
 
@@ -18,7 +19,7 @@ class IndividualAgency extends React.Component{
             url = ec2url + 'agency/' + this.props.match.params.agencyId
         }
         else{
-            url = 'http://localhost:8080/agency/' + this.props.match.params.agencyId;
+            url = '/agency/' + this.props.match.params.agencyId;
         }
         console.log(url);
         fetch(url)
@@ -36,18 +37,30 @@ class IndividualAgency extends React.Component{
 
     render(){
         return(
-            <div>
+            <div className="color-box">
                 <Header />
-                {this.state.showInformation ? this.state.information.wikiInfo.title : null}
-                {this.state.showInformation ? this.state.information.wikiInfo.extract : null}
-                {this.state.showInformation ? <a href={this.state.information.wikiInfo.page}>See more information</a> : null}
+                <table>
+                <tr>
+                <td width="400vw" align="center">
                 {this.state.showInformation ?
                 (
-                    this.state.information.wikiInfo.image !== 'Not found' ? <img src={this.state.information.wikiInfo.image} /> : null
+                    this.state.information.wikiInfo.image !== 'Not found' ? <img src={this.state.information.wikiInfo.image} height="250vh"/> : null
                 )
                 :
                     null
                 }
+                </td>
+                <td>
+                {this.state.showInformation ? this.state.information.wikiInfo.extract : null}
+                {this.state.showInformation ? <a href={this.state.information.wikiInfo.page}>See more information</a> : null}
+                </td>
+                </tr>
+                <tr>
+                <td align="center">
+                <h3>{this.state.showInformation ? this.state.information.wikiInfo.title : null} </h3>
+                </td>
+                </tr>
+                </table>
             </div>
         )
     }

@@ -76,7 +76,11 @@ class Launches extends React.Component{
         })})
     }
     else{
+<<<<<<< HEAD
       this.componentDidMount()
+=======
+      url = '/launch';
+>>>>>>> ebd0fa3e2daceb3542b389df1205e03e3f6516ee
     }
   }
 

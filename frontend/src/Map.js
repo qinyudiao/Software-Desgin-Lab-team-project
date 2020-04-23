@@ -62,11 +62,11 @@ class Map extends Component {
                   <div id="map-container">
                     <MapContainer />
                   </div>
-                  <div className="column-item" style={{height: "21.1vh", marginTop: "0.8vh", display: "absolute"}}>
-                    <p style={{color: "#aaa", fontSize: "85%", marginBottom: "0"}}>
+                  <div className="column-item" style={{height: "21.1vh", marginTop: "0.8vh", display: "absolute", overflow: "auto"}}>
+                    <p style={{color: "#aaa", fontSize: "60%", marginBottom: "0"}}>
                         Note:<br/>
                         - The first launch recorded in this database is a Atlas LV-3A rocket carried a Samos 2 launched by United States Air Force launched and launched at January 31, 1961 20:21:19 UTC.<br/>
-                        - The total launches number is based on all the recorded launches, there are some rocket launches that are not recorded.<br/> 
+                        - The total launches number is based on all the recorded launches, there are some rocket launches that are not recorded.<br/>
                         - The launches by country rank is based on all the recorded launches which has a recorded location, there are some rocket launches that are recorded but do not with a location.<br/>
                         - Each launch's country affiliation is based on the launch pad location in current ISO countries.<br/>
                         - Each marker in the map represents a launch pad which has a recorded launch.
@@ -89,7 +89,7 @@ class Map extends Component {
                   </div>
                 </span>
               </div>
-                
+
               </div>
             </div>
           </React.Fragment>
