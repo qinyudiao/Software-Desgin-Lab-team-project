@@ -123,14 +123,12 @@ render(){
                     <Nav.Item><Nav.Link href="/about">ABOUT</Nav.Link></Nav.Item>
                     <NavDropdown title="More" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/fail">Failed Launches</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Manned Launches (phase3)</NavDropdown.Item>
-                        <NavDropdown.Item href="education">Education</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Log in (phase3)</NavDropdown.Item>
+                        <NavDropdown.Item href="education">Education</NavDropdown.Item>
                     </NavDropdown>
                     <Form inline id="searchform" onSubmit={this.handleSubmit}>
                         <FormControl type="text" name="search" id="search" className="mr-sm-2" placeholder="Search" ref={this.textInput} onChange={this.handleChange} />
-                        <Button variant="outline-secondary" id="search-button">Search</Button>
+                        <Button variant="outline-secondary" onClick={this.handleSubmit} id="search-button">Search</Button>
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
