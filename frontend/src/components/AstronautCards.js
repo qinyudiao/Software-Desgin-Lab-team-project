@@ -24,11 +24,11 @@ export default function GenerateUSAstronautCards(props){
                             <CardText style={{color:'#000', textAlign:'left', fontSize:'14px'}}>
                               • STATUS: {row.Status}
                               <br/>
-                              • TOTAL SPACE TIME: {row.Cumulative}
+                              • TOTAL SPACE TIME: {row['Cumulative hours of space flight time']}
                               <br/>
-                              • # MISSIONS: {row.Cumulative}
+                              • # MISSIONS: {row['# Flights']}
                               <br/>
-                              • MISSIONS: {row.Cumulative}
+                              • MISSIONS: {row['Missions flown']}
                             </CardText>
                           </CardActions>
                       <CardActions border>
