@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './components/Header.js';
 import ReactTable from "react-table-6";
+import './css/US.css';
 import "react-table-6/react-table.css";
 import {Link} from 'react-router-dom';
 import ec2url from './EC2Link';
@@ -162,9 +163,10 @@ class USAstronauts extends React.Component{
               <Tab>International</Tab>
             </Tabs>
 
+            <div className="con">
             <div className="projects-grid" >
               <Grid>
-                <Cell col={1} style={{margin:'auto', border:'groove', width:'200px'}}>
+                <Cell col={1} style={{margin:'auto', border:'groove', width:'200px', background:'white'}}>
                   <div>
                     <Form inline id="searchform">
                         <FormControl type="text" name="search" id="search" className="mr-sm-2" placeholder="Search by Name" ref={this.searchName} onChange={this.handleChange} />
@@ -177,12 +179,13 @@ class USAstronauts extends React.Component{
                 </Cell>
               </Grid>
             </div>
+
             <Grid>
               <Cell col={12}>
                 <div className="content">{this.toggleCategories()}</div>
               </Cell>
             </Grid>
-
+            </div>
           </div>
         )
     }

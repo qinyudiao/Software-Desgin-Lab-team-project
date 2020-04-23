@@ -1,0 +1,13 @@
+.cont{
+  background-image: url(https://wp.technologyreview.com/wp-content/uploads/2019/12/489539469117dae1036a2o-11.jpg?resize=1032,688);
+background-size: cover;
+background-repeat: no-repeat;
+background-position: 50% 50%;
+min-height: 100vh;
+min-width: 100vw;
+justify-content: center;
+height: 100%;
+position: relative;
+height: 100vh;
+overflow-y: scroll;
+}

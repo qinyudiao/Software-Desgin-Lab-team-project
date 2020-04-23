@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header.js';
 import ReactTable from "react-table-6"
 import {Link} from 'react-router-dom'
+import './css/Agencies.css';
 import "react-table-6/react-table.css"
 import ec2url from './EC2Link';
 import {GenerateAgencyCards} from './components/AstronautCards.js'
@@ -27,8 +28,10 @@ class Agencies extends React.Component{
         return(
           <div className="category-tabs">
             <Header />
+            <div className='cont'>
             <div className="projects-grid" style={{display: 'flex'}}>
               <GenerateAgencyCards data={this.state.posts}/>
+            </div>
             </div>
           </div>
         )

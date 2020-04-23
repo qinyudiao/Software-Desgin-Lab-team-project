@@ -1,0 +1,13 @@
+.con{
+  background-image: url(https://i.dailymail.co.uk/1s/2019/03/18/12/11135124-6821911-Astronauts_who_travel_into_space_are-a-23_1552912649039.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+background-position: 50% 50%;
+min-height: 100vh;
+min-width: 100vw;
+justify-content: center;
+height: 100%;
+position: relative;
+height: 100vh;
+overflow-y: scroll;
+}
