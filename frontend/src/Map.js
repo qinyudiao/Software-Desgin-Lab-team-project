@@ -62,7 +62,7 @@ class Map extends Component {
                   <div id="map-container">
                     <MapContainer />
                   </div>
-                  <div className="column-item" style={{height: "21.1vh", marginTop: "0.8vh", display: "absolute"}}>
+                  <div className="column-item" style={{height: "21.1vh", marginTop: "0.8vh", display: "absolute", overflow: "auto"}}>
                     <p style={{color: "#aaa", fontSize: "60%", marginBottom: "0"}}>
                         Note:<br/>
                         - The first launch recorded in this database is a Atlas LV-3A rocket carried a Samos 2 launched by United States Air Force launched and launched at January 31, 1961 20:21:19 UTC.<br/>

@@ -48,7 +48,7 @@ class IndividualAstronaut extends React.Component{
                 <Header />
                 <table>
                 <tr>
-                <td>{this.state.showInformation ?
+                <td align="center">{this.state.showInformation ?
                 (
                     this.state.information.wikiInfo.image !== 'Not found' ? <img src={this.state.information.wikiInfo.image} height="300vh" /> : null
                 )
@@ -62,7 +62,7 @@ class IndividualAstronaut extends React.Component{
                 </td>
                 </tr>
                 <tr>
-                <td> <h3> {this.state.showInformation ? this.state.information.wikiInfo.title : null} </h3>
+                <td align="center"> <h3> {this.state.showInformation ? this.state.information.wikiInfo.title : null} </h3>
                 </td>
                 </tr>
                 </table>

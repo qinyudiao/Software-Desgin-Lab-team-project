@@ -41,7 +41,7 @@ class IndividualAgency extends React.Component{
                 <Header />
                 <table>
                 <tr>
-                <td>
+                <td width="400vw" align="center">
                 {this.state.showInformation ?
                 (
                     this.state.information.wikiInfo.image !== 'Not found' ? <img src={this.state.information.wikiInfo.image} height="250vh"/> : null
@@ -50,13 +50,13 @@ class IndividualAgency extends React.Component{
                     null
                 }
                 </td>
-                <td valign="top">
+                <td>
                 {this.state.showInformation ? this.state.information.wikiInfo.extract : null}
                 {this.state.showInformation ? <a href={this.state.information.wikiInfo.page}>See more information</a> : null}
                 </td>
                 </tr>
                 <tr>
-                <td>
+                <td align="center">
                 <h3>{this.state.showInformation ? this.state.information.wikiInfo.title : null} </h3>
                 </td>
                 </tr>

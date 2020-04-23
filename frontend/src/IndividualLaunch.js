@@ -51,11 +51,9 @@ class IndividualLaunch extends React.Component{
                     null
                 }
                 </td>
-                <td valign="top">
-                <p> The {this.state.showInformation ? this.state.information.rocketData.name : null} launched from {this.state.showInformation ? this.state.information.locationData.name : null} on {this.state.showInformation ? this.state.information.isonet.slice(4,6) : null}/{this.state.showInformation ? this.state.information.isonet.slice(6,8) : null}/{this.state.showInformation ? this.state.information.isonet.slice(0,4) : null}.</p>
-                {this.state.showInformation ?
+                <td valign="top">{this.state.showInformation ?
                 (
-                    this.state.information.holdreason !== null ? <p> This mission was delayed because {this.state.information.holdreason} </p> : null
+                    this.state.information.holdreason !== null ? <p> This mission was expected to launch on {this.state.showInformation ? this.state.information.isonet.slice(4,6) : null}/{this.state.showInformation ? this.state.information.isonet.slice(6,8) : null}/{this.state.showInformation ? this.state.information.isonet.slice(0,4) : null}, but it was delayed because {this.state.information.holdreason} </p> : <p> The {this.state.showInformation ? this.state.information.rocketData.name : null} launched from {this.state.showInformation ? this.state.information.locationData.name : null} on {this.state.showInformation ? this.state.information.isonet.slice(4,6) : null}/{this.state.showInformation ? this.state.information.isonet.slice(6,8) : null}/{this.state.showInformation ? this.state.information.isonet.slice(0,4) : null}.</p>
                 )
                 :
                     null
@@ -67,6 +65,15 @@ class IndividualLaunch extends React.Component{
                 :
                     null
                 }
+                {this.state.showInformation ?
+                (
+                    this.state.information.vidURLs !== null ? <a href={this.state.information.vidURLs}>Watch the launch here</a> : null
+                )
+                :
+                    null
+                }
+                <br/>
+                {this.state.showInformation ? <a href={this.state.information.rocketData.wikiURL}>About the Rocket</a> : null}
                 </td>
                 </tr>
                 </table>
