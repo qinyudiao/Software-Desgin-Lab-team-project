@@ -16,7 +16,7 @@ class IndividualAgency extends React.Component{
         let url = '';
 
         if(process.env.NODE_ENV === 'production'){
-            url = ec2url + 'agency/' + this.props.match.params.agencyId
+            url = ec2url + '/agency/' + this.props.match.params.agencyId
         }
         else{
             url = '/agency/' + this.props.match.params.agencyId;

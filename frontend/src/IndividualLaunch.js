@@ -16,7 +16,7 @@ class IndividualLaunch extends React.Component{
         let url = '';
 
         if(process.env.NODE_ENV === 'production'){
-            url = ec2url + 'launch/' + this.props.match.params.launchId;
+            url = ec2url + '/launch/' + this.props.match.params.launchId;
         }
         else{
             url = '/launch/' + this.props.match.params.launchId;

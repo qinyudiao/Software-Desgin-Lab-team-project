@@ -18,7 +18,7 @@ class IndividualAstronaut extends React.Component{
         let url = '';
 
         if(process.env.NODE_ENV === 'production'){
-            url = ec2url + this.props.match.params.type + '/' + this.props.match.params.astronautId + '/' + this.props.match.params.type;
+            url = ec2url + '/' + this.props.match.params.type + '/' + this.props.match.params.astronautId + '/' + this.props.match.params.type;
         }
         else{
             url = '/' + this.props.match.params.type + '/' + this.props.match.params.astronautId + '/' + this.props.match.params.type;
