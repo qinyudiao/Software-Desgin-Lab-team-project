@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './components/Header.js';
-import ReactPlayer from 'react-player'; 
+import ReactPlayer from 'react-player';
 
 class Failed extends React.Component{
     constructor(props){
@@ -20,4 +20,4 @@ class Failed extends React.Component{
     }
 }
 
-export default Failed; 
+export default Failed;

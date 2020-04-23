@@ -37,7 +37,7 @@ class USAstronauts extends React.Component{
         url = ec2url + '/USAstronauts';
       }
       else{
-        url = 'http://localhost:8080/USAstronauts';
+        url = '/USAstronauts';
       }
       fetch(url)
       .then(response => response.json())
@@ -48,7 +48,7 @@ class USAstronauts extends React.Component{
         url = ec2url + '/RussianAstronauts';
       }
       else{
-        url = 'http://localhost:8080/RussianAstronauts';
+        url = '/RussianAstronauts';
       }
       fetch(url)
       .then(response => response.json())
@@ -59,7 +59,7 @@ class USAstronauts extends React.Component{
         url = ec2url + '/InternationalAstronauts';
       }
       else{
-        url = 'http://localhost:8080/InternationalAstronauts';
+        url = '/InternationalAstronauts';
       }
       fetch(url)
       .then(response => response.json())

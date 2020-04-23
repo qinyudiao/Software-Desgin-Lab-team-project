@@ -1,4 +1,5 @@
 import React from 'react';
+import './css/IndividualLaunch.css';
 import Header from './components/Header';
 import ec2url from './EC2Link';
 
@@ -18,7 +19,7 @@ class IndividualLaunch extends React.Component{
             url = ec2url + 'launch/' + this.props.match.params.launchId;
         }
         else{
-            url = 'https://localhost:8080/launch/' + this.props.match.params.launchId;
+            url = '/launch/' + this.props.match.params.launchId;
         }
         console.log(url);
         fetch(url)
@@ -36,11 +37,39 @@ class IndividualLaunch extends React.Component{
 
     render(){
         return(
-            <div>
+            <div className="color-box">
                 <Header />
-                {this.state.showInformation ? this.state.information.name : null}
-                {this.state.showInformation ? this.state.information.locationData.name : null}
-                {this.state.showInformation ? this.state.information.rocketData.name : null}
+                <h3 align="center">{this.state.showInformation ? this.state.information.name : null}</h3>
+                <table>
+                <tr>
+                <td>
+                {this.state.showInformation ?
+                (
+                    this.state.information.rocketData.imageURL !== 'Not found' ? <img src={this.state.information.rocketData.imageURL} height="300vh" /> : null
+                )
+                :
+                    null
+                }
+                </td>
+                <td valign="top">
+                <p> The {this.state.showInformation ? this.state.information.rocketData.name : null} launched from {this.state.showInformation ? this.state.information.locationData.name : null} on {this.state.showInformation ? this.state.information.isonet.slice(4,6) : null}/{this.state.showInformation ? this.state.information.isonet.slice(6,8) : null}/{this.state.showInformation ? this.state.information.isonet.slice(0,4) : null}.</p>
+                {this.state.showInformation ?
+                (
+                    this.state.information.holdreason !== null ? <p> This mission was delayed because {this.state.information.holdreason} </p> : null
+                )
+                :
+                    null
+                }
+                {this.state.showInformation ?
+                (
+                    this.state.information.failreason !== null ? <p> This mission failed due to {this.state.information.failreason} </p> : null
+                )
+                :
+                    null
+                }
+                </td>
+                </tr>
+                </table>
             </div>
         )
     }

@@ -1,4 +1,5 @@
 import React from 'react';
+import './css/IndividualAstronaut.css';
 import Header from './components/Header.js';
 import ec2url from './EC2Link';
 
@@ -20,7 +21,7 @@ class IndividualAstronaut extends React.Component{
             url = ec2url + this.props.match.params.type + '/' + this.props.match.params.astronautId + '/' + this.props.match.params.type;
         }
         else{
-            url = 'https://localhost:8080/' + this.props.match.params.type + '/' + this.props.match.params.astronautId + '/' + this.props.match.params.type;
+            url = '/' + this.props.match.params.type + '/' + this.props.match.params.astronautId + '/' + this.props.match.params.type;
         }
         fetch(url)
         .then(response => response.json())
@@ -43,18 +44,28 @@ class IndividualAstronaut extends React.Component{
 
     render(){
         return(
-            <div>
+            <div className="color-box">
                 <Header />
-                {this.state.showInformation ? this.state.information.wikiInfo.title : null}
-                {this.state.showInformation ? this.state.information.wikiInfo.extract : null}
-                {this.state.showInformation ? <a href={this.state.information.wikiInfo.page}>See more information</a> : null}
-                {this.state.showInformation ?
+                <table>
+                <tr>
+                <td>{this.state.showInformation ?
                 (
-                    this.state.information.wikiInfo.image !== 'Not found' ? <img src={this.state.information.wikiInfo.image} /> : null
+                    this.state.information.wikiInfo.image !== 'Not found' ? <img src={this.state.information.wikiInfo.image} height="300vh" /> : null
                 )
                 :
                     null
                 }
+                </td>
+                <td valign="top">
+                <p> {this.state.showInformation ? this.state.information.wikiInfo.extract : null}
+                {this.state.showInformation ? <a href={this.state.information.wikiInfo.page}>See more information</a> : null} </p>
+                </td>
+                </tr>
+                <tr>
+                <td> <h3> {this.state.showInformation ? this.state.information.wikiInfo.title : null} </h3>
+                </td>
+                </tr>
+                </table>
             </div>
         )
     }

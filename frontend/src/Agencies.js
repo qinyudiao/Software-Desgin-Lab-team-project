@@ -41,9 +41,9 @@ const fetchAgencies = async () => {
     url = ec2url + '/agency';
   }
   else{
-    url = 'https://localhost:8080/agency';
+    url = '/agency';
   }
-  const response = await fetch('http://localhost:8080/agency');
+  const response = await fetch(url);
   const data = await response.json();
   return data;
 }

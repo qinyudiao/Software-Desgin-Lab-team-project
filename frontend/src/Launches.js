@@ -22,7 +22,7 @@ class Launches extends React.Component{
       url = ec2url + '/launch';
     }
     else{
-      url = 'http://localhost:8080/launch';
+      url = '/launch';
     }
     fetch(url)
     .then(response => response.json())

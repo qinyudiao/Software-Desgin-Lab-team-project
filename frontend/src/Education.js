@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './css/Education.css';
 import Header from './components/Header.js';
-import ReactPlayer from 'react-player'; 
+import ReactPlayer from 'react-player';
 
 
 class Education extends Component{
@@ -20,6 +20,9 @@ class Education extends Component{
                     <div className="education-container">
                         <h1 id="education-title">Education </h1>
                     </div>
+                    <p align="center">
+                    <ReactPlayer width="70vw" height="70vh" url="https://www.youtube.com/watch?v=1yBwWLunlOM"/>
+                    </p>
                     <div className="education-container">
                         <p className="education-info-box">
                             A rocket launch is the takeoff phase of the flight of a rocket. Launches for orbital spaceflights, or into interplanetary space, are usually from a fixed location on the ground, but would also be possible from an aircraft or ship. Launches of suborbital flights (including missile launches), can also be from:
@@ -51,7 +54,6 @@ class Education extends Component{
                             <a href="https://www.nationalgeographic.com/science/space/reference/rockets-and-rocket-launches-explained/" style={{color: "#54b85e"}}>Check out this National Geographic article.</a>
                         </p>
                     </div>
-                    <ReactPlayer width="100vw" height="100vh" url="https://www.youtube.com/watch?v=1yBwWLunlOM"/>
                 </div>
             </div>
         )

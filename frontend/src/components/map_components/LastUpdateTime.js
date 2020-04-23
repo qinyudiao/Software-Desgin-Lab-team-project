@@ -23,7 +23,7 @@ export default class LastUpdateTime extends Component {
                 <p style={{
                     fontSize: "0.8vw",
                     marginBottom: 0,
-                }}>Last updated at(MM/DD/YYYY)</p>
+                }}>Last updated at</p>
                 <p style={{
                     fontSize: "1.2vw",
                     color: "#c5c5c5",
