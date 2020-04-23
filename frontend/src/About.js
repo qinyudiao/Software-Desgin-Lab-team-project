@@ -26,6 +26,7 @@ class About extends React.Component{
       else{ // Just use relative url when working on localhost
         url = '/about'
       }
+
       fetch(url)
       .then(response => response.json())
       .then(data => {
