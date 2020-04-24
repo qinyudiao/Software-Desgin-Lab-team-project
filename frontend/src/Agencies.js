@@ -91,7 +91,11 @@ class Agencies extends React.Component{
                 </Cell>
               </Grid>
             </div>
-            <Pagination postsPerPage={postsPerPage} totalPosts={this.state.filteredposts.length} paginate={paginate}/>
+            <div className="projects-grid" style={{display: 'flex'}}>
+              <Cell col={6} style={{margin:'auto'}}>
+                <Pagination postsPerPage={postsPerPage} totalPosts={this.state.filteredposts.length} paginate={paginate}/>
+              </Cell>
+            </div>
             <div className="projects-grid" style={{display: 'flex'}}>
               <div className="content">{this.toggleCategories()}</div>
             </div>
