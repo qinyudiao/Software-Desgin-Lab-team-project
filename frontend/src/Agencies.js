@@ -2,7 +2,6 @@ import React from 'react';
 import Header from './components/Header.js';
 import ReactTable from "react-table-6"
 import {Link} from 'react-router-dom'
-import './css/Agencies.css';
 import "react-table-6/react-table.css"
 import ec2url from './EC2Link';
 import { Form, FormControl} from 'react-bootstrap';
@@ -48,7 +47,6 @@ class Agencies extends React.Component{
     }
 
     onCheckChange(e){
-      console.log(e.target.checked)
       this.setState({
         [e.target.name]: e.target.checked
       })
@@ -68,10 +66,9 @@ class Agencies extends React.Component{
         return(
           <div className="category-tabs">
             <Header />
-            <div className='cont'>
             <div className="projects-grid" style={{display: 'flex'}}>
               <Grid>
-                <Cell col={1} style={{margin:'auto', border:'groove', width:'200px', background:'white'}}>
+                <Cell col={1} style={{margin:'auto', border:'groove', width:'200px'}}>
                   <div>
                     <Form inline id="searchform">
                         <FormControl type="text" name="search" id="search" className="mr-sm-2" placeholder="Search by Agency Name" ref={this.searchName} onChange={this.handleChange} />
@@ -83,7 +80,6 @@ class Agencies extends React.Component{
             </div>
             <div className="projects-grid" style={{display: 'flex'}}>
               <div className="content">{this.toggleCategories()}</div>
-              </div>
             </div>
 
           </div>
@@ -99,7 +95,7 @@ const fetchAgencies = async () => {
     url = ec2url + '/agency';
   }
   else{
-    url = '/agency';
+    url = 'http://localhost:8080/agency';
   }
   const response = await fetch(url);
   console.log(response);
