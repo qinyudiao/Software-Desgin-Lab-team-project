@@ -166,6 +166,7 @@ export function GenerateAgencyCards(props)
                       </CardActions>
                   <CardActions border>
                     <Button onClick={event =>  window.location.href='/agency/'+row.name}>More Info.</Button>
+                    <Button href={row.wikiURL}>Wikipida Page.</Button>
                   </CardActions>
                   <CardMenu style={{color: '#fff'}}>
                     <IconButton name="share" />
