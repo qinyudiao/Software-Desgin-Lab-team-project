@@ -19,13 +19,13 @@ class IndividualLaunch extends React.Component{
             url = ec2url + '/launch/' + this.props.match.params.launchId;
         }
         else{
-            url = '/launch/' + this.props.match.params.launchId;
+            url = `/launch/id=${this.props.match.params.launchId}`;
         }
         console.log(url);
         fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            console.log('data', data);
             this.setState({information: data});
             this.setState({showInformation: true});
         });

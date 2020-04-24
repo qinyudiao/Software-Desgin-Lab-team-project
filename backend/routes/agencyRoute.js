@@ -81,19 +81,17 @@ router.get('/', (req, res) =>{
     });
 });
 
-// Search for agency name in database and return result
-router.get('/:agencyId', (req, res) =>{
-    Agency.findOne({name: req.params.agencyId}, (err, result) =>{
+router.get('/ObjectId=:ObjectId', (req, res) =>{
+    Agency.findById('5e96111cdcddcd378a4c087e', (err, result) =>{
+        console.log('debug agency.find', req.params.ObjectId);
         if(err){
             console.log(err);
         }
         else{
+            console.log(result);
             res.send(result);
         }
     });
 });
-
-
-
 
 module.exports = router;

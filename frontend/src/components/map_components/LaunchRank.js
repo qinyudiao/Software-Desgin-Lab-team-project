@@ -3,6 +3,7 @@ import { ListGroup } from 'react-bootstrap'
 import { codes, byAlpha3 } from 'iso-country-codes';
 import moment from 'moment';
 import 'moment-timezone';
+import ec2url from '../../EC2Link';
 
 export default class LaunchRank extends Component {
     constructor(props){
@@ -13,23 +14,22 @@ export default class LaunchRank extends Component {
         }
     }
 
-
     componentDidMount(){
         let dict = {};
         codes.forEach(country => {
             dict[country.alpha3] = 0;
         });
         // get date
-        const date = moment().format("YYYY-MM-DD");
-        const url = `https://launchlibrary.net/1.4/launch/?limit=5000&fields=location&enddate=${date}`;
-        console.log(url);
-        fetch(url, {
-            method: "GET"
-        })
-        .then(response => response.json())
-        .then(data => {
-            data.launches.forEach(launch => {
-                dict[launch.location.countryCode] += 1;
+        // const date = moment().format("YYYY-MM-DD");
+        // const url = `https://launchlibrary.net/1.4/launch/?limit=5000&fields=location&enddate=${date}`;
+        // console.log(url);
+        // fetch(url, {
+        //     method: "GET"
+        // })
+        fetchLaunches()
+        .then((launches) => {
+            launches.forEach(launch => {
+                dict[launch.locationData.countrycode] += 1;
             });
             const entries= [];
             for(let [key,value] of Object.entries(dict)){
@@ -42,7 +42,6 @@ export default class LaunchRank extends Component {
         });
 
     };
-
 
     render() {
         return (
@@ -64,4 +63,20 @@ export default class LaunchRank extends Component {
             </React.Fragment>
         )
     }
+    
+}
+
+const fetchLaunches = async () => {
+    let url = '';
+    if(process.env.NODE_ENV === 'production'){
+      url = ec2url + '/launch';
+    }
+    else{
+      url = '/launch';
+    }
+    const response = await fetch(url);
+    console.log(response);
+    const data = await response.json();
+    console.log(data);
+    return data;
 }

@@ -22,15 +22,12 @@ class Agencies extends React.Component{
       this.onCheckChange = this.onCheckChange.bind(this)
     }
 
-
-
     componentDidMount() {
       fetchAgencies()
       .then((posts) => {
         this.setState({posts: posts, filteredposts: posts});
       });
     }
-
 
     toggleCategories() {
         if(true){
@@ -42,8 +39,6 @@ class Agencies extends React.Component{
         }
       }
 
-
-
     handleChange = () =>{
       let vara = this.searchName.current.value
       this.setState({filteredposts: this.state.posts.filter((row) => {
@@ -51,8 +46,6 @@ class Agencies extends React.Component{
       })})
       this.toggleCategories()
     }
-
-
 
     onCheckChange(e){
       console.log(e.target.checked)
@@ -109,7 +102,9 @@ const fetchAgencies = async () => {
     url = '/agency';
   }
   const response = await fetch(url);
+  console.log(response);
   const data = await response.json();
+  console.log(data);
   return data;
 }
 

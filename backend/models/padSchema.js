@@ -24,10 +24,21 @@ const padSchema = Schema({
         type: Schema.Types.ObjectId,
         ref: 'Location'
     },
-    agencies: [
+    agenciesReference: [
         {
             type: Schema.Types.ObjectId,
             ref: 'Agency'
+        }
+    ],
+    "agencies": [
+        {
+            "id": {type: Number},
+            "name": {type: String},
+            "abbrev": {type: String},
+            "countryCode": {type: String},
+            "type": {type: Number},
+            "wikiURL": {type: String},
+            "infoURLs": [String]
         }
     ],
     "changed": {type: String}

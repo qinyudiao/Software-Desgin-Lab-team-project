@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { GoogleMap, Marker, withScriptjs, withGoogleMap, InfoWindow } from "react-google-maps";
 import { MarkerClusterer as MarkerCluster} from "react-google-maps/lib/components/addons/MarkerClusterer";
 import { compose, withProps, withStateHandlers } from "recompose";
+import ec2url from '../../EC2Link';
 
 const mapAPIKey = `AIzaSyD4MYem9eEY7_iLZSCyOdy-40GBCq4x2vY`
 
@@ -206,15 +207,9 @@ export default class MapContainer extends Component {
     }
 
     componentDidMount(){
-      // console.log('didMount');
-      const url = `https://launchlibrary.net/1.4/pad/?limit=1000/`;
-      fetch(url, {
-          method: "GET"
-      })
-      .then(response => response.json())
+      fetchPads()
       .then(data => {
-          console.log('data', data.pads);
-          let pads = data.pads.filter(pad => (pad.latitude != 0) && (pad.longitude != 0) )
+          let pads = data.filter(pad => (pad.latitude != 0) && (pad.longitude != 0) )
           .map((pad, index) => (
               {
                   id: pad.id,
@@ -240,7 +235,7 @@ export default class MapContainer extends Component {
       // console.log('didUpdate');
     }
 
-    render () {
+    render() {
         const { pads } = this.state;
         // console.log(this.state);
         return (
@@ -252,4 +247,34 @@ export default class MapContainer extends Component {
             </div>
         )
     }
+}
+
+const fetchPads = async () => {
+  let url = '';
+  if(process.env.NODE_ENV === 'production'){
+    url = ec2url + '/pad';
+  }
+  else{
+    url = '/pad';
+  }
+  const response = await fetch(url);
+  console.log(response);
+  const data = await response.json();
+  console.log(data);
+  return data;
+}
+
+const fetchAgencyByObjectId = async (ObjectId) => {
+  let url = '';
+  if(process.env.NODE_ENV === 'production'){
+    url = `${ec2url}/agency/ObjectId=${ObjectId}`;
+  }
+  else{
+    url = `/agency/ObjectId=${ObjectId}`;
+  }
+  const response = await fetch(url);
+  // console.log(response);
+  const data = await response.json();
+  // console.log(data);
+  return data;
 }

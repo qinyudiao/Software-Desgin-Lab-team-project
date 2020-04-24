@@ -201,7 +201,7 @@ updateAgencies = () =>{
     });
 }
 
-router.get('/:launchId', (req, res) =>{
+router.get('/id=:launchId', (req, res) =>{
     Launch.findOne({name: req.params.launchId}, (err, result) =>{
         console.log(req.params.launchId);
         if(err){
