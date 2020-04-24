@@ -1,7 +1,9 @@
+/* eslint-disable no-undef */
 import React, { Component } from 'react';
 import { GoogleMap, Marker, withScriptjs, withGoogleMap, InfoWindow } from "react-google-maps";
 import { MarkerClusterer as MarkerCluster} from "react-google-maps/lib/components/addons/MarkerClusterer";
 import { compose, withProps, withStateHandlers } from "recompose";
+import MapFilter from './MapFilter';
 import ec2url from '../../EC2Link';
 
 const mapAPIKey = `AIzaSyD4MYem9eEY7_iLZSCyOdy-40GBCq4x2vY`
@@ -99,7 +101,9 @@ const MapWithMarkers = compose(
   withStateHandlers(() => 
     ({
       infoIndexes: new Set(),
-      mouseOverIndex: null
+      mouseOverIndex: null,
+      showActive: true,
+      showRetired: true
     }),
     {
       onMarkerClusterClick: () => (markerCluster) => {
@@ -107,13 +111,19 @@ const MapWithMarkers = compose(
         console.log(`Current clicked markers length: ${clickedMarkers.length}`)
         console.log(clickedMarkers)
       },
+      onActiveOnlyClick: () => () => (
+        {
+          showActive: true,
+          showRetired: false,
+        }
+      ),
       onMarkerClick: ({infoIndexes}) => (index) => (
         infoIndexes.has(index) ? infoIndexes.delete(index) : infoIndexes.add(index),
         {
           infoIndexes: new Set(infoIndexes)
         }
       ),
-      onInfoWindowCloseClick: ({ infoIndexes }) => (index) => (
+      onInfoWindowCloseClick: ({infoIndexes}) => (index) => (
         infoIndexes.delete(index),
         {
           infoIndexes: new Set(infoIndexes)
@@ -146,12 +156,17 @@ const MapWithMarkers = compose(
         >
           <MarkerCluster
             onClick={props.onMarkerClusterClick}
-            averageCenter
+            averageCenter 
             enableRetinaIcons
             gridSize={30} // group markers that are 15 units away from each other
           >
-            {
-              props.isMarkerShown && props.marks.map((marker) => (
+            {  console.log(props),
+              props.isMarkerShown && props.marks
+              .filter(marker => 
+                ((marker.retired === 1) === props.showRetired)
+                ||  ((marker.retired === 0) === props.showActive)
+              )
+              .map((marker) => (
                 <Marker
                   icon={{
                       url: require('../../assets/launchpad-marker.png'),
@@ -165,7 +180,7 @@ const MapWithMarkers = compose(
                   onMouseOut={() => props.onMarkerMouseOut()}
                 >
                   {
-                    // (console.log(marker),
+                    // console.log(marker),
                       (props.infoIndexes.has(marker.id) || props.mouseOverIndex === marker.id) &&
                     <InfoWindow 
                       onCloseClick={() => props.onInfoWindowCloseClick(marker.id)}
@@ -192,8 +207,17 @@ const MapWithMarkers = compose(
                     </InfoWindow>
                   }
                 </Marker>
-            ))}
+              ))
+            }
             </MarkerCluster>
+            <MapFilter position={google.maps.ControlPosition.TOP_CENTER}>
+              <button 
+                onClick={props.onActiveOnlyClick}
+                style={{marginTop: '1rem'}}
+              >
+                Show active only
+              </button>
+            </MapFilter>
         </GoogleMap>
     )
 );

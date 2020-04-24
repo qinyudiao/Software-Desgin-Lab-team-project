@@ -23,16 +23,12 @@ class Launches extends React.Component{
     this.toggleSortDate = this.toggleSortDate.bind(this)
   }
 
-
-
   componentDidMount() {
     fetchLaunches()
     .then((posts) => {
       this.setState({isLoading: false, posts: posts, filteredposts: posts});
     });
   }
-
-
 
   toggleCategories() {
     if(true){
@@ -43,8 +39,6 @@ class Launches extends React.Component{
       )
     }
   }
-
-
 
   handleChange = () =>{
     let vara = this.searchName.current.value
