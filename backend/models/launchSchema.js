@@ -50,8 +50,9 @@ const launchSchema = Schema({
 		}
 	],
     "lsp": {
-        type: Schema.Types.ObjectId,
-        ref: 'Agency'
+        "id": {type: Number},
+        "name": {type: String},
+        "countryCode": {type: String}
     },
     vidURLs: [String],
     holdreason: {type: String},

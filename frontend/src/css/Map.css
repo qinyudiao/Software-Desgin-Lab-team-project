@@ -62,7 +62,7 @@
 }
 
 .column-item-heading {
-    font-size: 2.5vmin;
+    font-size: 200%;
 }
 
 #total-launches {
@@ -73,9 +73,9 @@
 
 #total-launches-number {
     color: red;
-    font-size: 8vh;
+    font-size: 400%;
     font-weight: normal;
-    margin-bottom: 0;
+    padding-top: 1rem;
 }
 
 #map-container {
@@ -89,11 +89,11 @@
 }
 
 #launch-rank-title {
-    font-size: 2vmin;
+    font-size: 180%;
     font-weight: 700;
 }
 
 #launch-rank-list {
-    height: 60vh;
+    height: 90%;
     overflow-y: scroll;
 }

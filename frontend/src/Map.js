@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './css/Map.css';
-import moment from 'moment';
-import 'moment-timezone';
+// import moment from 'moment';
+// import 'moment-timezone';
 import Header from './components/Header';
 import MapContainer from './components/map_components/MapContainer';
 import LaunchRank from './components/map_components/LaunchRank';
 import LastUpdateTime from './components/map_components/LastUpdateTime';
+import ec2url from './EC2Link';
 
 class Map extends Component {
   constructor(props){
@@ -15,17 +16,21 @@ class Map extends Component {
     }
   }
 
-  componentDidMount(){
-    const date = moment().format("YYYY-MM-DD");
-    const url = `https://launchlibrary.net/1.4/launch/?enddate=${date}`;
-    console.log();
-    fetch(url, {
-        method: "GET"
-    })
-    .then(response => response.json())
-    .then(data => {
-        this.setState({launch_number: data.total})
-    });
+  componentDidMount() {
+    // const date = moment().format("YYYY-MM-DD");
+    // const url = `https://launchlibrary.net/1.4/launch/?enddate=${date}`;
+    // console.log();
+    // fetch(url, {
+    //     method: "GET"
+    // })
+    // .then(response => response.json())
+    // .then(data => {
+    //     this.setState({launch_number: data.total})
+    // });
+      fetchTotalLaunchNumber()
+      .then(data => {
+          this.setState({launch_number: data.count})
+      });
   }
 
   render(){
@@ -37,7 +42,7 @@ class Map extends Component {
                 <div className="blackboard" style={ {height:"8vh"} }>
                 <div id="headline-container">
                   <p id="headline">
-                    Every rocket launch since 1960 - Launches data source from Launch Library at <a href="https://launchlibrary.net/" style={{color: "#99c"}}>
+                    Every rocket launch since 1961 - Launches data source from Launch Library at <a href="https://launchlibrary.net/" style={{color: "#99c"}}>
                       https://launchlibrary.net/
                       </a> - updating
                   </p>
@@ -51,7 +56,7 @@ class Map extends Component {
                     <p id="total-launches-number"> {this.state.launch_number}</p>
                   </div>
                   <div className="column-item" style={{height: "59.5vh"}}>
-                    <LaunchRank />
+                    <LaunchRank category={"country"}/>
                   </div>
                   <div className="column-item" style={{height: "7vh", display: "absolute"}}>
                     <LastUpdateTime />
@@ -63,7 +68,7 @@ class Map extends Component {
                     <MapContainer />
                   </div>
                   <div className="column-item" style={{height: "21.1vh", marginTop: "0.8vh", display: "absolute", overflow: "auto"}}>
-                    <p style={{color: "#aaa", fontSize: "60%", marginBottom: "0"}}>
+                    <p style={{color: "#aaa", fontSize: "110%", marginBottom: "0"}}>
                         Note:<br/>
                         - The first launch recorded in this database is a Atlas LV-3A rocket carried a Samos 2 launched by United States Air Force launched and launched at January 31, 1961 20:21:19 UTC.<br/>
                         - The total launches number is based on all the recorded launches, there are some rocket launches that are not recorded.<br/>
@@ -75,7 +80,7 @@ class Map extends Component {
                 </span>
 
                 <span id="right-column" className="column">
-                  <div id="launches-plot-month" className="column-item" style={{height: "27.5vh"}}>
+                  {/* <div id="launches-plot-month" className="column-item" style={{height: "27.5vh"}}>
                     <p className="column-item-heading">Plot: Launches by month in last 5 year</p>
                     <p>Coming soon in phase 3</p>
                   </div>
@@ -86,7 +91,10 @@ class Map extends Component {
                   <div id="launches-plot-year" className="column-item" style={{height: "27.6vh"}}>
                     <p className="column-item-heading">Plot: Total launches over years</p>
                     <p>Coming soon in phase 3</p>
-                  </div>
+                  </div> */}
+                  <div id="launches-plot-year" className="column-item" style={{height: "84.1vh"}}>
+                    <LaunchRank category={"agency"}/>
+                  </div> 
                 </span>
               </div>
 
@@ -98,3 +106,18 @@ class Map extends Component {
 }
 
 export default Map;
+
+const fetchTotalLaunchNumber = async () => {
+  let url = '';
+  if(process.env.NODE_ENV === 'production'){
+    url = ec2url + '/launch/total';
+  }
+  else{
+    url = '/launch/total';
+  }
+  const response = await fetch(url);
+  // console.log(response);
+  const data = await response.json();
+  // console.log('dsad',data);
+  return data;
+}

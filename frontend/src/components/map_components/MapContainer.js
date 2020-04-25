@@ -396,17 +396,17 @@ const fetchPads = async () => {
   return data;
 }
 
-const fetchAgencyByObjectId = async (ObjectId) => {
-  let url = '';
-  if(process.env.NODE_ENV === 'production'){
-    url = `${ec2url}/agency/ObjectId=${ObjectId}`;
-  }
-  else{
-    url = `/agency/ObjectId=${ObjectId}`;
-  }
-  const response = await fetch(url);
-  // console.log(response);
-  const data = await response.json();
-  // console.log(data);
-  return data;
-}
+// const fetchAgencyByObjectId = async (ObjectId) => {
+//   let url = '';
+//   if(process.env.NODE_ENV === 'production'){
+//     url = `${ec2url}/agency/ObjectId=${ObjectId}`;
+//   }
+//   else{
+//     url = `/agency/ObjectId=${ObjectId}`;
+//   }
+//   const response = await fetch(url);
+//   // console.log(response);
+//   const data = await response.json();
+//   // console.log(data);
+//   return data;
+// }

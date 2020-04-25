@@ -9,21 +9,23 @@ export default class MapFilter extends Component {
 
     render() {
         return (
-            <React.Fragment>
-                <FilterList
+            <React.Fragment >
+                <div style={{marginLeft: "0.5rem"}}>
+                    <FilterList
                     filterList={this.props.filterListActive}
                     updateSelected={this.props.updateSelectedActive}
-                />
-                <hr />
-                <FilterList
-                    filterList={this.props.filterListLaunch}
-                    updateSelected={this.props.updateSelectedLaunch}
-                />
-                <hr />
-                <FilterList
-                    filterList={this.props.filterListCountry}
-                    updateSelected={this.props.updateSelectedCountry}
-                />
+                    />
+                    <hr />
+                    <FilterList
+                        filterList={this.props.filterListLaunch}
+                        updateSelected={this.props.updateSelectedLaunch}
+                    />
+                    <hr />
+                    <FilterList
+                        filterList={this.props.filterListCountry}
+                        updateSelected={this.props.updateSelectedCountry}
+                    />
+                </div>
             </React.Fragment>
         );
     }
