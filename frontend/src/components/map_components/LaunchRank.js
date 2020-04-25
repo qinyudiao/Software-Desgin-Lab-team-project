@@ -19,15 +19,10 @@ export default class LaunchRank extends Component {
         codes.forEach(country => {
             dict[country.alpha3] = 0;
         });
-        // get date
-        // const date = moment().format("YYYY-MM-DD");
-        // const url = `https://launchlibrary.net/1.4/launch/?limit=5000&fields=location&enddate=${date}`;
-        // console.log(url);
-        // fetch(url, {
-        //     method: "GET"
-        // })
         fetchLaunches()
         .then((launches) => {
+            // get date
+        // const date = moment().format("YYYY-MM-DD");
             launches.forEach(launch => {
                 dict[launch.locationData.countrycode] += 1;
             });
@@ -47,19 +42,19 @@ export default class LaunchRank extends Component {
         return (
             <React.Fragment>
                 <p id="launch-rank-title">Launches by Country</p>     
-                    <ListGroup variant="flush" style={{
-                            color: "white",
-                            width: "100%",
-                        }} id="launch-rank-list">
-                        { this.state.loading ? <div className="column-item" style={{color:'red', borderWidth:0}}>Loading...</div> :
-                            this.state.entries.map((entry, index) => {
-                                return <ListGroup.Item key={index} style={{ backgroundColor: "transparent"}}>
-                                    <span style={{color: 'red'}}>{`${entry.number} `}</span>
-                                    <span>{`${entry.name}`}</span>
-                                </ListGroup.Item>
-                            })
-                        }
-                    </ListGroup>
+                <ListGroup variant="flush" style={{
+                        color: "white",
+                        width: "100%",
+                    }} id="launch-rank-list">
+                    { this.state.loading ? <div className="column-item" style={{color:'red', borderWidth:0}}>Loading...</div> :
+                        this.state.entries.map((entry, index) => {
+                            return <ListGroup.Item key={index} style={{ backgroundColor: "transparent"}}>
+                                <span style={{color: 'red'}}>{`${entry.number} `}</span>
+                                <span>{`${entry.name}`}</span>
+                            </ListGroup.Item>
+                        })
+                    }
+                </ListGroup>
             </React.Fragment>
         )
     }
@@ -75,8 +70,8 @@ const fetchLaunches = async () => {
       url = '/launch';
     }
     const response = await fetch(url);
-    console.log(response);
+    // console.log(response);
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     return data;
 }

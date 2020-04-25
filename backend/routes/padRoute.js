@@ -7,7 +7,7 @@ let Pad = require('../models/padSchema.js');
 let Location = require('../models/locationSchema.js');
 let Agency = require('../models/agencySchema.js');
 
-cron.schedule('20 * 8 * * 0', () => {
+cron.schedule('54 * 8 * * 0', () => {
     console.log('running pads cron job');
     request('https://launchlibrary.net/1.4/pad/?limit=500', (err, res) => {
         // console.log('err: ', err, 'res: ', res);
@@ -24,11 +24,13 @@ cron.schedule('20 * 8 * * 0', () => {
                     }
                     else {
                         console.log("new document", pad.id);
+                        pad.agenciesReference = [];
                         Location.findOne({ id: pad.locationid }, (err, foundLocation) => {
                         })
                         .then((foundLocation) => {
+                            // console.log('foundloc', foundLocation);
+                            pad.countryCode = foundLocation !== null ? foundLocation.countrycode : 'UNK';
                             pad.location = foundLocation;
-                            pad.agenciesReference = [];
                             if(pad.agencies !== null && pad.agencies.length >= 1) {
                                 Agency.findOne({ id: pad.agencies[0].id }, (err, foundAgency) => {
                                     pad.agenciesReference[0] = foundAgency

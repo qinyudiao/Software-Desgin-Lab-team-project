@@ -5,7 +5,7 @@ const cron = require('node-cron');
 
 let Location = require('../models/locationSchema.js');
 
-cron.schedule('20 * 8 * * Sunday', () =>{
+cron.schedule('45 * 8 * * 0', () =>{
     console.log('running locations cron job');
     request('https://launchlibrary.net/1.4/location?limit=50', (err, res) => {
         // console.log('err: ', err, 'res: ', res);

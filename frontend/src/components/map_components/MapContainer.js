@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { GoogleMap, Marker, withScriptjs, withGoogleMap, InfoWindow } from "react-google-maps";
 import { MarkerClusterer as MarkerCluster} from "react-google-maps/lib/components/addons/MarkerClusterer";
 import { compose, withProps, withStateHandlers } from "recompose";
+import MapControl from './MapControl';
 import MapFilter from './MapFilter';
 import ec2url from '../../EC2Link';
 
@@ -103,7 +104,58 @@ const MapWithMarkers = compose(
       infoIndexes: new Set(),
       mouseOverIndex: null,
       showActive: true,
-      showRetired: true
+      showRetired: true,
+      filterListActive: [
+        {
+          id: 'Active',
+          title: 'Active',
+          selected: true
+        },
+        {
+          id: 'Retired',
+          title: 'Retired',
+          selected: true
+        },
+      ],
+      filterListLaunch: [
+        {
+          id: 'Launch',
+          title: 'Launch',
+          selected: true
+        },
+        {
+          id: 'Landing',
+          title: 'Landing',
+          selected: true
+        }
+      ],
+      filterListCountry: [
+        {
+          id: 'USA',
+          title: 'USA',
+          selected: true
+        },
+        {
+          id: 'Russia',
+          title: 'Russia',
+          selected: true
+        },
+        {
+          id: 'China',
+          title: 'China',
+          selected: true
+        },
+        {
+          id: 'Kazakhstan',
+          title: 'Kazakhstan',
+          selected: true
+        },
+        {
+          id: 'Others',
+          title: 'Others',
+          selected: true
+        }
+      ]
     }),
     {
       onMarkerClusterClick: () => (markerCluster) => {
@@ -111,10 +163,37 @@ const MapWithMarkers = compose(
         console.log(`Current clicked markers length: ${clickedMarkers.length}`)
         console.log(clickedMarkers)
       },
-      onActiveOnlyClick: () => () => (
+      updateSelectedActive: ({filterListActive}) => id => (
+        console.log('update', filterListActive, id), // this console log runs after the state is updated
         {
-          showActive: true,
-          showRetired: false,
+            filterListActive: filterListActive.map(filterItem => {
+                if (filterItem.id === id) {
+                    filterItem.selected = !filterItem.selected;
+                }
+                return filterItem;
+            })
+        }
+      ),
+      updateSelectedLaunch: ({filterListLaunch}) => id => (
+        console.log('update launch/landing'), // this console log runs after the state is updated
+        {
+            filterListLaunch: filterListLaunch.map(filterItem => {
+              if (filterItem.id === id) {
+                  filterItem.selected = !filterItem.selected;
+              }
+              return filterItem;
+            })
+        }
+      ),
+      updateSelectedCountry: ({filterListCountry}) => id => (
+        console.log('update country'), // this console log runs after the state is updated
+        {
+            filterListCountry: filterListCountry.map(filterItem => {
+              if (filterItem.id === id) {
+                  filterItem.selected = !filterItem.selected;
+              }
+              return filterItem;
+            })
         }
       ),
       onMarkerClick: ({infoIndexes}) => (index) => (
@@ -160,13 +239,38 @@ const MapWithMarkers = compose(
             enableRetinaIcons
             gridSize={30} // group markers that are 15 units away from each other
           >
-            {  console.log(props),
+            { /*  console.log(props), */
               props.isMarkerShown && props.marks
-              .filter(marker => 
-                ((marker.retired === 1) === props.showRetired)
-                ||  ((marker.retired === 0) === props.showActive)
+              // filter by active/retired
+              .filter(marker => {
+                return ((marker.retired === 1) && props.filterListActive[1].selected)
+                ||  ((marker.retired === 0) && props.filterListActive[0].selected)
+                }
               )
-              .map((marker) => (
+              // filter by pad type
+              .filter(marker => 
+                ((marker.padType === 1) && props.filterListLaunch[1].selected)
+                ||  ((marker.padType === 0) && props.filterListLaunch[0].selected)
+              )
+              // filter by country
+              .filter(marker => {
+                  if (((marker.countryCode === 'USA') || (((marker.agencies === null) || (marker.agencies.length === 0)) ? false : (marker.agencies[0].countryCode === 'USA'))) && props.filterListCountry[0].selected)
+                    return true;
+                  else if (((marker.countryCode === 'RUS') || (((marker.agencies === null) || (marker.agencies.length === 0)) ? false : (marker.agencies[0].countryCode === 'RUS'))) && props.filterListCountry[1].selected)
+                    return true;
+                  else if (((marker.countryCode === 'CHN') || (((marker.agencies === null) || (marker.agencies.length === 0)) ? false : (marker.agencies[0].countryCode === 'CHN'))) && props.filterListCountry[2].selected)
+                    return true;
+                  else if (((marker.countryCode === 'KAZ') || (((marker.agencies === null) || (marker.agencies.length === 0)) ? false : (marker.agencies[0].countryCode === 'KAZ'))) && props.filterListCountry[3].selected)
+                    return true;
+                  else if ((marker.countryCode !== 'USA' && marker.countryCode !== 'RUS' && marker.countryCode !== 'CHN' && marker.countryCode !== 'KAZ') && props.filterListCountry[4].selected) {
+                    if ((marker.agencies !== null) && (marker.agencies.length > 0))
+                      return ((marker.agencies[0].countryCode === 'USA') || (marker.agencies[0].countryCode === 'RUS') || (marker.agencies[0].countryCode === 'CHN') || (marker.agencies[0].countryCode === 'KAZ')) ? false : true;
+                    return true;
+                  }
+                  return false;
+                }
+              )
+              .map(marker => (
                 <Marker
                   icon={{
                       url: require('../../assets/launchpad-marker.png'),
@@ -210,14 +314,16 @@ const MapWithMarkers = compose(
               ))
             }
             </MarkerCluster>
-            <MapFilter position={google.maps.ControlPosition.TOP_CENTER}>
-              <button 
-                onClick={props.onActiveOnlyClick}
-                style={{marginTop: '1rem'}}
-              >
-                Show active only
-              </button>
-            </MapFilter>
+            <MapControl position={google.maps.ControlPosition.LEFT_CENTER}>
+              <MapFilter
+                filterListActive={props.filterListActive}
+                filterListLaunch={props.filterListLaunch}
+                filterListCountry={props.filterListCountry}
+                updateSelectedActive={props.updateSelectedActive}
+                updateSelectedLaunch={props.updateSelectedLaunch}
+                updateSelectedCountry={props.updateSelectedCountry}
+              />
+            </MapControl>
         </GoogleMap>
     )
 );
@@ -240,6 +346,8 @@ export default class MapContainer extends Component {
                   name: pad.name,
                   retired: pad.retired,
                   padType: pad.padType,
+                  countryCode: pad.countryCode,
+                  location: pad.location,
                   agencies: pad.agencies,
                   lat: Number(pad.latitude),
                   lng: Number(pad.longitude),
@@ -282,9 +390,9 @@ const fetchPads = async () => {
     url = '/pad';
   }
   const response = await fetch(url);
-  console.log(response);
+  // console.log(response);
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data;
 }
 

@@ -13,7 +13,7 @@ const padSchema = Schema({
     },
     "countryCode": {type: String},
     "mapURL": {type: String},
-    "padType": {type: Number}, // 0 for launching, 1 for landing
+    "padType": {type: Number}, // 0 for launch, 1 for landing
     "retired": {type: Number},
     "infoURL": {type: String},
     "wikiURL": {type: String},
@@ -24,6 +24,7 @@ const padSchema = Schema({
         type: Schema.Types.ObjectId,
         ref: 'Location'
     },
+    locationid: {type: Number},
     agenciesReference: [
         {
             type: Schema.Types.ObjectId,
