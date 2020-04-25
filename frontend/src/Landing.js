@@ -4,9 +4,10 @@ import './css/Landing.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import Header from './components/Header.js';
-import launch1 from './assets/launch1.jpg'
-import launch2 from './assets/launch2.jpg'
-import launch3 from './assets/launch3.jpg';
+import launch1 from './assets/launch1.gif'
+import launch2 from './assets/launch2.gif'
+import launch3 from './assets/launch3.gif';
+import launch4 from './assets/launch4.gif';
 import SubscriberForm from './components/SubscriberForm';
 import UnsubscriberForm from './components/UnsubscriberForm';
 import ec2url from './EC2Link';
@@ -51,7 +52,7 @@ class Landing extends React.Component{
       </Header>
         <Grid className="landing-grid" style={{width: '100%'}}>
           <Cell col={12}>
-          <Carousel autoPlay showThumbs={false} autoLoop={true} interval="5000" wrap={true} infiniteLoop={true}>
+          <Carousel autoPlay showThumbs={false} autoLoop={true} interval="3000" wrap={true} infiniteLoop={true}>
             <div>
               <img alt ="rocket" src={launch1} height="750"/>
               <div style={{background: '#000', width:'100%', position:'relative', top:'-80px', color:"white", opacity:"0.5"}}>
@@ -71,6 +72,13 @@ class Landing extends React.Component{
               <div style={{background: '#000', width:'100%', position:'relative', top:'-80px', color:"white", opacity:"0.5"}}>
                 <h1 style={{textAlign:'left', textColor:"#fff"}}>SpaceX's Falcon Heavy Launch</h1>
                 <p style={{textAlign:'left'}}>SpaceX's performs its first Falcon Heavy launch with a Tesla Roadster in its payload!</p>
+              </div>
+            </div>
+            <div>
+              <img alt ="rocket" src={launch4} height="750"/>
+              <div style={{background: '#000', width:'100%', position:'relative', top:'-80px', color:"white", opacity:"0.5"}}>
+                <h1 style={{textAlign:'left', textColor:"#fff"}}>SpaceX's Lands Both Boosters Simultaineously!</h1>
+                <p style={{textAlign:'left'}}>Following SpaceX's first test of their Heavy Launch Vehicle they miraculously displayed an almost impossible feat!</p>
               </div>
             </div>
             </Carousel>

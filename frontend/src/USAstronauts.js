@@ -5,6 +5,7 @@ import './css/US.css';
 import "react-table-6/react-table.css";
 import {Link} from 'react-router-dom';
 import ec2url from './EC2Link';
+import Pagination from './components/Pagination.js'
 import { Form, FormControl} from 'react-bootstrap';
 import GenerateUSAstronautCards from './components/AstronautCards.js'
 import {GenerateRussianAstronautCards, GenerateInternationalAstronautCards} from './components/AstronautCards.js'
@@ -26,7 +27,8 @@ class USAstronauts extends React.Component{
           CurrentCheck: false,
           DeceasedCheck: false,
           FormerCheck: false,
-          IgnoreCheck: false
+          IgnoreCheck: false,
+          currentPage1: 1
         };
         this.searchName = React.createRef();
         this.onCheckChange = this.onCheckChange.bind(this)
@@ -38,7 +40,7 @@ class USAstronauts extends React.Component{
         url = ec2url + '/USAstronauts';
       }
       else{
-        url = '/USAstronauts';
+        url = 'http://localhost:8080/USAstronauts';
       }
       fetch(url)
       .then(response => response.json())
@@ -49,7 +51,7 @@ class USAstronauts extends React.Component{
         url = ec2url + '/RussianAstronauts';
       }
       else{
-        url = '/RussianAstronauts';
+        url = 'http://localhost:8080/RussianAstronauts';
       }
       fetch(url)
       .then(response => response.json())
@@ -60,7 +62,7 @@ class USAstronauts extends React.Component{
         url = ec2url + '/InternationalAstronauts';
       }
       else{
-        url = '/InternationalAstronauts';
+        url = 'http://localhost:8080/InternationalAstronauts';
       }
       fetch(url)
       .then(response => response.json())
@@ -68,11 +70,23 @@ class USAstronauts extends React.Component{
     }
 
     toggleCategories() {
+      let postsPerPage1 = 12;
+      let indexOfLastPost1 = this.state.currentPage1 * postsPerPage1;
+      let indexOfFirstPost1 = indexOfLastPost1 - postsPerPage1;
+      let currentPosts1 = this.state.filteredposts.slice(indexOfFirstPost1, indexOfLastPost1);
+
+      const paginate = (pageNumber) => {
+        this.setState({currentPage1: pageNumber})
+      }
 
       if(this.state.activeTab === 0){
         return(
-          <div className="projects-grid" style={{display: 'flex'}}>
-            <GenerateUSAstronautCards data={this.state.filteredposts}/>
+          <div className="projects-grid" style={{width: '100%', margin: 'auto'}}>
+            <Pagination postsPerPage={postsPerPage1} totalPosts={this.state.filteredposts.length} paginate={paginate}/>
+            <Grid>
+              <Cell col={8}></Cell>
+            </Grid>
+            <GenerateUSAstronautCards data={currentPosts1}/>
           </div>
         )
       } else if(this.state.activeTab === 1){
@@ -179,7 +193,6 @@ class USAstronauts extends React.Component{
                 </Cell>
               </Grid>
             </div>
-
             <Grid>
               <Cell col={12}>
                 <div className="content">{this.toggleCategories()}</div>

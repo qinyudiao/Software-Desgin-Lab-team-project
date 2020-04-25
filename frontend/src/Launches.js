@@ -4,6 +4,7 @@ import ReactTable from "react-table-6"
 import "react-table-6/react-table.css"
 import ec2url from './EC2Link';
 import {Link} from 'react-router-dom';
+import Pagination from './components/Pagination.js'
 import { Form, FormControl} from 'react-bootstrap';
 import {GenerateLaunchCards} from './components/AstronautCards.js'
 import { Tabs, Tab, Grid, Cell, Card, CardTitle, CardText, CardActions, Button, CardMenu, IconButton } from 'react-mdl'
@@ -16,7 +17,8 @@ class Launches extends React.Component{
       posts: [],
       filteredposts: [],
       checkIfFailure: false,
-      checkMostRecentLaunches: false
+      checkMostRecentLaunches: false,
+      currentPage: 1
     }
     this.searchName = React.createRef();
     this.onCheckChange = this.onCheckChange.bind(this)
@@ -31,10 +33,17 @@ class Launches extends React.Component{
   }
 
   toggleCategories() {
+    let postsPerPage = 50;
+    let indexOfLastPost = this.state.currentPage * postsPerPage;
+    let indexOfFirstPost = indexOfLastPost - postsPerPage;
+    let currentPosts = this.state.filteredposts.slice(indexOfFirstPost, indexOfLastPost);
+    const paginate = (pageNumber) => {
+      this.setState({currentPage: pageNumber})
+    }
     if(true){
       return(
         <div className="projects-grid" style={{display: 'flex'}}>
-          <GenerateLaunchCards data={this.state.filteredposts}/>
+          <GenerateLaunchCards data={currentPosts}/>
         </div>
       )
     }
@@ -76,6 +85,13 @@ class Launches extends React.Component{
 
 
   render(){
+    let postsPerPage = 50;
+    let indexOfLastPost = this.state.currentPage * postsPerPage;
+    let indexOfFirstPost = indexOfLastPost - postsPerPage;
+    let currentPosts = this.state.filteredposts.slice(indexOfFirstPost, indexOfLastPost);
+    const paginate = (pageNumber) => {
+      this.setState({currentPage: pageNumber})
+    }
       return(
       <div className="category-tabs">
         <Header />
@@ -91,6 +107,11 @@ class Launches extends React.Component{
               </div>
             </Cell>
           </Grid>
+        </div>
+        <div className="projects-grid" style={{display: 'flex'}}>
+          <Cell col={8} style={{margin:'auto'}}>
+            <Pagination postsPerPage={postsPerPage} totalPosts={this.state.filteredposts.length} paginate={paginate}/>
+          </Cell>
         </div>
         <div className="projects-grid" style={{display: 'flex'}}>
           <div className="content">{this.toggleCategories()}</div>
