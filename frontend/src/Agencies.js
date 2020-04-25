@@ -3,6 +3,7 @@ import Header from './components/Header.js';
 import ReactTable from "react-table-6"
 import {Link} from 'react-router-dom'
 import "react-table-6/react-table.css"
+import './css/Agencies.css';
 import ec2url from './EC2Link';
 import Pagination from './components/Pagination.js'
 import { Form, FormControl} from 'react-bootstrap';
@@ -79,9 +80,10 @@ class Agencies extends React.Component{
         return(
           <div className="category-tabs">
             <Header />
+            <div className="background-container-1">
             <div className="projects-grid" style={{display: 'flex'}}>
               <Grid>
-                <Cell col={1} style={{margin:'auto', border:'groove', width:'200px'}}>
+                <Cell col={1} style={{margin:'auto', border:'groove', width:'200px', background: 'white'}}>
                   <div>
                     <Form inline id="searchform">
                         <FormControl type="text" name="search" id="search" className="mr-sm-2" placeholder="Search by Agency Name" ref={this.searchName} onChange={this.handleChange} />
@@ -92,14 +94,14 @@ class Agencies extends React.Component{
               </Grid>
             </div>
             <div className="projects-grid" style={{display: 'flex'}}>
-              <Cell col={6} style={{margin:'auto'}}>
+              <Cell col={12} style={{margin:'auto'}}>
                 <Pagination postsPerPage={postsPerPage} totalPosts={this.state.filteredposts.length} paginate={paginate}/>
               </Cell>
             </div>
             <div className="projects-grid" style={{display: 'flex'}}>
               <div className="content">{this.toggleCategories()}</div>
             </div>
-
+            </div>
           </div>
         )
     }

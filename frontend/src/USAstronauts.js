@@ -177,7 +177,7 @@ class USAstronauts extends React.Component{
               <Tab>International</Tab>
             </Tabs>
 
-            <div className="con">
+            <div className="background-container-3">
             <div className="projects-grid" >
               <Grid>
                 <Cell col={1} style={{margin:'auto', border:'groove', width:'200px', background:'white'}}>

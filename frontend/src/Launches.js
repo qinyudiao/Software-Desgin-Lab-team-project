@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header.js';
 import ReactTable from "react-table-6"
 import "react-table-6/react-table.css"
+import './css/Launches.css';
 import ec2url from './EC2Link';
 import {Link} from 'react-router-dom';
 import Pagination from './components/Pagination.js'
@@ -95,9 +96,10 @@ class Launches extends React.Component{
       return(
       <div className="category-tabs">
         <Header />
+        <div className="background-container-2">
         <div className="projects-grid" style={{display: 'flex'}}>
           <Grid>
-            <Cell col={1} style={{margin:'auto', border:'groove', width:'200px'}}>
+            <Cell col={1} style={{margin:'auto', border:'groove', width:'200px', background: 'white'}}>
               <div>
                 <Form inline id="searchform">
                     <FormControl type="text" name="search" id="search" className="mr-sm-2" placeholder="Search by Launch Title" ref={this.searchName} onChange={this.handleChange} />
@@ -109,12 +111,13 @@ class Launches extends React.Component{
           </Grid>
         </div>
         <div className="projects-grid" style={{display: 'flex'}}>
-          <Cell col={8} style={{margin:'auto'}}>
+          <Cell col={12} style={{margin:'auto'}}>
             <Pagination postsPerPage={postsPerPage} totalPosts={this.state.filteredposts.length} paginate={paginate}/>
           </Cell>
         </div>
         <div className="projects-grid" style={{display: 'flex'}}>
           <div className="content">{this.toggleCategories()}</div>
+        </div>
         </div>
       </div>
       )
