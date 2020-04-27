@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav, Navbar, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import {Redirect} from 'react-router-dom';
 import styled from 'styled-components';
 import ec2url from '../EC2Link';

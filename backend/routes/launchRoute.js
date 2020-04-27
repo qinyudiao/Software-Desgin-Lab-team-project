@@ -80,9 +80,10 @@ router.get('/total', (req, res) =>{
 });
 
 // cron.schedule('22 * 10 * * 0', () =>{
-// cron.schedule('18 15 * * * 0', () =>{
-//     updateLocations();
-//     updateRockets();
+// cron.schedule('20 13 * * * *', () =>{
+//     //  updateLocations();
+//     // updateRockets();
+//     updateAgencies();
 // });
 
 updateLocations = () =>{
@@ -108,8 +109,8 @@ updateLocations = () =>{
                                 else{
                                     console.log("updated", launch.id);
                                 }
-                            }
-                            )}
+                            })
+                        }
                     });
                 };
             });
@@ -125,38 +126,46 @@ updateRockets = () =>{
         else{
             let launches = res;
             console.log("found launches");
-            console.log(launches);
+            // console.log(launches);
             launches.forEach(launch =>{
-                if(launch.rocket){
-                    Rocket.findOne({_id: launch.rocket}, (err, res) =>{
+                if(launch.rocketData.imageURL == null && launch.rocket){
+                    Rocket.findOne({_id: launch.rocket}, (err, foundRocket) =>{
                         if(err){
                             console.log("could not find rocket");
                         }
                         else{
-							var rock = Rocket.findOne({_id: launch.rocket}, {});
-							var agencyString = tojson(rock.family.agencies);
-							var agencyArray = agencyString.split(',');
-							for(var i = 0; i < agencyArray.length; i++)
-							{
-								Agency.findOne({id: agencyArray[i]}, (err, res) =>{
-									if(err){
-										console.log("could not find agency");
-									}
-									else
-									{
-										Agency.updateOne({id: agencyArray[i]}, {$set: {agencies: res}}, (err, res) =>{
-			                                if(err){
-			                                    console.log(err);
-			                                }
-			                                else{
-			                                    console.log("updated", launch.id);
-			                                }
-			                            }
-			                            )
-									}
-								})
-							}
-							}
+                            // var rock = Rocket.findOne({_id: launch.rocket}, {});
+                            Launch.updateOne({id: launch.id}, {$set: {rocketData: foundRocket}}, (err, res) =>{
+                                if(err){
+                                    console.log(err);
+                                }
+                                else{
+                                    console.log("updated", launch.id);
+                                }
+                            })
+							// var agencyString = JSON.stringify(rock.family.agencies);
+							// var agencyArray = agencyString.split(',');
+							// for(var i = 0; i < agencyArray.length; i++)
+							// {
+							// 	Agency.findOne({id: agencyArray[i]}, (err, res) =>{
+							// 		if(err){
+							// 			console.log("could not find agency");
+							// 		}
+							// 		else
+							// 		{
+							// 			Agency.updateOne({id: agencyArray[i]}, {$set: {agencies: res}}, (err, res) =>{
+			                //                 if(err){
+			                //                     console.log(err);
+			                //                 }
+			                //                 else{
+			                //                     console.log("updated", launch.id);
+			                //                 }
+			                //             }
+			                //             )
+							// 		}
+							// 	})
+							// }
+						}
                     });
                 };
             });

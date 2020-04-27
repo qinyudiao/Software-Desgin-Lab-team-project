@@ -41,41 +41,41 @@ class IndividualLaunch extends React.Component{
                 <Header />
                 <h3 align="center">{this.state.showInformation ? this.state.information.name : null}</h3>
                 <table>
-                <tr>
-                <td>
-                {this.state.showInformation ?
-                (
-                    this.state.information.rocketData.imageURL !== 'Not found' ? <img src={this.state.information.rocketData.imageURL} height="300vh" /> : null
-                )
-                :
-                    null
-                }
-                </td>
-                <td valign="top">{this.state.showInformation ?
-                (
-                    this.state.information.holdreason !== null ? <p> This mission was expected to launch on {this.state.showInformation ? this.state.information.isonet.slice(4,6) : null}/{this.state.showInformation ? this.state.information.isonet.slice(6,8) : null}/{this.state.showInformation ? this.state.information.isonet.slice(0,4) : null}, but it was delayed because {this.state.information.holdreason} </p> : <p> The {this.state.showInformation ? this.state.information.rocketData.name : null} launched from {this.state.showInformation ? this.state.information.locationData.name : null} on {this.state.showInformation ? this.state.information.isonet.slice(4,6) : null}/{this.state.showInformation ? this.state.information.isonet.slice(6,8) : null}/{this.state.showInformation ? this.state.information.isonet.slice(0,4) : null}.</p>
-                )
-                :
-                    null
-                }
-                {this.state.showInformation ?
-                (
-                    this.state.information.failreason !== null ? <p> This mission failed due to {this.state.information.failreason} </p> : null
-                )
-                :
-                    null
-                }
-                {this.state.showInformation ?
-                (
-                    this.state.information.vidURLs !== null ? <a href={this.state.information.vidURLs}>Watch the launch here</a> : null
-                )
-                :
-                    null
-                }
-                <br/>
-                {this.state.showInformation ? <a href={this.state.information.rocketData.wikiURL}>About the Rocket</a> : null}
-                </td>
-                </tr>
+                    <tr>
+                        <td>
+                            {this.state.showInformation ?
+                            (
+                                this.state.information.rocketData.imageURL !== 'Not found' ? <img src={this.state.information.rocketData.imageURL} height="300vh" /> : null
+                            )
+                            :
+                                null
+                            }
+                            </td>
+                            <td align="top">{this.state.showInformation ?
+                            (
+                                this.state.information.holdreason != null ? <p> This mission was expected to launch on {this.state.showInformation ? this.state.information.isonet.slice(4,6) : null}/{this.state.showInformation ? this.state.information.isonet.slice(6,8) : null}/{this.state.showInformation ? this.state.information.isonet.slice(0,4) : null}, but it was delayed because {this.state.information.holdreason} </p> : <p> The {this.state.showInformation ? this.state.information.rocketData.name : null} launched from {this.state.showInformation ? this.state.information.locationData.name : null} on {this.state.showInformation ? this.state.information.isonet.slice(4,6) : null}/{this.state.showInformation ? this.state.information.isonet.slice(6,8) : null}/{this.state.showInformation ? this.state.information.isonet.slice(0,4) : null}.</p>
+                            )
+                            :
+                                null
+                            }
+                            {this.state.showInformation ?
+                            (
+                                this.state.information.failreason != null ? <p> This mission failed due to {this.state.information.failreason} </p> : null
+                            )
+                            :
+                                null
+                            }
+                            {this.state.showInformation ?
+                            (
+                                this.state.information.vidURLs != null ? <a href={this.state.information.vidURLs}>Watch the launch here</a> : null
+                            )
+                            :
+                                null
+                            }
+                            <br/>
+                            {this.state.showInformation ? <a href={this.state.information.rocketData.wikiURL}>About the Rocket</a> : null}
+                        </td>
+                    </tr>
                 </table>
             </div>
         )
