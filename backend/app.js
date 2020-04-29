@@ -233,5 +233,5 @@ app.post('/search', async (req, res) =>{
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(app);
 
-httpServer.listen(8080);
-httpsServer.listen(8443);
+httpServer.listen(80);
+httpsServer.listen(443);
