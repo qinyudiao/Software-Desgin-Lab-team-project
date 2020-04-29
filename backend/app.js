@@ -228,10 +228,10 @@ app.post('/search', async (req, res) =>{
 });
 
 const port = process.env.PORT || 8080;
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+// app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(app);
 
-httpServer.listen(80);
-httpsServer.listen(443);
+httpServer.listen(8080);
+httpsServer.listen(8443);
