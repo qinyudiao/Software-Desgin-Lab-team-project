@@ -3,6 +3,8 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var https = require('https');
+var http = require('http');
 
 app.use(cors());
 
@@ -227,3 +229,9 @@ app.post('/search', async (req, res) =>{
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(app);
+
+httpServer.listen(80);
+httpsServer.listen(443);
