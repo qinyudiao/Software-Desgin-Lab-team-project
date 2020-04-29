@@ -28,11 +28,11 @@ class PageNotFound extends Component {
             (this.state.timeToRedirect <= 0) ? <Redirect to="/upcoming"/> :
             <React.Fragment>
                 <Header/>
-                <div class="container">
-                    <div class="message">
-                        <div class="notification">You will be redirected back to the upcoming launches page in {this.state.timeToRedirect} seconds</div>
-                        <div class="number">404</div>
-                        <div class="text">Page Not Found</div>
+                <div className="container">
+                    <div className="message">
+                        <div className="notification">You will be redirected back to the upcoming launches page in {this.state.timeToRedirect} seconds</div>
+                        <div className="number">404</div>
+                        <div className="text">Page Not Found</div>
                     </div>
                 </div>
             </React.Fragment> 
