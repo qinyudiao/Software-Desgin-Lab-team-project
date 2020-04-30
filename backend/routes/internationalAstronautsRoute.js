@@ -6,7 +6,7 @@ const cron = require('node-cron');
 let internationalAstronaut = require('../models/internationalAstronautSchema.js');
 
 // At a periodic time update database with international astronaut information
-cron.schedule('0 13 * * Sunday', () =>{
+cron.schedule('0 13 * 0 Sunday', () =>{
     console.log('running international astronaut cron job');
     request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db4.json', (err, res) =>{
         if(!err && res.statusCode === 200){
@@ -62,20 +62,22 @@ getInternationalWikiInfo = (astronaut) =>{
     });
 }
 
-parseInternationalName = (name) =>{
-    let nameArray = name.split(" ");
-
-    // Take out extra punctuation like commas or periods
-    for(let i = 0; i < nameArray.length; i++){
-        nameArray[i] = nameArray[i].replace(",", ""); 
-        nameArray[i] = nameArray[i].replace(".", "");
+cleanName = (name) =>{
+    let cleanNameArray = name.split(" ");
+    for(let i = 0; i < cleanNameArray.length; i++){
+        cleanNameArray[i] = cleanNameArray[i].replace(",", "");
+        cleanNameArray[i] = cleanNameArray[i].replace(".", "");
     }
+}
+
+parseInternationalName = (name) =>{
+    let cleanNameArray = cleanName(name);
 
     // Take out blank spaces and initials since they mess up formation of full name
     let finalNameArray = []
-    for(let i = 0; i < nameArray.length; i++){
-        if(nameArray[i] !== '' && nameArray[i].length > 1){
-            finalNameArray.push(nameArray[i]);
+    for(let i = 0; i < cleanNameArray.length; i++){
+        if(cleanNameArray[i] !== '' && cleanNameArray[i].length > 1){
+            finalNameArray.push(cleanNameArray[i]);
         }
     }
 
@@ -84,7 +86,7 @@ parseInternationalName = (name) =>{
     let lastName = finalNameArray[finalNameArray.length - 2];
     let middleNames = []; // An array for names with multiple middle names
     if(finalNameArray.length > 2){
-        middleNames = finalNameArray.slice(0, nameArray.length - 2);
+        middleNames = finalNameArray.slice(0, cleanNameArray.length - 2);
     }
     let middleName = ' ';
     for(let i = 0; i < middleNames.length; i++){ // Combine middle names into one string
