@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 const cron = require('node-cron');
+var parseName = require('./parseAstronautNames.js');
 
 let russianAstronaut = require('../models/russianAstronautSchema.js');
 
@@ -12,7 +13,7 @@ cron.schedule('0 13 * 0 Sunday', () =>{
         if(!err && res.statusCode === 200){
             let responseArray = JSON.parse(res.body);
             for(let i = 0; i < responseArray.length; i++){
-                let convertedName = lowerCase(parseRussianName(responseArray[i].A));
+                let convertedName = lowerCase(parseName(responseArray[i].A));
                 responseArray[i].A = convertedName;
                 russianAstronaut.findOne({A: responseArray[i].A}, (error, document) =>{
                     if(error){
@@ -38,40 +39,6 @@ lowerCase = (name) =>{
         convertedName += name[i].charAt(0).toUpperCase() + name[i].slice(1).toLowerCase() + " ";
     }
     return convertedName;
-}
-
-cleanName = (name) =>{
-    let cleanNameArray = name.split(" ");
-    for(let i = 0; i < cleanNameArray.length; i++){
-        cleanNameArray[i] = cleanNameArray[i].replace(",", "");
-        cleanNameArray[i] = cleanNameArray[i].replace(".", "");
-    }
-}
-
-// Convert name to first name, last name
-parseRussianName = (name) =>{
-    let cleanNameArray = cleanName(name);
-
-    // Take out blank spaces and initials since they mess up formation of full name
-    let finalNameArray = []
-    for(let i = 0; i < cleanNameArray.length; i++){
-        if(cleanNameArray[i] !== '' && cleanNameArray[i].length > 1){
-            finalNameArray.push(cleanNameArray[i]);
-        }
-    }
-
-    let firstName = finalNameArray[1];
-    let lastName = finalNameArray[0];
-    let fullName  = '';
-    if(finalNameArray.length > 2){
-        let middleName = finalNameArray[2];
-        fullName = firstName + ' ' + middleName + ' ' + lastName; // Might not need middle name
-    }
-    else{
-        fullName = firstName + ' ' + lastName;
-    }
-    fullName = firstName + ' ' + lastName;
-    return fullName;
 }
 
 createWikiObject = (results) =>{
