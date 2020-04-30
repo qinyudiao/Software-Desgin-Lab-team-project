@@ -6,7 +6,7 @@ const cron = require('node-cron');
 let russianAstronaut = require('../models/russianAstronautSchema.js');
 
 // At a periodic time update database with international astronaut information
-cron.schedule('0 13 * * Sunday', () =>{
+cron.schedule('0 13 * 0 Sunday', () =>{
     console.log('running russian astronaut cron job');
     request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db3.json', (err, res) =>{
         if(!err && res.statusCode === 200){
@@ -40,19 +40,23 @@ lowerCase = (name) =>{
     return convertedName;
 }
 
+cleanName = (name) =>{
+    let cleanNameArray = name.split(" ");
+    for(let i = 0; i < cleanNameArray.length; i++){
+        cleanNameArray[i] = cleanNameArray[i].replace(",", "");
+        cleanNameArray[i] = cleanNameArray[i].replace(".", "");
+    }
+}
+
 // Convert name to first name, last name
 parseRussianName = (name) =>{
-    let nameArray = name.split(" ");
-    for(let i = 0; i < nameArray.length; i++){
-        nameArray[i] = nameArray[i].replace(",", ""); 
-        nameArray[i] = nameArray[i].replace(".", "");
-    }
+    let cleanNameArray = cleanName(name);
 
     // Take out blank spaces and initials since they mess up formation of full name
     let finalNameArray = []
-    for(let i = 0; i < nameArray.length; i++){
-        if(nameArray[i] !== '' && nameArray[i].length > 1){
-            finalNameArray.push(nameArray[i]);
+    for(let i = 0; i < cleanNameArray.length; i++){
+        if(cleanNameArray[i] !== '' && cleanNameArray[i].length > 1){
+            finalNameArray.push(cleanNameArray[i]);
         }
     }
 
@@ -70,25 +74,28 @@ parseRussianName = (name) =>{
     return fullName;
 }
 
+createWikiObject = (results) =>{
+    let wikiObject = '';
+    if(results.title !== 'Not found.'){
+        if(results.thumbnail){
+            wikiObject = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': results.thumbnail.source};
+        }
+        else{
+            wikiObject = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': 'Not found'};
+        }
+    }
+    else{
+        wikiObject = {'title': 'Not found', 'page': 'Not found', 'extract': 'Not found', 'image': 'Not found'}; 
+    }
+    return wikiObject;
+}
+
 // pass astronaut into request for wikipedia api and then create astronaut based on results and store in database
 getRussianWikiInfo = (astronaut) =>{
     let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + astronaut.A;
     request(url, (req, res) =>{
         let results = JSON.parse(res.body);
-        let object = {};
-        if(results.title !== 'Not found.'){
-            if(results.thumbnail){
-                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': results.thumbnail.source};
-            }
-            else{
-                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': 'Not found'};
-            }
-        }
-        else{
-            object = {'title': 'Not found', 'page': 'Not found', 'extract': 'Not found', 'image': 'Not found'}; 
-        }
-
-        astronaut.wikiInfo = object;
+        astronaut.wikiInfo = createWikiObject(results);
         russianAstronaut.create(astronaut, (err, result) =>{
             if(err){
                 console.log(err);

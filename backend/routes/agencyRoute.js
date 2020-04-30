@@ -5,7 +5,7 @@ const cron = require('node-cron');
 
 let Agency = require('../models/agencySchema');
 
-cron.schedule('0 13 * * Sunday', () =>{
+cron.schedule('0 13 * 0 Sunday', () =>{
 // cron.schedule('2 * * * * *', () => {
     console.log('running agencies cron job');
     request('https://launchlibrary.net/1.4/agency?limit=500', (err, res) => { // api url is different, no '/' between 'agency' and '?limit'
@@ -29,6 +29,22 @@ cron.schedule('0 13 * * Sunday', () =>{
     });
 });
 
+createWikiObject = (results) =>{
+    let wikiObject = '';
+    if(results.title !== 'Not found.'){
+        if(results.thumbnail){
+            wikiObject = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': results.thumbnail.source};
+        }
+        else{
+            wikiObject = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': 'Not found'};
+        }
+    }
+    else{
+        wikiObject = {'title': 'Not found', 'page': 'Not found', 'extract': 'Not found', 'image': 'Not found'}; 
+    }
+    return wikiObject
+}
+
 // Send agency name into wikipedia request and add result to database
 getWikiInfo = (agency) =>{
     let searchTerm = '';
@@ -42,21 +58,7 @@ getWikiInfo = (agency) =>{
     let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + searchTerm;
     request(url, (req, response) =>{
         let results = JSON.parse(response.body);
-        if(results.title !== 'Not found.'){
-            let object = '';
-            if(results.thumbnail){
-                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': results.thumbnail.source};
-            }
-            else{
-                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': 'Not found'};
-            }
-            agency.wikiInfo = object;
-        }
-        else{
-            let object = {'title': 'Not found', 'page': 'Not found', 'extract': 'Not found', 'image': 'Not found'}; 
-            agency.wikiInfo = object;
-        }
-        
+        agency.wikiInfo = createWikiObject(results);
         Agency.create(agency, (err, result) =>{
             if(err){
                 console.log(err);
