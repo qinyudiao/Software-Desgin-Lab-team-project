@@ -70,25 +70,28 @@ parseRussianName = (name) =>{
     return fullName;
 }
 
+createWikiObject = (results) =>{
+    let wikiObject = '';
+    if(results.title !== 'Not found.'){
+        if(results.thumbnail){
+            wikiObject = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': results.thumbnail.source};
+        }
+        else{
+            wikiObject = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': 'Not found'};
+        }
+    }
+    else{
+        wikiObject = {'title': 'Not found', 'page': 'Not found', 'extract': 'Not found', 'image': 'Not found'}; 
+    }
+    return wikiObject;
+}
+
 // pass astronaut into request for wikipedia api and then create astronaut based on results and store in database
 getRussianWikiInfo = (astronaut) =>{
     let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + astronaut.A;
     request(url, (req, res) =>{
         let results = JSON.parse(res.body);
-        let object = {};
-        if(results.title !== 'Not found.'){
-            if(results.thumbnail){
-                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': results.thumbnail.source};
-            }
-            else{
-                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': 'Not found'};
-            }
-        }
-        else{
-            object = {'title': 'Not found', 'page': 'Not found', 'extract': 'Not found', 'image': 'Not found'}; 
-        }
-
-        astronaut.wikiInfo = object;
+        astronaut.wikiInfo = createWikiObject(results);
         russianAstronaut.create(astronaut, (err, result) =>{
             if(err){
                 console.log(err);

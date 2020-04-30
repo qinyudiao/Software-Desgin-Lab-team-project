@@ -30,25 +30,27 @@ cron.schedule('0 13 * * Sunday', () =>{
     });
 });
 
+createWikiObject = (results) =>{
+    let wikiObject = ''
+    if(results.title !== 'Not found.'){
+        if(results.thumbnail){
+            wikiObject = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': results.thumbnail.source};
+        }
+        else{
+            wikiObject = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': 'Not found'};
+        }
+    }
+    else{
+        wikiObject = {'title': 'Not found', 'page': 'Not found', 'extract': 'Not found', 'image': 'Not found'}; 
+    }
+    return wikiObject;
+}
+
 getInternationalWikiInfo = (astronaut) =>{
     let url = "http://en.wikipedia.org/api/rest_v1/page/summary/" + astronaut.A;
     request(url, (req, response) =>{
         let results = JSON.parse(response.body);
-        let object = {};
-
-        if(results.title !== 'Not found.'){
-            if(results.thumbnail){
-                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': results.thumbnail.source};
-            }
-            else{
-                object = {'title': results.title, 'page': results.content_urls.desktop.page, 'extract': results.extract, 'image': 'Not found'};
-            }
-        }
-        else{
-            object = {'title': 'Not found', 'page': 'Not found', 'extract': 'Not found', 'image': 'Not found'}; 
-        }
-
-        astronaut.wikiInfo = object;
+        astronaut.wikiInfo = createWikiObject(results);
         internationalAstronaut.create(astronaut, (err, result) =>{
             if(err){
                 console.log(err);
