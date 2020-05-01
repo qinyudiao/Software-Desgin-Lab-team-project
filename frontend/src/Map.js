@@ -12,28 +12,23 @@ class Map extends Component {
   constructor(props){
     super(props);
     this.state = {
-      launch_number: ""
+      launch_number: "",
+      launches: []
     }
   }
 
   componentDidMount() {
-    // const date = moment().format("YYYY-MM-DD");
-    // const url = `https://launchlibrary.net/1.4/launch/?enddate=${date}`;
-    // console.log();
-    // fetch(url, {
-    //     method: "GET"
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //     this.setState({launch_number: data.total})
-    // });
       fetchTotalLaunchNumber()
       .then(data => {
           this.setState({launch_number: data.count})
       });
+      fetchLaunches()
+      .then(data => {
+          this.setState({launches: data})
+      });
   }
 
-  render(){
+  render() {
       return(
           <React.Fragment>
             <div style={ {height:"100vh"} }>
@@ -56,7 +51,7 @@ class Map extends Component {
                     <p id="total-launches-number"> {this.state.launch_number}</p>
                   </div>
                   <div className="column-item" style={{height: "59.5vh"}}>
-                    <LaunchRank category={"country"}/>
+                    <LaunchRank category={"country"} launches={this.state.launches} />
                   </div>
                   <div className="column-item" style={{height: "7vh", display: "absolute"}}>
                     <LastUpdateTime />
@@ -68,7 +63,7 @@ class Map extends Component {
                     <MapContainer />
                   </div>
                   <div className="column-item" style={{height: "21.1vh", marginTop: "0.8vh", display: "absolute", overflow: "auto"}}>
-                    <p style={{color: "#aaa", fontSize: "110%", marginBottom: "0"}}>
+                    <p style={{color: "#aaa", fontSize: "90%", marginBottom: "1rem", paddingTop: "2rem"}}>
                         Note:<br/>
                         - The first launch recorded in this database is a Atlas LV-3A rocket carried a Samos 2 launched by United States Air Force launched and launched at January 31, 1961 20:21:19 UTC.<br/>
                         - The total launches number is based on all the recorded launches, there are some rocket launches that are not recorded.<br/>
@@ -93,7 +88,7 @@ class Map extends Component {
                     <p>Coming soon in phase 3</p>
                   </div> */}
                   <div id="launches-plot-year" className="column-item" style={{height: "84.1vh"}}>
-                    <LaunchRank category={"agency"}/>
+                    <LaunchRank category={"agency"} launches={this.state.launches} />
                   </div> 
                 </span>
               </div>
@@ -108,16 +103,15 @@ class Map extends Component {
 export default Map;
 
 const fetchTotalLaunchNumber = async () => {
-  let url = '';
-  if(process.env.NODE_ENV === 'production'){
-    url = ec2url + '/launch/total';
-  }
-  else{
-    url = '/launch/total';
-  }
+  const url = (process.env.NODE_ENV === 'production') ? `${ec2url}/launch/total` : '/launch/total';
   const response = await fetch(url);
-  // console.log(response);
   const data = await response.json();
-  // console.log('dsad',data);
+  return data;
+}
+
+const fetchLaunches = async () => {
+  const url = (process.env.NODE_ENV === 'production') ? `${ec2url}/launch` : '/launch';
+  const response = await fetch(url);
+  const data = await response.json();
   return data;
 }

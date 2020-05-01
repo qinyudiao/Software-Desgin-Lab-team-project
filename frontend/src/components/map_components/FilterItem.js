@@ -34,6 +34,6 @@ export default class FilterItem extends Component {
 
 // PropTypes
 FilterItem.propTypes = {
-  filterItem: PropTypes.object.isRequired,
-  markSelected: PropTypes.func.isRequired,
+  filterItem: PropTypes.object,
+  markSelected: PropTypes.func,
 };

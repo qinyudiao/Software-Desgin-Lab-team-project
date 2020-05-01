@@ -1,11 +1,11 @@
 import { Component } from 'react';
 import { createPortal } from 'react-dom';
 import { MAP } from 'react-google-maps/lib/constants';
-import { string, element, object, oneOfType, array } from 'prop-types';
+import { string, number, element, object, oneOfType, array } from 'prop-types';
 
 export default class MapControl extends Component {
   static propTypes = {
-    position: string.isRequired,
+    position: number,
     children: oneOfType([element, array]),
     className: string,
   };

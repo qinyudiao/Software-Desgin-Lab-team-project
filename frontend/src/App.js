@@ -29,25 +29,7 @@ class App extends Component{
         }
     }
 
-    // componentWillUnmount() {
-    //     window.removeEventListener("resize", this.updateDimensions.bind(this));
-    // }
-
-    // updateDimensions() {
-    //     let windowWidth = typeof window !== "undefined" ? window.innerWidth : 0;
-    //     let windowHeight = typeof window !== "undefined" ? window.innerHeight : 0;
-    
-    //     this.setState({ windowWidth, windowHeight });
-    // }
-
     render(){
-        // const { windowWidth } = this.state;
-
-        // const styles = {
-        //   white: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-        //   black: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-        // };
-        
         return(
             <React.Fragment>
                     <Router>
