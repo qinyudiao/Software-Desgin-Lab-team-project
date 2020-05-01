@@ -18,7 +18,7 @@ import IndividualCompanies from './IndividualAgency.js';
 import PageNotFound from './PageNotFound.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UpcomingLaunches from './UpcomingLaunches';
-import Search from './Search';
+// import Search from './Search';
 
 class App extends Component{
     constructor(props){
@@ -35,7 +35,7 @@ class App extends Component{
                     <Router>
                         <Switch>
                             <Route exact path="/" component={Landing} />
-                            <Route path="/search" component={Search} />
+                            {/* <Route path="/search" component={Search} /> */}
                             <Route path="/about" component={About} />
                             <Route path="/agency/:agencyId" component={IndividualCompanies} />
                             <Route path="/agency" component={Agencies} />

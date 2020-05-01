@@ -106,7 +106,7 @@ render(){
 
     return(
         <Styles>
-            <Navbar expand="lg">
+            <Navbar expand="xl" className="navbar-dark">
                 <Navbar.Brand href="/">
                     <img alt="" src="/ERLE3.png" width="800" height="60" className="d-inline-block align-top" />
                     {' '}
