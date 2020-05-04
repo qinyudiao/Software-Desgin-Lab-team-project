@@ -5,7 +5,7 @@ const cron = require('node-cron');
 
 let Agency = require('../models/agencySchema');
 
-cron.schedule('0 13 * 0 Sunday', () =>{
+cron.schedule('0 13 * 1 Sunday', () =>{
 // cron.schedule('2 * * * * *', () => {
     console.log('running agencies cron job');
     request('https://launchlibrary.net/1.4/agency?limit=500', (err, res) => { // api url is different, no '/' between 'agency' and '?limit'
@@ -83,14 +83,13 @@ router.get('/', (req, res) =>{
     });
 });
 
-router.get('/ObjectId=:ObjectId', (req, res) =>{
-    Agency.findById('5e96111cdcddcd378a4c087e', (err, result) =>{
-        console.log('debug agency.find', req.params.ObjectId);
+// Search for agency name in database and return result
+router.get('/:agencyId', (req, res) =>{
+    Agency.findOne({name: req.params.agencyId}, (err, result) =>{
         if(err){
             console.log(err);
         }
         else{
-            console.log(result);
             res.send(result);
         }
     });

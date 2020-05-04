@@ -7,7 +7,7 @@ var parseName = require('./parseAstronautNames.js');
 let internationalAstronaut = require('../models/internationalAstronautSchema.js');
 
 // At a periodic time update database with international astronaut information
-cron.schedule('0 13 * 0 Sunday', () =>{
+cron.schedule('0 13 * 1 Sunday', () =>{
     console.log('running international astronaut cron job');
     request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db4.json', (err, res) =>{
         if(!err && res.statusCode === 200){
