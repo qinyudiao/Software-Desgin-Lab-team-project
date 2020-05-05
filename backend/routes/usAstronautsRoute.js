@@ -7,29 +7,29 @@ var parseName = require('./parseAstronautNames.js');
 let usAstronaut = require('../models/usAstronautSchema.js');
 
 // At a periodic time update database with US astronaut information
-cron.schedule('0 13 * 0 Sunday', () =>{
-    console.log('running us astronaut cron job');
-    request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db.json', (err, res) =>{
-        if(!err && res.statusCode === 200){
-            let responseArray = JSON.parse(res.body);
-            for(let i = 0; i < responseArray.length; i++){
-                let convertedName = parseName(responseArray[i].Astronaut);
-                responseArray[i].Astronaut = convertedName;
-                usAstronaut.findOne({Astronaut: responseArray[i].Astronaut}, (error, document) =>{
-                    if(error){
-                        console.log(error);
-                    }
-                    if(document){
-                        console.log("Astronaut already in database");
-                    }
-                    else{
-                        getUSWikiInfo(responseArray[i]);
-                    }
-                });
-            }
-        }
-    });
-});
+// cron.schedule('0 13 * * Sunday', () =>{
+//     console.log('running us astronaut cron job');
+//     request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db.json', (err, res) =>{
+//         if(!err && res.statusCode === 200){
+//             let responseArray = JSON.parse(res.body);
+//             for(let i = 0; i < responseArray.length; i++){
+//                 let convertedName = parseName(responseArray[i].Astronaut);
+//                 responseArray[i].Astronaut = convertedName;
+//                 usAstronaut.findOne({Astronaut: responseArray[i].Astronaut}, (error, document) =>{
+//                     if(error){
+//                         console.log(error);
+//                     }
+//                     if(document){
+//                         console.log("Astronaut already in database");
+//                     }
+//                     else{
+//                         getUSWikiInfo(responseArray[i]);
+//                     }
+//                 });
+//             }
+//         }
+//     });
+// });
 
 createWikiObject = (results) =>{
     let wikiObject = '';

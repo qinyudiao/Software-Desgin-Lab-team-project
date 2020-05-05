@@ -5,29 +5,29 @@ const cron = require('node-cron');
 
 let Agency = require('../models/agencySchema');
 
-cron.schedule('0 13 * 0 Sunday', () =>{
-// cron.schedule('2 * * * * *', () => {
-    console.log('running agencies cron job');
-    request('https://launchlibrary.net/1.4/agency?limit=500', (err, res) => { // api url is different, no '/' between 'agency' and '?limit'
-        if(!err && res.statusCode === 200){
-            let responseObject = JSON.parse(res.body);
-            agenciesArray = responseObject.agencies;
-            agenciesArray.forEach(agency => {
-                Agency.findOne({id: agency.id, changed: agency.changed}, (error, document) =>{
-                    if(error){
-                        console.log(error);
-                    }
-                    if(document){
-                        console.log("agency already in database");
-                    }
-                    else{
-                        getWikiInfo(agency);
-                    }
-                });
-            });
-        }
-    });
-});
+// cron.schedule('0 13 * * Sunday', () =>{
+// // cron.schedule('2 * * * * *', () => {
+//     console.log('running agencies cron job');
+//     request('https://launchlibrary.net/1.4/agency?limit=500', (err, res) => { // api url is different, no '/' between 'agency' and '?limit'
+//         if(!err && res.statusCode === 200){
+//             let responseObject = JSON.parse(res.body);
+//             agenciesArray = responseObject.agencies;
+//             agenciesArray.forEach(agency => {
+//                 Agency.findOne({id: agency.id, changed: agency.changed}, (error, document) =>{
+//                     if(error){
+//                         console.log(error);
+//                     }
+//                     if(document){
+//                         console.log("agency already in database");
+//                     }
+//                     else{
+//                         getWikiInfo(agency);
+//                     }
+//                 });
+//             });
+//         }
+//     });
+// });
 
 createWikiObject = (results) =>{
     let wikiObject = '';

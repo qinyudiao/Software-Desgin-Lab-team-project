@@ -11,7 +11,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // Routes
-var country = require('./routes/countryRoute');
 var about = require('./routes/aboutRoute');
 var launch = require('./routes/launchRoute');
 var landing = require('./routes/landingpageRoute');
@@ -32,7 +31,6 @@ let InternationalAstronaut = require('./models/internationalAstronautSchema');
 let Agency = require('./models/agencySchema');
 
 app.use('/landing', landing);
-app.use('/country', country); 
 app.use('/about', about);
 app.use('/launch', launch);
 app.use('/USAstronauts', usAstronauts);

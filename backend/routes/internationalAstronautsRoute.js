@@ -7,29 +7,29 @@ var parseName = require('./parseAstronautNames.js');
 let internationalAstronaut = require('../models/internationalAstronautSchema.js');
 
 // At a periodic time update database with international astronaut information
-cron.schedule('0 13 * 0 Sunday', () =>{
-    console.log('running international astronaut cron job');
-    request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db4.json', (err, res) =>{
-        if(!err && res.statusCode === 200){
-            let responseArray = JSON.parse(res.body);
-            for(let i = 0; i < responseArray.length; i++){
-                let convertedName = parseName(responseArray[i].A);
-                responseArray[i].A = convertedName;
-                internationalAstronaut.findOne({A: responseArray[i].A}, (error, document) =>{
-                    if(error){
-                        console.log(error);
-                    }
-                    if(document){
-                        console.log("International Astronaut already in database");
-                    }
-                    else{
-                        getInternationalWikiInfo(responseArray[i]);
-                    }
-                });
-            }
-        }
-    });
-});
+// cron.schedule('0 13 * * Sunday', () =>{
+//     console.log('running international astronaut cron job');
+//     request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db4.json', (err, res) =>{
+//         if(!err && res.statusCode === 200){
+//             let responseArray = JSON.parse(res.body);
+//             for(let i = 0; i < responseArray.length; i++){
+//                 let convertedName = parseName(responseArray[i].A);
+//                 responseArray[i].A = convertedName;
+//                 internationalAstronaut.findOne({A: responseArray[i].A}, (error, document) =>{
+//                     if(error){
+//                         console.log(error);
+//                     }
+//                     if(document){
+//                         console.log("International Astronaut already in database");
+//                     }
+//                     else{
+//                         getInternationalWikiInfo(responseArray[i]);
+//                     }
+//                 });
+//             }
+//         }
+//     });
+// });
 
 createWikiObject = (results) =>{
     let wikiObject = ''

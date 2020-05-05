@@ -7,29 +7,29 @@ var parseName = require('./parseAstronautNames.js');
 let russianAstronaut = require('../models/russianAstronautSchema.js');
 
 // At a periodic time update database with international astronaut information
-cron.schedule('0 13 * 0 Sunday', () =>{
-    console.log('running russian astronaut cron job');
-    request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db3.json', (err, res) =>{
-        if(!err && res.statusCode === 200){
-            let responseArray = JSON.parse(res.body);
-            for(let i = 0; i < responseArray.length; i++){
-                let convertedName = lowerCase(parseName(responseArray[i].A));
-                responseArray[i].A = convertedName;
-                russianAstronaut.findOne({A: responseArray[i].A}, (error, document) =>{
-                    if(error){
-                        console.log(error);
-                    }
-                    if(document){
-                        console.log("Russian Astronaut already in database");
-                    }
-                    else{
-                        getRussianWikiInfo(responseArray[i]);
-                    }
-                });
-            }
-        }
-    });
-});
+// cron.schedule('0 13 * * Sunday', () =>{
+//     console.log('running russian astronaut cron job');
+//     request('https://raw.githubusercontent.com/ShawnVictor/demo/master/db3.json', (err, res) =>{
+//         if(!err && res.statusCode === 200){
+//             let responseArray = JSON.parse(res.body);
+//             for(let i = 0; i < responseArray.length; i++){
+//                 let convertedName = lowerCase(parseName(responseArray[i].A));
+//                 responseArray[i].A = convertedName;
+//                 russianAstronaut.findOne({A: responseArray[i].A}, (error, document) =>{
+//                     if(error){
+//                         console.log(error);
+//                     }
+//                     if(document){
+//                         console.log("Russian Astronaut already in database");
+//                     }
+//                     else{
+//                         getRussianWikiInfo(responseArray[i]);
+//                     }
+//                 });
+//             }
+//         }
+//     });
+// });
 
 // lowercase all letters except for first letter in words
 lowerCase = (name) =>{
