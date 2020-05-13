@@ -7,7 +7,7 @@ Team Members:
   4. Kenan Hurd, eid: kah4285, username: KenaHu
   5. Lucas Best, eid: lwb498, username: LBest42
 
-Link to website: http://d29srdcmzi6q02.cloudfront.net/
+Link to website: http://www.everyrocketlaunch.com/
 
 Phase 1 completion time:
   1. Jack Diao: Estimated: 12 hours / Actual: 17 hours
